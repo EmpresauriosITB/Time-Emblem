@@ -4,9 +4,6 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
 
-    public enum State { active, inactive , doingAction};
-    private State currentState;
-
     public Stats stats;
 
     public string characterName;
@@ -19,9 +16,12 @@ public abstract class Character : MonoBehaviour {
     private int currentVelocity;
     private int currentGridSpeed;
 
-    private List<Abilities> abilities;
+    private AbilitySet abilitieSet;
+    private Abilities specialPassive;
 
-    public abstract void DoAbility(int idAbilityInList);
+    public void DoAbility(int idAbilityInList) {
+        abilitieSet.abilities[idAbilityInList].doAbility();
+    }
 
     public void Init() {
         currentHp = (int) GetHp();
@@ -33,7 +33,8 @@ public abstract class Character : MonoBehaviour {
         currentGridSpeed = (int) GetGridSpeed();
     }
 
-    public List<Abilities> GetAbilities() { return abilities; }
+    public AbilitySet GetAbilitiesSet() { return abilitieSet; }
+    public Abilities GetSpecialPassive() { return specialPassive; }
     public string GetName() { return characterName; }
     public float GetHp() { return stats.hp; }
     public float GetPhysicalPower() { return stats.physicalPower; }
@@ -55,6 +56,8 @@ public abstract class Character : MonoBehaviour {
     public void SetForceValue(float forceValue) { stats.forceValue = forceValue; }
     public void SetGridSpeed(float gridSpeed) { stats.gridSpeed = gridSpeed; }
     public void SetStats(Stats stats) { this.stats = stats; }
+    public void SetAbilitiesSet(AbilitySet abilitieSet) { this.abilitieSet = abilitieSet; }
+    public void SetSpecialPassive(Abilities specialPassive) { this.specialPassive = specialPassive; }
 
     public int GetCurrentHp() { return currentHp; }
     public int GetCurrentPhysicalPower() { return currentPhysicalPower; }
@@ -71,5 +74,4 @@ public abstract class Character : MonoBehaviour {
     public void SetCurrentMentalDefense(int mentalDefense) { this.currentMentalDefense = mentalDefense; }
     public void SetCurrentVelocity(int velocity) { this.currentVelocity = velocity; }
     public void SetCurrentGridSpeed(int gridSpeed) { this.currentGridSpeed = gridSpeed; }
-
 }

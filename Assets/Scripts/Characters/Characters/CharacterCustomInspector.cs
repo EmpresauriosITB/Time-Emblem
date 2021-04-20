@@ -9,7 +9,7 @@ public abstract class CharacterCustomInspector : Editor
     private Character character;
     private bool statsFoldout = false, currentStatsFoldout = false, statsNotNull;
 
-    public void DefaultFoHierarchy()
+    public void DefaultForHierarchy()
     {
         character = (Character)target;
         statsNotNull = character.GetStats() != null;
