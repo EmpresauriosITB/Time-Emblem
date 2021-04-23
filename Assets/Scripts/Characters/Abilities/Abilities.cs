@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 public abstract class Abilities : ScriptableObject {
-
     private string abilityName;
     private int Power;
     private string description;
@@ -19,4 +18,5 @@ public abstract class Abilities : ScriptableObject {
 
     public void SetDescription(string description) { this.description = description; }
     public string GetDescription() { return description; }
+
 }

@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AbilitySet")]
 public class AbilitySet : ScriptableObject
 {
-    public List<Abilities> abilities;
+    public List<AbilityCommon.AbiltiesId> abilities;
 }

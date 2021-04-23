@@ -7,14 +7,22 @@ using UnityEditor;
 public abstract class CharacterCustomInspector : Editor
 {
     private Character character;
-    private bool statsFoldout = false, currentStatsFoldout = false, statsNotNull;
+    private bool statsFoldout = false, currentStatsFoldout = false, specialPassiveFoldout = false, abilitiesFoldout = false;
+    private bool statsNotNull, abilitySetNotNull, specialPassiveNotNull, abilitiesNotNull;
+    private int indexer = 0;
+    private bool currentStatsInit = false, abilitiesInit = false, passiveInit = false;
 
     public void DefaultForHierarchy()
     {
         character = (Character)target;
-        statsNotNull = character.GetStats() != null;
 
         character.SetStats(EditorGUILayout.ObjectField("StatsObject", character.GetStats(), typeof(Stats), true) as Stats);
+        character.SetSpecialPassiveSettings(EditorGUILayout.ObjectField("SpecialPassive", character.GetSpecialPassiveSettings(), typeof(SpecialPassiveSettings), true) as SpecialPassiveSettings);
+        character.SetAbilitiesSet(EditorGUILayout.ObjectField("AbilitiySet", character.GetAbilitiesSet(), typeof(AbilitySet), true) as AbilitySet);
+
+        statsNotNull = character.GetStats() != null;
+        abilitySetNotNull = character.GetAbilitiesSet() != null;
+        specialPassiveNotNull = character.GetSpecialPassiveSettings() != null;
 
         GUILayout.Space(10);
 
@@ -22,12 +30,23 @@ public abstract class CharacterCustomInspector : Editor
         EditorGUILayout.LabelField("Name");
         character.SetName(EditorGUILayout.TextField(character.GetName()));
         EditorGUILayout.EndHorizontal();
+
         if (statsNotNull) { 
             statsFoldout = EditorGUILayout.Foldout(statsFoldout, "Stats", true);
             if (statsFoldout) { ShowStats(); }
 
             currentStatsFoldout = EditorGUILayout.Foldout(currentStatsFoldout, "Current Stats", true);
             if (currentStatsFoldout) { ShowCurrentStats(); }
+        }
+
+        if (specialPassiveNotNull) {
+            specialPassiveFoldout = EditorGUILayout.Foldout(specialPassiveFoldout, "Special Passive", true);
+            if (specialPassiveFoldout) { ShowSpecialPassive(); }
+        }
+
+        if (abilitySetNotNull) {
+            abilitiesFoldout = EditorGUILayout.Foldout(abilitiesFoldout, "Abilities", true);
+            if (abilitiesFoldout) { ShowAbilities(); }
         }
     }
 
@@ -77,6 +96,11 @@ public abstract class CharacterCustomInspector : Editor
     }
 
     private void ShowCurrentStats() {
+        if (!currentStatsInit) {
+            character.InitCurrentStats();
+            currentStatsInit = true;
+        }
+
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Current HP");
         character.SetCurrentHp((int) EditorGUILayout.Slider(character.GetCurrentHp(), 0, character.GetHp()));
@@ -113,5 +137,43 @@ public abstract class CharacterCustomInspector : Editor
         EditorGUILayout.EndHorizontal();
 
         GUILayout.Space(10);
+    }
+
+    private void ShowSpecialPassive() {
+        if (!passiveInit)
+        {
+            character.InitSpecialPassive();
+            passiveInit = true;
+        }
+
+        character.specialPassiveSettings.specialPassiveId = (SpecialPassiveCommon.SpecialPassiveId) EditorGUILayout.EnumFlagsField("SpecialPassive", character.specialPassiveSettings.specialPassiveId);
+
+        character.UpdatePassiveScript();
+    }
+
+    private void ShowAbilities() {
+
+        if (!abilitiesInit)
+        {
+            character.InitAbilities();
+            abilitiesInit = true;
+        }
+
+        character.abilitieSet.abilities[indexer] = (AbilityCommon.AbiltiesId) EditorGUILayout.EnumFlagsField("Ability", character.abilitieSet.abilities[indexer]);
+
+        EditorGUILayout.BeginHorizontal();
+        if (indexer != 0) {
+            if (GUILayout.Button("Previous")) {
+                indexer--;
+            }
+        }
+        if (indexer != character.GetAbilitiesSet().abilities.Count -1) {
+            if (GUILayout.Button("Next")) {
+                indexer++;
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+
+        character.UpdateAbilityScript(indexer);
     }
 }

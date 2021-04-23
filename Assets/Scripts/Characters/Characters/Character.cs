@@ -16,25 +16,52 @@ public abstract class Character : MonoBehaviour {
     private int currentVelocity;
     private int currentGridSpeed;
 
-    private AbilitySet abilitieSet;
-    private Abilities specialPassive;
+    public AbilitySet abilitieSet;
+    private List<Abilities> abilitiesScript = new List<Abilities>();
+    public SpecialPassiveSettings specialPassiveSettings;
+    private SpecialPassive specialPassiveScript;
 
     public void DoAbility(int idAbilityInList) {
-        abilitieSet.abilities[idAbilityInList].doAbility();
+        abilitiesScript[idAbilityInList].doAbility();
     }
 
     public void Init() {
-        currentHp = (int) GetHp();
-        currentPhysicalPower = (int) GetPhysicalPower();
-        currentPhysicalDefense = (int) GetPhysicalDefense();
-        currentMentalPower = (int) GetMentalPower();
-        currentMentalDefense = (int) GetMentalDefense();
-        currentVelocity = (int) GetVelocity();
-        currentGridSpeed = (int) GetGridSpeed();
+        InitAbilities();
+        InitSpecialPassive();
+        InitCurrentStats();
+    }
+
+    public void InitAbilities() {
+        foreach (int id in abilitieSet.abilities) {
+            abilitiesScript.Add(AbilityCommon.abilitiesReference[id]);
+        }
+    }
+
+    public void InitSpecialPassive() {
+        specialPassiveScript = SpecialPassiveCommon.specialPassiveReference[(int)specialPassiveSettings.specialPassiveId];
+    }
+
+    public void InitCurrentStats() {
+        currentHp = (int)GetHp();
+        currentPhysicalPower = (int)GetPhysicalPower();
+        currentPhysicalDefense = (int)GetPhysicalDefense();
+        currentMentalPower = (int)GetMentalPower();
+        currentMentalDefense = (int)GetMentalDefense();
+        currentVelocity = (int)GetVelocity();
+        currentGridSpeed = (int)GetGridSpeed();
+    }
+
+    public void UpdateAbilityScript(int id) {
+        abilitiesScript.Insert(id, AbilityCommon.abilitiesReference[(int) abilitieSet.abilities[id]]);   
+    }
+
+    public void UpdatePassiveScript()
+    {
+        specialPassiveScript = SpecialPassiveCommon.specialPassiveReference[(int)specialPassiveSettings.specialPassiveId];
     }
 
     public AbilitySet GetAbilitiesSet() { return abilitieSet; }
-    public Abilities GetSpecialPassive() { return specialPassive; }
+    public SpecialPassiveSettings GetSpecialPassiveSettings() { return specialPassiveSettings; }
     public string GetName() { return characterName; }
     public float GetHp() { return stats.hp; }
     public float GetPhysicalPower() { return stats.physicalPower; }
@@ -57,7 +84,7 @@ public abstract class Character : MonoBehaviour {
     public void SetGridSpeed(float gridSpeed) { stats.gridSpeed = gridSpeed; }
     public void SetStats(Stats stats) { this.stats = stats; }
     public void SetAbilitiesSet(AbilitySet abilitieSet) { this.abilitieSet = abilitieSet; }
-    public void SetSpecialPassive(Abilities specialPassive) { this.specialPassive = specialPassive; }
+    public void SetSpecialPassiveSettings(SpecialPassiveSettings specialPassiveSettings) { this.specialPassiveSettings = specialPassiveSettings; }
 
     public int GetCurrentHp() { return currentHp; }
     public int GetCurrentPhysicalPower() { return currentPhysicalPower; }

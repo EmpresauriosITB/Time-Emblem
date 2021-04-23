@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f70fb6392d1f074f895c6e5ed827023, type: 3}
-  m_Name: New Special Passive Settings
+  m_Name: ExampleSpecialPassiveSetting
   m_EditorClassIdentifier: 
-  specialPassive: {fileID: 0}
+  specialPassiveId: 0

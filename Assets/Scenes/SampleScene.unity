@@ -230,11 +230,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399154161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 507c1ecb0aa705e4fbe262871501732c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d6c259e24be13d4798f9ac746d07236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 13d660c9be279ea4c917dd998930cf55, type: 2}
-  characterName: Default
+  characterName: Ejemplo
 --- !u!4 &1399154163
 Transform:
   m_ObjectHideFlags: 0

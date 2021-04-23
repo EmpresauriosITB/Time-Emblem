@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SpecialPassive")]
 public class SpecialPassiveSettings : ScriptableObject
 {
-    public SpecialPassive specialPassive;
+    public SpecialPassiveCommon.SpecialPassiveId specialPassiveId;
 }
