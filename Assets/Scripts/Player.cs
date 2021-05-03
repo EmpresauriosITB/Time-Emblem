@@ -6,22 +6,22 @@ public class Player
 {
     public Teams team { get; set;}
     public Board board { get; set; }
-    public List<Character> activeCharacters { get; private set; }
+    public List<CharacterTest> activeCharacters { get; private set; }
 
     public Player(Teams team, Board board)
     {
         this.board = board;
         this.team = team;
-        activeCharacters = new List<Character>();
+        activeCharacters = new List<CharacterTest>();
     }
 
-    public void AddCharacters(Character character)
+    public void AddCharacters(CharacterTest character)
     {
         if (!activeCharacters.Contains(character))
             activeCharacters.Add(character);
     }
 
-    public void RemoveCharacter (Character character)
+    public void RemoveCharacter (CharacterTest character)
     {
         if (activeCharacters.Contains(character))
             activeCharacters.Remove(character);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(IObjectTweener))]
 
-public abstract class Character : MonoBehaviour
+public abstract class CharacterTest : MonoBehaviour
 {
     public Board board { protected get; set; }
 
@@ -27,7 +27,7 @@ public abstract class Character : MonoBehaviour
 
     
 
-    public bool isFromSameTeam (Character character)
+    public bool isFromSameTeam (CharacterTest character)
     {
         return team == character.team;
     }

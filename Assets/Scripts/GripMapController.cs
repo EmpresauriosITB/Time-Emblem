@@ -64,7 +64,7 @@ public class GripMapController : MonoBehaviour
 
     private void CreateCharacterAndInitialize(Vector2Int squareCoords, Teams team, Type type)
     {
-        Character newCharacter = characterCreator.CreateCharacter(type).GetComponent<Character>();
+        CharacterTest newCharacter = characterCreator.CreateCharacter(type).GetComponent<CharacterTest>();
         newCharacter.SetData(squareCoords, team, board);
 
         Material teamMaterial = characterCreator.GetTeamMaterial(team);

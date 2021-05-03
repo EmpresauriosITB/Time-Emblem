@@ -11,8 +11,8 @@ public class Board : MonoBehaviour
     [SerializeField] private Transform startTransform;
     [SerializeField] private float squareSize;
 
-    private Character[,] grid;
-    private Character selectedCharacter;
+    private CharacterTest[,] grid;
+    private CharacterTest selectedCharacter;
     private GripMapController controller;
     private SquareSelectorCreator squareSelector;
 
@@ -30,11 +30,11 @@ public class Board : MonoBehaviour
 
     private void CreateGrid()
     {
-        grid = new Character[BOARD_SIZE, BOARD_SIZE];
+        grid = new CharacterTest[BOARD_SIZE, BOARD_SIZE];
     }
   
 
-    public Character GetCharacterOnSquare(Vector2Int nextCoords)
+    public CharacterTest GetCharacterOnSquare(Vector2Int nextCoords)
     {
         if (CheckIfCoordinatedAreOnBoard(nextCoords))
             return grid[nextCoords.x, nextCoords.y];
@@ -49,7 +49,7 @@ public class Board : MonoBehaviour
     internal void OnSquareSelecter(Vector3 inputPosition)
     {
         Vector2Int coords = CalculateCoordFromPosition(inputPosition);
-        Character character = GetCharacterOnSquare(coords);
+        CharacterTest character = GetCharacterOnSquare(coords);
         if (selectedCharacter)
         {
             if (character != null && selectedCharacter == character)
@@ -69,7 +69,7 @@ public class Board : MonoBehaviour
 
     
 
-    private void SelectedCharacter(Character character)
+    private void SelectedCharacter(CharacterTest character)
     {
         selectedCharacter = character;
         List<Vector2Int> selection = selectedCharacter.avaliableMoves;
@@ -94,7 +94,7 @@ public class Board : MonoBehaviour
         squareSelector.ClearSelection();
     }
 
-    private void OnSelectedPieceMoved(Vector2Int coords, Character character)
+    private void OnSelectedPieceMoved(Vector2Int coords, CharacterTest character)
     {
         UpdateBoardOnCharacterMoved(coords, character.occupiedSquare, character, null);
         selectedCharacter.MoveCharacter(coords);
@@ -109,7 +109,7 @@ public class Board : MonoBehaviour
         controller.EndTurn();
     }
 
-    private void UpdateBoardOnCharacterMoved(Vector2Int newCoords, Vector2Int oldCoords, Character newCharacter, Character oldCharacter)
+    private void UpdateBoardOnCharacterMoved(Vector2Int newCoords, Vector2Int oldCoords, CharacterTest newCharacter, CharacterTest oldCharacter)
     {
         grid[oldCoords.x, oldCoords.y] = oldCharacter;
         grid[newCoords.x, newCoords.y] = newCharacter;
@@ -132,7 +132,7 @@ public class Board : MonoBehaviour
 
     }
 
-    public bool HasCharacter(Character character)
+    public bool HasCharacter(CharacterTest character)
     {
         for(int i = 0; i < BOARD_SIZE; i++)
         {
@@ -146,7 +146,7 @@ public class Board : MonoBehaviour
         return false;
     }
 
-    public void SetCharacterOnBoard(Vector2Int coords, Character character)
+    public void SetCharacterOnBoard(Vector2Int coords, CharacterTest character)
     {
         if (CheckIfCoordinatedAreOnBoard(coords))
             grid[coords.x, coords.y] = character;

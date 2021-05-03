@@ -15,7 +15,7 @@ public class CharacterCreator : MonoBehaviour
     {
         foreach (var character in charactersPrefabs)
         {
-            nameToCharacterDict.Add(character.GetComponent<Character>().GetType().ToString(), character);
+            nameToCharacterDict.Add(character.GetComponent<CharacterTest>().GetType().ToString(), character);
         }
     }
 

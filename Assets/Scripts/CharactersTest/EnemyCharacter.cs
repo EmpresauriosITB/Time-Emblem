@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCharacter : Character
+public class EnemyCharacter : CharacterTest
 {
     private Vector2Int[] directions = new Vector2Int[] {
 
@@ -24,7 +24,7 @@ public class EnemyCharacter : Character
             for (int i = 1; i <= range; i++)
             {
                 Vector2Int nextCoords = occupiedSquare + direction * i;
-                Character character = board.GetCharacterOnSquare(nextCoords);
+                CharacterTest character = board.GetCharacterOnSquare(nextCoords);
                 if (!board.CheckIfCoordinatedAreOnBoard(nextCoords))
                     break;
                 if (character == null)
