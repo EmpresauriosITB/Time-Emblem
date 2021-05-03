@@ -19,7 +19,7 @@ public class AlliedCharacter : Character
     public override List<Vector2Int> SelectAvaliableSquares()
     {
         avaliableMoves.Clear();
-        float range = Board.BOARD_SIZE;
+        float range = 3;
         foreach (var direction in directions)
         {
             for (int i = 1; i <= range; i++)

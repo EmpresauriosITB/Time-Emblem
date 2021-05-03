@@ -11,6 +11,7 @@ public abstract class Character : MonoBehaviour
     public Vector2Int occupiedSquare { get; set; }
     public Teams team { get; set; }
     public bool hasMoved { get; private set; }
+
     public List<Vector2Int> avaliableMoves;
 
     private IObjectTweener tweener;
