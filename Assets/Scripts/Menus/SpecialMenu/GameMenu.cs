@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameMenu : MonoBehaviour
 {
 
@@ -23,4 +24,6 @@ public class GameMenu : MonoBehaviour
     {
         MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
     }
+
+    
 }

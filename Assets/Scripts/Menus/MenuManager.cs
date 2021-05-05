@@ -5,11 +5,13 @@ public static class MenuManager
 
     public static bool IsInitialised { get; private set; }
     public static GameObject startMenu, settingsMenu, gameMenu, statsMenu, actionsMenu, itemsMenu;
-
+    private static Character character;
+    
+    
 
     public static void Init()
     {
-
+        
         GameObject canva = GameObject.Find("Canvas");
         startMenu = canva.transform.Find("MainMenu").gameObject;
         settingsMenu = canva.transform.Find("SettingMenu").gameObject;
@@ -48,4 +50,18 @@ public static class MenuManager
 
         callingMenu.SetActive(false);
     }
+  
+
+    public static void setCharacter(Character c)
+    {
+        character = c;
+    }
+    public static Character getCharacter()
+    {
+        return character;
+    }
+
+
+
+
 }

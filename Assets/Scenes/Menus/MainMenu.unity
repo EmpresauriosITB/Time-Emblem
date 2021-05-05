@@ -1417,7 +1417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &882509523
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1645,6 +1645,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960202999}
   m_CullTransparentMesh: 0
+--- !u!1 &1046559927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1046559929}
+  - component: {fileID: 1046559928}
+  m_Layer: 0
+  m_Name: Prueba
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1046559928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046559927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feaca2724dd7068439cd1aac1ca00cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 519621110}
+--- !u!4 &1046559929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046559927}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 484.1052, y: 236.89449, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177524057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1719,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1200469837}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1889,9 +1933,9 @@ RectTransform:
   - {fileID: 1258020544}
   - {fileID: 1811509613}
   - {fileID: 1752867443}
+  - {fileID: 1177524058}
   - {fileID: 1405578973}
   - {fileID: 1471004185}
-  - {fileID: 1177524058}
   m_Father: {fileID: 1852550930}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1950,7 +1994,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: {fileID: 301418901}
-  character: {fileID: 519621110}
+  PhysicalPower: {fileID: 236047542}
+  PhysicalDefense: {fileID: 1258020545}
+  MentalPower: {fileID: 1811509614}
+  MentalDefense: {fileID: 1752867444}
+  Velocity: {fileID: 1177524059}
+  ForceValue: {fileID: 1405578974}
+  GridSpeed: {fileID: 1471004186}
 --- !u!1 &1213507306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,7 +2148,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: PhysicalDefense
+  m_Text: Physical Defense
 --- !u!222 &1258020546
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2293,7 +2343,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1200469837}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2332,7 +2382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: ForceValue
+  m_Text: Force Value
 --- !u!222 &1405578975
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2501,7 +2551,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1200469837}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2540,7 +2590,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: GridSpeed
+  m_Text: Grid Speed
 --- !u!222 &1471004187
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3361,7 +3411,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: MentalDefense
+  m_Text: Mental Defense
 --- !u!222 &1752867445
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3439,7 +3489,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: MentalPower
+  m_Text: Mental Power
 --- !u!222 &1811509615
 CanvasRenderer:
   m_ObjectHideFlags: 0
