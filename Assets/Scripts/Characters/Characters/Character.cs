@@ -4,22 +4,22 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
 
-    public Stats stats;
+    public Stats stats; 
 
-    public string characterName;
+    public string characterName; 
 
-    private int currentHp;
-    private int currentPhysicalPower;
-    private int currentPhysicalDefense;
-    private int currentMentalPower;
-    private int currentMentalDefense;
-    private int currentVelocity;
-    private int currentGridSpeed;
+    private int currentHp; 
+    private int currentPhysicalPower; 
+    private int currentPhysicalDefense; 
+    private int currentMentalPower; 
+    private int currentMentalDefense; 
+    private int currentVelocity; 
+    private int currentGridSpeed; 
 
-    public AbilitySet abilitieSet;
-    private List<Abilities> abilitiesScript = new List<Abilities>();
-    public SpecialPassiveSettings specialPassiveSettings;
-    private SpecialPassive specialPassiveScript;
+    public AbilitySet abilitieSet; 
+    private List<Abilities> abilitiesScript = new List<Abilities>(); 
+    public SpecialPassiveSettings specialPassiveSettings; 
+    private SpecialPassive specialPassiveScript; 
 
     public void DoAbility(int idAbilityInList) {
         abilitiesScript[idAbilityInList].doAbility();
