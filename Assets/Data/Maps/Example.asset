@@ -48,7 +48,7 @@ MonoBehaviour:
     tileType: 0
   - posX: 2
     posY: 3
-    tileType: 0
+    tileType: 1
   - posX: 3
     posY: 0
     tileType: 0
@@ -66,3 +66,7 @@ MonoBehaviour:
     tileVisualPrefab: {fileID: 130280, guid: fe846d821f03406459b00accdd18d267, type: 3}
     isWalkable: 1
     movementCost: 1
+  - name: Swamp
+    tileVisualPrefab: {fileID: 193080, guid: 0269da9bd85f7874a837873754a064fe, type: 3}
+    isWalkable: 1
+    movementCost: 2
