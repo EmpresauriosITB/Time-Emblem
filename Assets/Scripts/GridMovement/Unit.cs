@@ -9,6 +9,9 @@ public class Unit : MonoBehaviour {
 
 	public List<Node> currentPath = null;
 
+	public delegate void SetCurrentActiveCharacter(GameObject activeChar);
+    public event SetCurrentActiveCharacter setCurrentActiveCharacter;
+
 	int moveSpeed = 4;
 
 	void Update() {
@@ -27,12 +30,20 @@ public class Unit : MonoBehaviour {
 
 				currNode++;
 			}
-
 		}
+	}
+
+
+
+
+	void OnMouseUp() {
+		setCurrentActiveCharacter(this.gameObject);
 	}
 
 	public void MoveNextTile() {
 		float remainingMovement = moveSpeed;
+
+		map.DesocupyTile(tileX, tileY);
 
 		while(remainingMovement > 0) {
 			if(currentPath==null)
@@ -57,6 +68,8 @@ public class Unit : MonoBehaviour {
 				currentPath = null;
 			}
 		}
+
+		map.OccupyTile(tileX, tileY);
 
 	}
 }

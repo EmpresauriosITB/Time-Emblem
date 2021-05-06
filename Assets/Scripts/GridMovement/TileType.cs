@@ -9,5 +9,4 @@ public class TileType {
 
 	public bool isWalkable = true;
 	public float movementCost = 1;
-
 }

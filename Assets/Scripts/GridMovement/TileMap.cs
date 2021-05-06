@@ -11,11 +11,10 @@ public class TileMap : MonoBehaviour {
 	int[,] tiles;
 	Node[,] graph;
 
-	void Start() {
-        // Setup the selectedUnit's variable
+	public void Init(BattleManager manager) {
         GenerateMapData();
-		GenerateMapVisual();
-        setSelectedUnit(selectedUnit);
+		GenerateMapVisual(manager);
+		//setSelectedUnit(selectedUnit);
 	}
 
     public void setSelectedUnit(GameObject selectedUnit) {
@@ -25,6 +24,20 @@ public class TileMap : MonoBehaviour {
         this.selectedUnit = selectedUnit;
         GeneratePathfindingGraph();
     }
+
+	public void OccupyTile(int x, int y) {
+		tiles[x, y] = 1;
+	}
+
+	public void DesocupyTile(int x, int y) {
+		bool flag = true;
+		for (int i = 0; i < tileSet.tileMapData.Length && flag; i++) {
+			if (tileSet.tileMapData[i].posX == x && tileSet.tileMapData[i].posY == y) {
+				flag = false;
+				tiles[x, y] = tileSet.tileMapData[i].tileType;
+			} 
+		}
+	} 
 
 	void GenerateMapData() {
 		// Allocate our map tiles
@@ -114,7 +127,7 @@ public class TileMap : MonoBehaviour {
 		}
 	}
 
-	void GenerateMapVisual() {
+	void GenerateMapVisual(BattleManager manager) {
 		int num = 0;
 		for(int x=0; x < tileSet.GetX(); x++) {
 			for(int y=0; y < tileSet.GetY(); y++) {
@@ -128,6 +141,7 @@ public class TileMap : MonoBehaviour {
 				ClickableTile ct = go.GetComponent<ClickableTile>();
 				ct.tileX = x;
 				ct.tileY = y;
+				ct.AddEvents(manager);
 				ct.map = this;
 			}
 		}
