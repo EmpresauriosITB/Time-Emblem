@@ -33,7 +33,9 @@ public abstract class Character : MonoBehaviour {
 
     public void InitAbilities() {
         foreach (int id in abilitieSet.abilities) {
-            abilitiesScript.Add(AbilityCommon.abilitiesReference[id]);
+            Abilities a = AbilityCommon.abilitiesReference[id];
+            a.init();
+            abilitiesScript.Add(a);
         }
     }
 

@@ -4,9 +4,12 @@ using UnityEngine;
 
 
 public abstract class Abilities : ScriptableObject {
-    private string abilityName;
+    public string abilityName;
     private int Power;
     private string description;
+
+
+    public abstract void init();
 
     public abstract void doAbility();
 
