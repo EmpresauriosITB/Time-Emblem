@@ -14,7 +14,6 @@ public class TileMap : MonoBehaviour {
 	public void Init(BattleManager manager) {
         GenerateMapData();
 		GenerateMapVisual(manager);
-		//setSelectedUnit(selectedUnit);
 	}
 
     public void setSelectedUnit(GameObject selectedUnit) {

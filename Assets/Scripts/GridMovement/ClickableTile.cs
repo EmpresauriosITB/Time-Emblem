@@ -11,7 +11,7 @@ public class ClickableTile : MonoBehaviour {
 	private bool allowedToCLick = false;
 
 	void OnMouseUp() {
-		if (characterActive && allowedToCLick) { map.GeneratePathTo(tileX, tileY); }
+        if (characterActive && allowedToCLick) { map.GeneratePathTo(tileX, tileY); }
 	}
 
 	public void AddEvents(BattleManager manager) {

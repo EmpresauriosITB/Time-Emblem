@@ -10,6 +10,8 @@ public class BattleManager : MonoBehaviour {
     public TileMap tileMap;
     private GameObject activeChar;
 
+    public GameObject playerTeam;
+
     public delegate void SetAllowedToClick(int x, int y);
     public event SetAllowedToClick setAllowedToClick;
 
@@ -49,6 +51,7 @@ public class BattleManager : MonoBehaviour {
                 CheckNoCurrentActivePlayer();
                 break;           
             case State.CharacterActive:
+                DefocusCharacter();
                 break;
             case State.BattleStopped:
                 ReaunudeGame();
@@ -62,6 +65,9 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void StartBattle() {
+
+        playerTeam.GetComponent<Unit>().setCurrentActiveCharacter += SetCurrentaActiveCharacter;
+
         currentState = State.Battle;
     }
 
@@ -80,9 +86,30 @@ public class BattleManager : MonoBehaviour {
     private void CheckNoCurrentActivePlayer() {
         if (activeChar != null) {
             //Enseñar UI Character
+
+            setAllowedToClick(0, 1);
             currentState = State.CharacterActive;
         }
     }
 
     private void ReaunudeGame() {}
+
+
+    public void SetCurrentaActiveCharacter(GameObject character) {
+        activeChar = character;
+        setCharacterActive(true);
+        tileMap.setSelectedUnit(activeChar);
+    }
+
+    public void DefocusCharacter() {
+        if (!haveActions()) {
+            activeChar = null;
+
+            currentState = State.Battle;
+        }
+    }
+
+    private bool haveActions() {
+        return true;
+    }
 }

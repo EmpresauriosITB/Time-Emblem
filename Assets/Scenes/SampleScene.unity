@@ -214,6 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 728637524}
   - component: {fileID: 728637523}
+  - component: {fileID: 728637525}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -251,6 +252,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!136 &728637525
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728637522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5506373
+  m_Height: 2.2707925
+  m_Direction: 1
+  m_Center: {x: -0.16461903, y: -2.0751157, z: 0.081347466}
 --- !u!1 &798430278
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   tileMap: {fileID: 1940790412}
+  playerTeam: {fileID: 728637522}
 --- !u!1 &1165413099
 GameObject:
   m_ObjectHideFlags: 0

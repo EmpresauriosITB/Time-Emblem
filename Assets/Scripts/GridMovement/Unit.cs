@@ -35,8 +35,8 @@ public class Unit : MonoBehaviour {
 
 
 
-
 	void OnMouseUp() {
+        Debug.Log("a");
 		setCurrentActiveCharacter(this.gameObject);
 	}
 
