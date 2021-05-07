@@ -8,6 +8,9 @@ public class ActionsMenu : MonoBehaviour
     private string abilitiesName;
     public TextLogController textController;
 
+
+
+
     private void OnEnable()
     {
         setTextAbilities();

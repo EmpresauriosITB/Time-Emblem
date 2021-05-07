@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TextLogController : MonoBehaviour
 {
-    [SerializeField] private GameObject text;
+    public GameObject text;
 
     private List<GameObject> textItems;
 
-    private void onEnable()
-    {
+    public delegate void DestroyText();
+    public event DestroyText destroyText;
+
+    private void onEnable() {
     }
 
     public void LogText(string newTextString)
@@ -21,7 +23,8 @@ public class TextLogController : MonoBehaviour
         newText.SetActive(true);
 
         newText.GetComponent<TextLogItem>().SetText(newTextString);
-        newText.transform.SetParent(text.transform.parent, false);
+        newText.GetComponent<TextLogItem>().subscribeEvent(this);
+        newText.transform.SetParent(this.transform.GetChild(0).transform.GetChild(0).transform, false);
 
         Debug.Log(newText);
         Debug.Log(textItems);
@@ -30,12 +33,7 @@ public class TextLogController : MonoBehaviour
 
     }
 
-    public void DeleteTextItems()
-    {
-       
-        for (int i = 0; i < textItems.Count; i++)
-        {
-            Destroy(gameObject);
-        }
+    public void DeleteTextItems() {
+        destroyText();
     }
 }
