@@ -14,6 +14,11 @@ public class ExampleSpecialPassive : SpecialPassive
         throw new System.NotImplementedException();
     }
 
+    public override void init()
+    {
+        throw new System.NotImplementedException();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

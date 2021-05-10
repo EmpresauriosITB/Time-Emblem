@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cb3b628d2729f4da4367219b12e235, type: 3}
   m_Name: ExampleStats
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 20
   physicalPower: 10
   physicalDefense: 2
   mentalPower: 10
   mentalDefense: 10
   velocity: 10
-  forceValue: 10
+  forceValue: 75
   gridSpeed: 10
