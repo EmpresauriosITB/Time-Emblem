@@ -36,9 +36,8 @@ public class ActionsMenu : MonoBehaviour
         }
         for(int i = 0; i < listaAbilities.Count; i++)
         {
-            abilitiesName = listaAbilities[i].GetName();
-            Debug.Log(abilitiesName);
-            textController.LogText(abilitiesName);
+        
+            textController.LogText(listaAbilities[i]);
         }
     }
 }

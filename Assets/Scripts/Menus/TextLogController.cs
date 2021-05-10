@@ -1,29 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TextLogController : MonoBehaviour
 {
-    public GameObject text;
+    public Button button;
 
     private List<GameObject> textItems;
 
     public delegate void DestroyText();
     public event DestroyText destroyText;
+   
+    private void Update() {
 
-    private void onEnable() {
     }
 
-    public void LogText(string newTextString)
+    public void LogText( Abilities a)
     {
         
         textItems = new List<GameObject>();
-        
-        GameObject newText = Instantiate(text) as GameObject;
-        newText.SetActive(true);
 
-        newText.GetComponent<TextLogItem>().SetText(newTextString);
-        newText.GetComponent<TextLogItem>().subscribeEvent(this);
+        Button newText = Instantiate(button) as Button;
+        newText.gameObject.SetActive(true);
+
+        newText.GetComponentInChildren<TextLogItem>().SetText(a.GetName());
+        newText.GetComponent<ButtonFunction>().subscribeEvent(this, a);
         newText.transform.SetParent(this.transform.GetChild(0).transform.GetChild(0).transform, false);
 
         Debug.Log(newText);
