@@ -12,7 +12,7 @@ public static class MenuManager
     public static void Init()
     {
         
-        GameObject canva = GameObject.Find("Canvas");
+        GameObject canva = GameObject.Find("MenuCanvas");
         startMenu = canva.transform.Find("MainMenu").gameObject;
         settingsMenu = canva.transform.Find("SettingMenu").gameObject;
         gameMenu = canva.transform.Find("GameMenu").gameObject;

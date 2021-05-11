@@ -9,8 +9,7 @@ public class Unit : MonoBehaviour {
 
 	public List<Node> currentPath = null;
 
-	public delegate void SetCurrentActiveCharacter(GameObject activeChar);
-    public event SetCurrentActiveCharacter setCurrentActiveCharacter;
+	
 
 	int moveSpeed = 4;
 
@@ -35,10 +34,6 @@ public class Unit : MonoBehaviour {
 
 
 
-	void OnMouseUp() {
-        Debug.Log("a");
-		setCurrentActiveCharacter(this.gameObject);
-	}
 
 	public void MoveNextTile() {
 		float remainingMovement = moveSpeed;

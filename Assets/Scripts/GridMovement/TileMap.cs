@@ -8,12 +8,13 @@ public class TileMap : MonoBehaviour {
 
 	public TileSet tileSet;
 
-	int[,] tiles;
-	Node[,] graph;
+	int[,] currentTiles;
+	public Node[,] graph;
 
 	public void Init(BattleManager manager) {
         GenerateMapData();
 		GenerateMapVisual(manager);
+		GeneratePathfindingGraph();
 	}
 
     public void setSelectedUnit(GameObject selectedUnit) {
@@ -21,11 +22,11 @@ public class TileMap : MonoBehaviour {
         selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
         selectedUnit.GetComponent<Unit>().map = this;
         this.selectedUnit = selectedUnit;
-        GeneratePathfindingGraph();
+        
     }
 
 	public void OccupyTile(int x, int y) {
-		tiles[x, y] = 1;
+		currentTiles[x, y] = 1;
 	}
 
 	public void DesocupyTile(int x, int y) {
@@ -33,17 +34,21 @@ public class TileMap : MonoBehaviour {
 		for (int i = 0; i < tileSet.tileMapData.Length && flag; i++) {
 			if (tileSet.tileMapData[i].posX == x && tileSet.tileMapData[i].posY == y) {
 				flag = false;
-				tiles[x, y] = tileSet.tileMapData[i].tileType;
+				currentTiles[x, y] = tileSet.tileMapData[i].tileType;
 			} 
 		}
 	} 
 
+	public bool isWalkable (int x, int y) {
+		return tileSet.tileTypes[currentTiles[x,y]].isWalkable;
+	}
+
 	void GenerateMapData() {
 		// Allocate our map tiles
-		tiles = new int[tileSet.GetX(),tileSet.GetY()];
+		currentTiles = new int[tileSet.GetX(),tileSet.GetY()];
 		
 		for (int i = 0; i < tileSet.tileMapData.Length; i++) {
-            tiles[tileSet.tileMapData[i].posX, tileSet.tileMapData[i].posY] = tileSet.tileMapData[i].tileType;
+            currentTiles[tileSet.tileMapData[i].posX, tileSet.tileMapData[i].posY] = tileSet.tileMapData[i].tileType;
         }
 		
 
@@ -51,7 +56,7 @@ public class TileMap : MonoBehaviour {
 
 	public float CostToEnterTile(int sourceX, int sourceY, int targetX, int targetY) {
 
-		TileType tt = tileSet.tileTypes[ tiles[targetX,targetY] ];
+		TileType tt = tileSet.tileTypes[ currentTiles[targetX,targetY] ];
 
 		if(UnitCanEnterTile(targetX, targetY) == false)
 			return Mathf.Infinity;
@@ -69,6 +74,7 @@ public class TileMap : MonoBehaviour {
 	}
 
 	void GeneratePathfindingGraph() {
+		
 		// Initialize the array
 		graph = new Node[tileSet.GetX(),tileSet.GetY()];
 
@@ -122,6 +128,7 @@ public class TileMap : MonoBehaviour {
 					graph[x,y].neighbours.Add( graph[x, y+1] );
 
 				// This also works with 6-way hexes and n-way variable areas (like EU4)
+				
 			}
 		}
 	}
@@ -131,7 +138,7 @@ public class TileMap : MonoBehaviour {
 		for(int x=0; x < tileSet.GetX(); x++) {
 			for(int y=0; y < tileSet.GetY(); y++) {
 				num ++;
-				TileType tt = tileSet.tileTypes[ tiles[x,y] ];
+				TileType tt = tileSet.tileTypes[ currentTiles[x,y] ];
 				
 				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefab, new Vector3(x, y, 0), Quaternion.identity );
 				go.name = "Tile " + num;
@@ -155,10 +162,11 @@ public class TileMap : MonoBehaviour {
 		// We could test the unit's walk/hover/fly type against various
 		// terrain flags here to see if they are allowed to enter the tile.
 
-		return tileSet.tileTypes[ tiles[x,y] ].isWalkable;
+		return tileSet.tileTypes[ currentTiles[x,y] ].isWalkable;
 	}
 
 	public void GeneratePathTo(int x, int y) {
+		Debug.Log("A");
         if (selectedUnit != null)
         {
             // Clear out our unit's old path.
@@ -262,6 +270,8 @@ public class TileMap : MonoBehaviour {
             currentPath.Reverse();
 
             selectedUnit.GetComponent<Unit>().currentPath = currentPath;
+
+			Debug.Log("finish");
         }
 	}
 

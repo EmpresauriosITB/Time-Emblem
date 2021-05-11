@@ -66,7 +66,7 @@ public class BattleManager : MonoBehaviour {
 
     private void StartBattle() {
 
-        playerTeam.GetComponent<Unit>().setCurrentActiveCharacter += SetCurrentaActiveCharacter;
+        playerTeam.GetComponent<CharacterController>().setCurrentActiveCharacter += SetCurrentaActiveCharacter;
 
         currentState = State.Battle;
     }
@@ -87,7 +87,7 @@ public class BattleManager : MonoBehaviour {
         if (activeChar != null) {
             //Enseñar UI Character
 
-            setAllowedToClick(0, 1);
+            
             currentState = State.CharacterActive;
         }
     }
@@ -97,19 +97,39 @@ public class BattleManager : MonoBehaviour {
 
     public void SetCurrentaActiveCharacter(GameObject character) {
         activeChar = character;
-        setCharacterActive(true);
+        setCharacterActive(true);    
         tileMap.setSelectedUnit(activeChar);
+        Character charInfo = character.GetComponent<CharacterController>().character;
+        
+        Unit unit = character.GetComponent<Unit>();
+        setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, -1, -1);
+
+        MenuManager.setCharacter(charInfo);
+        MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
     }
 
     public void DefocusCharacter() {
-        if (!haveActions()) {
-            activeChar = null;
+        //if (!haveActions()) {
+        //    activeChar = null;
 
-            currentState = State.Battle;
+        //    currentState = State.Battle;
+        //}
+    }
+
+    private void setAllowedToCLickTiles(float movementsLeft, int x, int y, int latestX, int latestY) {
+        if (movementsLeft < 0) {
+            for (int i = 0; i < tileMap.graph[x,y].neighbours.Count; i++) {
+                int currentX = tileMap.graph[x,y].neighbours[i].x;
+                int currentY = tileMap.graph[x,y].neighbours[i].y;
+                if (latestX != currentX && latestY != currentY) {
+                    if (tileMap.isWalkable(x,y)) {
+                        setAllowedToClick(currentX, currentY);
+                        setAllowedToCLickTiles(movementsLeft - 1, currentX, currentY, x, y);
+                    }
+                }
+            }
         }
     }
 
-    private bool haveActions() {
-        return true;
-    }
+    
 }
