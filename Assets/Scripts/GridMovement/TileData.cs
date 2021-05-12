@@ -10,10 +10,9 @@ public class TileData {
 
     
 
-    public TileData(int posX, int posY, int tileType) {
+    public TileData(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-        this.tileType = tileType;
     }
 
 }

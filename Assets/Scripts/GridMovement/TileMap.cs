@@ -8,8 +8,11 @@ public class TileMap : MonoBehaviour {
 
 	public TileSet tileSet;
 
-	int[,] currentTiles;
+	public int[,] currentTiles;
 	public Node[,] graph;
+
+	public delegate void ChangeTileMaterial(GameObject go, int x, int y);
+	public event ChangeTileMaterial changeTileMaterial;
 
 	public void Init(BattleManager manager) {
         GenerateMapData();
@@ -38,6 +41,13 @@ public class TileMap : MonoBehaviour {
 			} 
 		}
 	} 
+
+	public void ActivateTile(int x, int y) {
+		graph[x,y].isActive = true;
+		changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabActive, x, y);
+
+	}
+
 
 	public bool isWalkable (int x, int y) {
 		return tileSet.tileTypes[currentTiles[x,y]].isWalkable;
@@ -92,16 +102,17 @@ public class TileMap : MonoBehaviour {
 			for(int y=0; y < tileSet.GetY(); y++) {
 
 				// This is the 4-way connection version:
-/*				if(x > 0)
+				if(x > 0)
 					graph[x,y].neighbours.Add( graph[x-1, y] );
-				if(x < mapSizeX-1)
+				if(x < tileSet.GetX()-1)
 					graph[x,y].neighbours.Add( graph[x+1, y] );
 				if(y > 0)
 					graph[x,y].neighbours.Add( graph[x, y-1] );
-				if(y < mapSizeY-1)
+				if(y < tileSet.GetY()-1)
 					graph[x,y].neighbours.Add( graph[x, y+1] );
-*/
 
+
+				/*
 				// This is the 8-way connection version (allows diagonal movement)
 				// Try left
 				if(x > 0) {
@@ -126,6 +137,7 @@ public class TileMap : MonoBehaviour {
 					graph[x,y].neighbours.Add( graph[x, y-1] );
 				if(y < tileSet.GetY()-1)
 					graph[x,y].neighbours.Add( graph[x, y+1] );
+					*/
 
 				// This also works with 6-way hexes and n-way variable areas (like EU4)
 				
@@ -140,15 +152,15 @@ public class TileMap : MonoBehaviour {
 				num ++;
 				TileType tt = tileSet.tileTypes[ currentTiles[x,y] ];
 				
-				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefab, new Vector3(x, y, 0), Quaternion.identity );
+				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefabNotActive, new Vector3(x, y, 0), Quaternion.identity );
 				go.name = "Tile " + num;
 				go.transform.parent = this.gameObject.transform.GetChild(0).transform;
 
 				ClickableTile ct = go.GetComponent<ClickableTile>();
 				ct.tileX = x;
 				ct.tileY = y;
-				ct.AddEvents(manager);
 				ct.map = this;
+				ct.AddEvents();
 			}
 		}
 	}

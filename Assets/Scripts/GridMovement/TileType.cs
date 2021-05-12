@@ -5,7 +5,8 @@ using System.Collections;
 public class TileType {
 
 	public string name;
-	public GameObject tileVisualPrefab;
+	public GameObject tileVisualPrefabNotActive;
+	public GameObject tileVisualPrefabActive;
 
 	public bool isWalkable = true;
 	public float movementCost = 1;

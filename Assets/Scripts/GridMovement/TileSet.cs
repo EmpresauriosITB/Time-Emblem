@@ -10,10 +10,12 @@ public class TileSet : ScriptableObject {
     public TileType[] tileTypes;
 
     public void Init() {
+        Debug.Log(tileMapData[0].tileType);
+        
         tileMapData = new TileData[x*y];
         int auxX = 0, auxY = 0;
         for (int i = 0; i < tileMapData.Length; i++) {
-            tileMapData[i] = new TileData(auxX, auxY, 0);           
+            tileMapData[i] = new TileData(auxX, auxY);           
             if (auxY < y - 1) { auxY ++; }
             else {
                 auxX ++;

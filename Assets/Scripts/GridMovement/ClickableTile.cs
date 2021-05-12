@@ -11,27 +11,20 @@ public class ClickableTile : MonoBehaviour {
 	private bool allowedToCLick = false;
 
 	void OnMouseUp() {
-        if (characterActive && allowedToCLick) { 
+		Debug.Log("Debug: " + map.graph[tileX, tileY].isActive);
+        if (map.graph[tileX, tileY].isActive) { 
 			map.GeneratePathTo(tileX, tileY); 
 		}
 	}
 
-	public void AddEvents(BattleManager manager) {
-		manager.setAllowedToClick += SetAllowedToClick;
-		manager.setCharacterActive += SetCharacterActive;
-		manager.disableAllowedToCLick += DisableAllowedToCLick;
+	public void AddEvents() {
+		map.changeTileMaterial += ChangeMaterial;
 	}
 
-	public void SetAllowedToClick(int x, int y) {
-		if ( x == tileX && y == tileY) {allowedToCLick = true; }
-	}
-
-	public void SetCharacterActive(bool flag) {
-		characterActive = flag;
-	}
-
-	public void DisableAllowedToCLick() {
-		allowedToCLick = false;
+	public void ChangeMaterial(GameObject go, int x, int y) {
+		if (x == tileX && y == tileY) {
+			this.gameObject.GetComponent<MeshRenderer>().material = go.GetComponent<MeshRenderer>().sharedMaterial;
+		}
 	}
 
 }

@@ -96,8 +96,7 @@ public class BattleManager : MonoBehaviour {
 
 
     public void SetCurrentaActiveCharacter(GameObject character) {
-        activeChar = character;
-        setCharacterActive(true);    
+        activeChar = character;  
         tileMap.setSelectedUnit(activeChar);
         Character charInfo = character.GetComponent<CharacterController>().character;
         
@@ -105,7 +104,7 @@ public class BattleManager : MonoBehaviour {
         setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, -1, -1);
 
         MenuManager.setCharacter(charInfo);
-        MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
+        //MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
     }
 
     public void DefocusCharacter() {
@@ -116,20 +115,20 @@ public class BattleManager : MonoBehaviour {
         //}
     }
 
-    private void setAllowedToCLickTiles(float movementsLeft, int x, int y, int latestX, int latestY) {
-        if (movementsLeft < 0) {
+    private void setAllowedToCLickTiles(float movementsLeft, int x, int y, int lastX, int lastY) {
+        
+        if (movementsLeft > 0) {
             for (int i = 0; i < tileMap.graph[x,y].neighbours.Count; i++) {
                 int currentX = tileMap.graph[x,y].neighbours[i].x;
                 int currentY = tileMap.graph[x,y].neighbours[i].y;
-                if (latestX != currentX && latestY != currentY) {
-                    if (tileMap.isWalkable(x,y)) {
-                        setAllowedToClick(currentX, currentY);
-                        setAllowedToCLickTiles(movementsLeft - 1, currentX, currentY, x, y);
+                //if (!tileMap.graph[currentX,currentY].isActive) {
+                    if (tileMap.isWalkable(currentX,currentY)) {
+                        
+                        tileMap.ActivateTile(currentX, currentY);
+                        setAllowedToCLickTiles(movementsLeft - tileMap.tileSet.tileTypes[tileMap.currentTiles[currentX,currentY]].movementCost, currentX, currentY, lastX, lastY);
                     }
-                }
+                //}
             }
         }
-    }
-
-    
+    } 
 }
