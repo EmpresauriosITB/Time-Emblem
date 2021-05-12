@@ -4,7 +4,7 @@ public static class MenuManager
 {
 
     public static bool IsInitialised { get; private set; }
-    public static GameObject startMenu, settingsMenu, gameMenu, statsMenu, actionsMenu, itemsMenu;
+    public static GameObject startMenu, settingsMenu, gameMenu, statsMenu, actionsMenu, dragMenu;
     private static Character character;
     
     
@@ -18,7 +18,7 @@ public static class MenuManager
         gameMenu = canva.transform.Find("GameMenu").gameObject;
         statsMenu = canva.transform.Find("StatsMenu").gameObject;
         actionsMenu = canva.transform.Find("ActionsMenu").gameObject;
-
+        dragMenu = canva.transform.Find("Drag&Drop").gameObject;
         IsInitialised = true;
 
     }
@@ -45,6 +45,9 @@ public static class MenuManager
                 break;
             case Menu.Actions_Menu:
                 actionsMenu.SetActive(true);
+                break;
+            case Menu.Drag_Menu:
+                dragMenu.SetActive(true);
                 break;
         }
 

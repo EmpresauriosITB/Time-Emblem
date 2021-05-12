@@ -8,7 +8,7 @@ public class Pruebas : MonoBehaviour
     void Start()
     {
         MenuManager.setCharacter(character);
-        MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
+        MenuManager.OpenMenu(Menu.Drag_Menu, gameObject);
     }
 
     // Update is called once per frame
