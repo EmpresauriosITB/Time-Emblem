@@ -10,8 +10,6 @@ public class TileSet : ScriptableObject {
     public TileType[] tileTypes;
 
     public void Init() {
-        Debug.Log(tileMapData[0].tileType);
-        
         tileMapData = new TileData[x*y];
         int auxX = 0, auxY = 0;
         for (int i = 0; i < tileMapData.Length; i++) {
@@ -26,11 +24,13 @@ public class TileSet : ScriptableObject {
 
     public void changeArrayLenghtX(int x) {
         this.x = x;
-        Init();
     }
 
     public void changeArrayLenghtY(int y) {
         this.y = y;
+    }
+
+    public void ApplyChanges() {
         Init();
     }
 
@@ -40,6 +40,4 @@ public class TileSet : ScriptableObject {
     public int GetY() {
         return y;
     }
-
-
 }

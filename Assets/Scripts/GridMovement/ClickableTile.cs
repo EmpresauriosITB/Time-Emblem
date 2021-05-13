@@ -11,7 +11,6 @@ public class ClickableTile : MonoBehaviour {
 	private bool allowedToCLick = false;
 
 	void OnMouseUp() {
-		Debug.Log("Debug: " + map.graph[tileX, tileY].isActive);
         if (map.graph[tileX, tileY].isActive) { 
 			map.GeneratePathTo(tileX, tileY); 
 		}

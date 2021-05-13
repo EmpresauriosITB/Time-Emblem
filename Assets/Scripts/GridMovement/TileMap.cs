@@ -178,7 +178,6 @@ public class TileMap : MonoBehaviour {
 	}
 
 	public void GeneratePathTo(int x, int y) {
-		Debug.Log("A");
         if (selectedUnit != null)
         {
             // Clear out our unit's old path.
@@ -282,8 +281,6 @@ public class TileMap : MonoBehaviour {
             currentPath.Reverse();
 
             selectedUnit.GetComponent<Unit>().currentPath = currentPath;
-
-			Debug.Log("finish");
         }
 	}
 

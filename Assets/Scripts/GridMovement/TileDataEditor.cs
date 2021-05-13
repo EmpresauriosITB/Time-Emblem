@@ -22,6 +22,10 @@ public class TileDataEditor : Editor
         EditorGUILayout.LabelField("Y");
         set.changeArrayLenghtY(EditorGUILayout.IntField(set.GetY()));
         GUILayout.EndHorizontal();
+        bool buttonPressed = GUILayout.Button("Apply SizeChanges");
+        if (buttonPressed) {
+            set.Init();
+        }
 
     }
 
