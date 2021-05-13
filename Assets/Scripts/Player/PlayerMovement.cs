@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
+  
     public Animator anim;
-    
-
     public float Speed;
-
     public Rigidbody rb;
-    public float turnSmoothTime = 0.1f;
-    float turnSmoothVelocity;
-
     Vector3 movement;
+
     void Start() {
         anim = GetComponent<Animator>();
     }
