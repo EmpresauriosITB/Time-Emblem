@@ -5,13 +5,14 @@ public static class MenuManager
 
     public static bool IsInitialised { get; private set; }
     public static GameObject startMenu, settingsMenu, gameMenu, statsMenu, actionsMenu, itemsMenu;
-    private static Character character;
-    
-    
+    private static GameObject character;
 
-    public static void Init()
-    {
-        
+
+    public static void MoveClicked() {
+        character.GetComponent<Unit>().MoveNextTile();
+    }
+
+    public static void Init() {
         GameObject canva = GameObject.Find("MenuCanvas");
         startMenu = canva.transform.Find("MainMenu").gameObject;
         settingsMenu = canva.transform.Find("SettingMenu").gameObject;
@@ -52,13 +53,13 @@ public static class MenuManager
     }
   
 
-    public static void setCharacter(Character c)
+    public static void setCharacter(GameObject c)
     {
         character = c;
     }
     public static Character getCharacter()
     {
-        return character;
+        return character.GetComponent<CharacterController>().character;
     }
 
 

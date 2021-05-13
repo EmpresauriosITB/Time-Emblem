@@ -6,10 +6,6 @@ public class ClickableTile : MonoBehaviour {
 	public int tileX;
 	public int tileY;
 	public TileMap map;
-
-	private bool characterActive = false;
-	private bool allowedToCLick = false;
-
 	void OnMouseUp() {
         if (map.graph[tileX, tileY].isActive) { 
 			map.GeneratePathTo(tileX, tileY); 

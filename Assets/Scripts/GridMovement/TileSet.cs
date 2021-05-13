@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "TileSet")]
 public class TileSet : ScriptableObject {
 
-    private int x, y;
+    public int x, y;
     public TileData[] tileMapData;
     public TileType[] tileTypes;
 

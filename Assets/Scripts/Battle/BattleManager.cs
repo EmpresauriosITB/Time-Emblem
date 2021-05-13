@@ -7,19 +7,12 @@ public class BattleManager : MonoBehaviour {
     public enum State {StartEncounter, SelectTeam, LocateTeam, StartBattle, Battle, CharacterActive, BattleStopped}
     public State currentState = State.StartEncounter;
 
+    private bool conGoNextState = true;
+
     public TileMap tileMap;
     private GameObject activeChar;
 
     public GameObject playerTeam;
-
-    public delegate void SetAllowedToClick(int x, int y);
-    public event SetAllowedToClick setAllowedToClick;
-
-    public delegate void DisableAllowedToCLick();
-    public event DisableAllowedToCLick disableAllowedToCLick;
-
-    public delegate void SetCharacterActive(bool flag);
-    public event SetCharacterActive setCharacterActive;
 
     
     void Start()
@@ -28,8 +21,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     
-    void Update()
-    {
+    void Update() {
         CheckState();
     }
 
@@ -51,7 +43,7 @@ public class BattleManager : MonoBehaviour {
                 CheckNoCurrentActivePlayer();
                 break;           
             case State.CharacterActive:
-                DefocusCharacter();
+                
                 break;
             case State.BattleStopped:
                 ReaunudeGame();
@@ -65,70 +57,63 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void StartBattle() {
+        CharacterController controller = playerTeam.GetComponent<CharacterController>();
+        Unit unit = playerTeam.GetComponent<Unit>();
 
-        playerTeam.GetComponent<CharacterController>().setCurrentActiveCharacter += SetCurrentaActiveCharacter;
+        controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
+        tileMap.OccupyTile(unit.tileX, unit.tileY);
 
         currentState = State.Battle;
     }
 
     private void Next() {
-        // if ()
-        switch(currentState) {
-            case State.SelectTeam:
-                currentState = State.LocateTeam;
-                break;
-            case State.LocateTeam:
-                currentState = State.StartBattle;
-                break;
+        if (conGoNextState) {
+            switch(currentState) {
+                case State.SelectTeam:
+                    currentState = State.LocateTeam;
+                    break;
+                case State.LocateTeam:
+                    currentState = State.StartBattle;
+                    break; 
+            }
+            //conGoNextState = false;
         }
     }
 
     private void CheckNoCurrentActivePlayer() {
-        if (activeChar != null) {
-            //Enseñar UI Character
+        if (isCurrentPlayerActive()) {
+            Character charInfo = activeChar.GetComponent<CharacterController>().character;
+            Unit unit = activeChar.GetComponent<Unit>();
 
-            
+            PathFind.setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, true, tileMap);
+
+            MenuManager.setCharacter(activeChar);
+            MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
+
             currentState = State.CharacterActive;
         }
+    }
+
+    public bool isCurrentPlayerActive() {
+        return activeChar != null;
     }
 
     private void ReaunudeGame() {}
 
 
     public void SetCurrentaActiveCharacter(GameObject character) {
+        if (activeChar != null) { DefocusCharacter(); }
         activeChar = character;  
-        tileMap.setSelectedUnit(activeChar);
-        Character charInfo = character.GetComponent<CharacterController>().character;
-        
-        Unit unit = character.GetComponent<Unit>();
-        setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, -1, -1);
-
-        MenuManager.setCharacter(charInfo);
-        //MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
+        tileMap.setSelectedUnit(activeChar);  
     }
 
     public void DefocusCharacter() {
-        //if (!haveActions()) {
-        //    activeChar = null;
+        Character charInfo = activeChar.GetComponent<CharacterController>().character;
+        Unit unit = activeChar.GetComponent<Unit>();
 
-        //    currentState = State.Battle;
-        //}
+        PathFind.setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, false, tileMap);
+
+        activeChar = null;
+        currentState = State.Battle;
     }
-
-    private void setAllowedToCLickTiles(float movementsLeft, int x, int y, int lastX, int lastY) {
-        
-        if (movementsLeft > 0) {
-            for (int i = 0; i < tileMap.graph[x,y].neighbours.Count; i++) {
-                int currentX = tileMap.graph[x,y].neighbours[i].x;
-                int currentY = tileMap.graph[x,y].neighbours[i].y;
-                //if (!tileMap.graph[currentX,currentY].isActive) {
-                    if (tileMap.isWalkable(currentX,currentY)) {
-                        
-                        tileMap.ActivateTile(currentX, currentY);
-                        setAllowedToCLickTiles(movementsLeft - tileMap.tileSet.tileTypes[tileMap.currentTiles[currentX,currentY]].movementCost, currentX, currentY, lastX, lastY);
-                    }
-                //}
-            }
-        }
-    } 
 }

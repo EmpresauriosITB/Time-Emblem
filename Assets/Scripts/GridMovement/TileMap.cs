@@ -42,10 +42,10 @@ public class TileMap : MonoBehaviour {
 		}
 	} 
 
-	public void ActivateTile(int x, int y) {
-		graph[x,y].isActive = true;
-		changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabActive, x, y);
-
+	public void ActivateTile(int x, int y, bool isActive) {
+		graph[x,y].isActive = isActive;
+		if (isActive) { changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabActive, x, y); }
+		else { changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabNotActive, x, y); }
 	}
 
 

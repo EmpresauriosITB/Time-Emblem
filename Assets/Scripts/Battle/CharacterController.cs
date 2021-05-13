@@ -20,7 +20,6 @@ public class CharacterController : MonoBehaviour {
     }
     
 	void OnMouseUp() {
-        Debug.Log("a");
 		setCurrentActiveCharacter(this.gameObject);
 	}
 
@@ -38,5 +37,9 @@ public class CharacterController : MonoBehaviour {
 
     public void resetActions() {
         actionsLeft = actionNum;
+    }
+
+    public void doAction() {
+        
     }
 }

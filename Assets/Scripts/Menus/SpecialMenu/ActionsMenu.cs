@@ -24,15 +24,10 @@ public class ActionsMenu : MonoBehaviour
     public void setTextAbilities()
     {
         List<Abilities> listaAbilities = new List<Abilities>();
-        character = MenuManager.getCharacter();
-        Debug.Log(character);
-        Debug.Log(character.GetAbilitiesSet().abilities.Count);
-            
+        character = MenuManager.getCharacter();        
         for (int i = 0; i < character.GetAbilitiesSet().abilities.Count; i++) {
             Abilities a = AbilityCommon.abilitiesReference[(int)character.GetAbilitiesSet().abilities[i]];
             listaAbilities.Add(a);
-
-            Debug.Log(listaAbilities[i]);
         }
         for(int i = 0; i < listaAbilities.Count; i++)
         {
