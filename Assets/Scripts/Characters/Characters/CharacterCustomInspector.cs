@@ -17,7 +17,7 @@ public abstract class CharacterCustomInspector : Editor
         character = (Character)target;
 
         character.stats = EditorGUILayout.ObjectField("StatsObject", character.GetStats(), typeof(Stats), true) as Stats;
-        character.specialPassiveSettings = EditorGUILayout.ObjectField("SpecialPassive", character.GetSpecialPassiveSettings(), typeof(SpecialPassiveSettings), true) as SpecialPassiveSettings);
+        character.specialPassiveSettings = EditorGUILayout.ObjectField("SpecialPassive", character.GetSpecialPassiveSettings(), typeof(SpecialPassiveSettings), true) as SpecialPassiveSettings;
         character.abilitieSet = (EditorGUILayout.ObjectField("AbilitiySet", character.GetAbilitiesSet(), typeof(AbilitySet), true) as AbilitySet);
 
         statsNotNull = character.GetStats() != null;
