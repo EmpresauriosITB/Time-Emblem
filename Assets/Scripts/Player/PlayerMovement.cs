@@ -9,23 +9,36 @@ public class PlayerMovement : MonoBehaviour
     public float Speed;
     public Rigidbody rb;
     Vector3 movement;
+    public GameObject camara;
+    public bool canMove;
 
     void Start() {
         anim = GetComponent<Animator>();
+        camara = GameObject.Find("Camera");
     }
     private void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        if(x != 0f || z != 0f)
+        if (canMove)
         {
-            anim.SetBool ("Run", true);
-        } else {
-            anim.SetBool("Run", false);
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            if (x != 0f || z != 0f)
+            {
+                anim.SetBool("Run", true);
+            }
+            else
+            {
+                anim.SetBool("Run", false);
+            }
+            movement.x = -x;
+            movement.z = -z;
         }
-        movement.x = -x;
-        movement.z = -z;
-    }    
+    }  
+    
+    public void setCanMove(bool flag)
+    {
+        canMove = flag;
+    }
 
     private void FixedUpdate(){
         rb.MovePosition(rb.position + movement * Speed * Time.fixedDeltaTime);
