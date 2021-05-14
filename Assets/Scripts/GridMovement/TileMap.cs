@@ -8,14 +8,16 @@ public class TileMap : MonoBehaviour {
 
 	public TileSet tileSet;
 
-	int[,] tiles;
-	Node[,] graph;
+	public int[,] currentTiles;
+	public Node[,] graph;
 
-	void Start() {
-        // Setup the selectedUnit's variable
+	public delegate void ChangeTileMaterial(GameObject go, int x, int y);
+	public event ChangeTileMaterial changeTileMaterial;
+
+	public void Init(BattleManager manager) {
         GenerateMapData();
-		GenerateMapVisual();
-        setSelectedUnit(selectedUnit);
+		GenerateMapVisual(manager);
+		GeneratePathfindingGraph();
 	}
 
     public void setSelectedUnit(GameObject selectedUnit) {
@@ -23,15 +25,40 @@ public class TileMap : MonoBehaviour {
         selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
         selectedUnit.GetComponent<Unit>().map = this;
         this.selectedUnit = selectedUnit;
-        GeneratePathfindingGraph();
+        
     }
+
+	public void OccupyTile(int x, int y) {
+		currentTiles[x, y] = 1;
+	}
+
+	public void DesocupyTile(int x, int y) {
+		bool flag = true;
+		for (int i = 0; i < tileSet.tileMapData.Length && flag; i++) {
+			if (tileSet.tileMapData[i].posX == x && tileSet.tileMapData[i].posY == y) {
+				flag = false;
+				currentTiles[x, y] = tileSet.tileMapData[i].tileType;
+			} 
+		}
+	} 
+
+	public void ActivateTile(int x, int y, bool isActive) {
+		graph[x,y].isActive = isActive;
+		if (isActive) { changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabActive, x, y); }
+		else { changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabNotActive, x, y); }
+	}
+
+
+	public bool isWalkable (int x, int y) {
+		return tileSet.tileTypes[currentTiles[x,y]].isWalkable;
+	}
 
 	void GenerateMapData() {
 		// Allocate our map tiles
-		tiles = new int[tileSet.GetX(),tileSet.GetY()];
+		currentTiles = new int[tileSet.GetX(),tileSet.GetY()];
 		
 		for (int i = 0; i < tileSet.tileMapData.Length; i++) {
-            tiles[tileSet.tileMapData[i].posX, tileSet.tileMapData[i].posY] = tileSet.tileMapData[i].tileType;
+            currentTiles[tileSet.tileMapData[i].posX, tileSet.tileMapData[i].posY] = tileSet.tileMapData[i].tileType;
         }
 		
 
@@ -39,7 +66,7 @@ public class TileMap : MonoBehaviour {
 
 	public float CostToEnterTile(int sourceX, int sourceY, int targetX, int targetY) {
 
-		TileType tt = tileSet.tileTypes[ tiles[targetX,targetY] ];
+		TileType tt = tileSet.tileTypes[ currentTiles[targetX,targetY] ];
 
 		if(UnitCanEnterTile(targetX, targetY) == false)
 			return Mathf.Infinity;
@@ -57,6 +84,7 @@ public class TileMap : MonoBehaviour {
 	}
 
 	void GeneratePathfindingGraph() {
+		
 		// Initialize the array
 		graph = new Node[tileSet.GetX(),tileSet.GetY()];
 
@@ -74,16 +102,17 @@ public class TileMap : MonoBehaviour {
 			for(int y=0; y < tileSet.GetY(); y++) {
 
 				// This is the 4-way connection version:
-/*				if(x > 0)
+				if(x > 0)
 					graph[x,y].neighbours.Add( graph[x-1, y] );
-				if(x < mapSizeX-1)
+				if(x < tileSet.GetX()-1)
 					graph[x,y].neighbours.Add( graph[x+1, y] );
 				if(y > 0)
 					graph[x,y].neighbours.Add( graph[x, y-1] );
-				if(y < mapSizeY-1)
+				if(y < tileSet.GetY()-1)
 					graph[x,y].neighbours.Add( graph[x, y+1] );
-*/
 
+
+				/*
 				// This is the 8-way connection version (allows diagonal movement)
 				// Try left
 				if(x > 0) {
@@ -108,20 +137,22 @@ public class TileMap : MonoBehaviour {
 					graph[x,y].neighbours.Add( graph[x, y-1] );
 				if(y < tileSet.GetY()-1)
 					graph[x,y].neighbours.Add( graph[x, y+1] );
+					*/
 
 				// This also works with 6-way hexes and n-way variable areas (like EU4)
+				
 			}
 		}
 	}
 
-	void GenerateMapVisual() {
+	void GenerateMapVisual(BattleManager manager) {
 		int num = 0;
 		for(int x=0; x < tileSet.GetX(); x++) {
 			for(int y=0; y < tileSet.GetY(); y++) {
 				num ++;
-				TileType tt = tileSet.tileTypes[ tiles[x,y] ];
+				TileType tt = tileSet.tileTypes[ currentTiles[x,y] ];
 				
-				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefab, new Vector3(x, y, 0), Quaternion.identity );
+				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefabNotActive, new Vector3(x, y, 0), Quaternion.identity );
 				go.name = "Tile " + num;
 				go.transform.parent = this.gameObject.transform.GetChild(0).transform;
 
@@ -129,6 +160,7 @@ public class TileMap : MonoBehaviour {
 				ct.tileX = x;
 				ct.tileY = y;
 				ct.map = this;
+				ct.AddEvents();
 			}
 		}
 	}
@@ -142,7 +174,7 @@ public class TileMap : MonoBehaviour {
 		// We could test the unit's walk/hover/fly type against various
 		// terrain flags here to see if they are allowed to enter the tile.
 
-		return tileSet.tileTypes[ tiles[x,y] ].isWalkable;
+		return tileSet.tileTypes[ currentTiles[x,y] ].isWalkable;
 	}
 
 	public void GeneratePathTo(int x, int y) {

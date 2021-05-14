@@ -7,6 +7,7 @@ public abstract class Abilities : ScriptableObject {
     public string abilityName;
     private int Power;
     private string description;
+    private int range;
 
 
     public abstract void init();
@@ -21,5 +22,4 @@ public abstract class Abilities : ScriptableObject {
 
     public void SetDescription(string description) { this.description = description; }
     public string GetDescription() { return description; }
-
 }

@@ -8,8 +8,11 @@ public class Unit : MonoBehaviour {
 	public TileMap map;
 
 	public List<Node> currentPath = null;
+	float moveSpeed;
 
-	int moveSpeed = 4;
+	void Start() {
+		moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
+	}
 
 	void Update() {
 		if(currentPath != null) {
@@ -27,16 +30,19 @@ public class Unit : MonoBehaviour {
 
 				currNode++;
 			}
-
 		}
 	}
+
+
+
 
 	public void MoveNextTile() {
 		float remainingMovement = moveSpeed;
 
-		while(remainingMovement > 0) {
-			if(currentPath==null)
-				return;
+		map.DesocupyTile(tileX, tileY);
+		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map);
+
+		while(remainingMovement > 0 && currentPath != null) {
 
 			// Get cost from current tile to next tile
 			remainingMovement -= map.CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y );
@@ -58,5 +64,8 @@ public class Unit : MonoBehaviour {
 			}
 		}
 
+		map.OccupyTile(tileX, tileY);
+			
+		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map);
 	}
 }

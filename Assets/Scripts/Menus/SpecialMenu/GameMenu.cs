@@ -15,9 +15,9 @@ public class GameMenu : MonoBehaviour
     {
         MenuManager.OpenMenu(Menu.Actions_Menu, gameObject);
     }
-    public void OnClick_Items()
+    public void OnClick_Move()
     {
-        MenuManager.OpenMenu(Menu.Items_Menu, gameObject);
+        MenuManager.MoveClicked();
     }
 
     public void OnClick_Back()

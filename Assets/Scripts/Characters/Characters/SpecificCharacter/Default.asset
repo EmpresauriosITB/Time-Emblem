@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cb3b628d2729f4da4367219b12e235, type: 3}
-  m_Name: ExampleStats
+  m_Script: {fileID: 11500000, guid: 7d6c259e24be13d4798f9ac746d07236, type: 3}
+  m_Name: Default
   m_EditorClassIdentifier: 
-  hp: 20
-  physicalPower: 10
-  physicalDefense: 2
-  mentalPower: 10
-  mentalDefense: 10
-  velocity: 10
-  forceValue: 75
-  gridSpeed: 5
+  stats: {fileID: 0}
+  characterName: 
+  abilitieSet: {fileID: 0}
+  specialPassiveSettings: {fileID: 0}
