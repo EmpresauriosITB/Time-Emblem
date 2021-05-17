@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PickupObject : MonoBehaviour
 {
+    public Camera pixelCamera;
 
     public void Start()
     {
-        
+        pixelCamera = GameObject.FindObjectOfType<Camera>();
     }
 
     void OnTriggerStay(Collider collider)
@@ -24,6 +25,7 @@ public class PickupObject : MonoBehaviour
                 gameObject.GetComponent<PlayerController>().camara.transform.GetChild(0).GetComponent<PlayerFollow>().PlayerTransform = gameObject.transform;
                 gameObject.GetComponent<PlayerController>().setCanMove(true);
                 collider.gameObject.SetActive(false);
+                pixelCamera.fieldOfView = 60f;
             }
         }
     }
