@@ -3548,12 +3548,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3496674673578181335}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Player sit
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3496674673578181335
 Transform:
   m_ObjectHideFlags: 0
@@ -3567,7 +3567,7 @@ Transform:
   m_Children:
   - {fileID: 3496674673578104925}
   m_Father: {fileID: 6238345404997391453}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3496674673578459911
 GameObject:
@@ -4081,6 +4081,36 @@ Transform:
   m_Father: {fileID: 3496674673578190559}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4400154938019385658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3145552074783465062}
+  m_Layer: 8
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3145552074783465062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400154938019385658}
+  m_LocalRotation: {x: -0, y: -0.8260309, z: 0, w: 0.5636249}
+  m_LocalPosition: {x: -19.8, y: -5.3, z: 276.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6238345404997391453}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6238345404997077017
 GameObject:
   m_ObjectHideFlags: 0
@@ -4117,6 +4147,7 @@ Transform:
   m_LocalPosition: {x: 23.44, y: -2.47, z: 92.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3145552074783465062}
   - {fileID: 3496674673578181335}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -4275,3 +4306,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pixelCamera: {fileID: 0}
+  onBoard: 0
