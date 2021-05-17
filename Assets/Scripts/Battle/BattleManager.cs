@@ -85,7 +85,7 @@ public class BattleManager : MonoBehaviour {
             Character charInfo = activeChar.GetComponent<CharacterController>().character;
             Unit unit = activeChar.GetComponent<Unit>();
 
-            PathFind.setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, true, tileMap);
+            PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap);
 
             MenuManager.setCharacter(activeChar);
             MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
@@ -111,7 +111,7 @@ public class BattleManager : MonoBehaviour {
         Character charInfo = activeChar.GetComponent<CharacterController>().character;
         Unit unit = activeChar.GetComponent<Unit>();
 
-        PathFind.setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, false, tileMap);
+        PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap);
 
         activeChar = null;
         currentState = State.Battle;

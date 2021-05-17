@@ -15,9 +15,7 @@ public class CharacterController : MonoBehaviour {
     public event SetCurrentActiveCharacter setCurrentActiveCharacter;
 
 
-    void Start() {
-        character.Init();
-    }
+    void Start() {}
     
 	void OnMouseUp() {
 		setCurrentActiveCharacter(this.gameObject);
@@ -28,7 +26,7 @@ public class CharacterController : MonoBehaviour {
     }
 
     public void ResetCooldown() {
-        timeToNextActivePeriod = Time.deltaTime + character.GetVelocity();
+        timeToNextActivePeriod = Time.deltaTime + character.currentVelocity;
     }
 
     public bool HasActionsLeft() {

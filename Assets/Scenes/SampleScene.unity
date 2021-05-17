@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be96077d67a7afb4297d119684da546c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 11400000, guid: 43a479b45a5d4634b8c6436c5c780d4b, type: 2}
+  character: {fileID: 11400000, guid: 3bee4cc77d62136419bee2d93c033056, type: 2}
   actionNum: 0
   timeToNextActivePeriod: 0
 --- !u!1 &798430278
@@ -883,7 +883,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1835520416}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

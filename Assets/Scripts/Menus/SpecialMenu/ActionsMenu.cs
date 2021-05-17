@@ -25,8 +25,8 @@ public class ActionsMenu : MonoBehaviour
     {
         List<Abilities> listaAbilities = new List<Abilities>();
         character = MenuManager.getCharacter();        
-        for (int i = 0; i < character.GetAbilitiesSet().abilities.Count; i++) {
-            Abilities a = AbilityCommon.abilitiesReference[(int)character.GetAbilitiesSet().abilities[i]];
+        for (int i = 0; i < character.abilitieSet.abilities.Count; i++) {
+            Abilities a = character.abilitieSet.abilities[i];
             listaAbilities.Add(a);
         }
         for(int i = 0; i < listaAbilities.Count; i++)

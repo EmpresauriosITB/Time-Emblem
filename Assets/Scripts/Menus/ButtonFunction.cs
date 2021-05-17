@@ -24,6 +24,5 @@ public class ButtonFunction : MonoBehaviour
 
     public void buttonClicked()
     {
-        Debug.Log(abilities.GetName());
     }
 }

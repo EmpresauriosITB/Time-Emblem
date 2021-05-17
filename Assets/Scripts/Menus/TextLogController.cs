@@ -24,7 +24,7 @@ public class TextLogController : MonoBehaviour
         Button newText = Instantiate(button) as Button;
         newText.gameObject.SetActive(true);
 
-        newText.GetComponentInChildren<TextLogItem>().SetText(a.GetName());
+        newText.GetComponentInChildren<TextLogItem>().SetText(a.AbilityName);
         newText.GetComponent<ButtonFunction>().subscribeEvent(this, a);
         newText.transform.SetParent(this.transform.GetChild(0).transform.GetChild(0).transform, false);
 

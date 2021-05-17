@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour {
 	float moveSpeed;
 
 	void Start() {
-		moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
+		moveSpeed = this.gameObject.GetComponent<CharacterController>().character.stats.gridSpeed;
 	}
 
 	void Update() {

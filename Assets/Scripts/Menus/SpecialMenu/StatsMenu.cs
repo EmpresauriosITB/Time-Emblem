@@ -38,14 +38,14 @@ public class StatsMenu : MonoBehaviour
     {
         character = MenuManager.getCharacter();
         
-        HP.text = "HP: " + character.GetHp();
-        PhysicalPower.text = "Physical Power: " + character.GetPhysicalPower();
-        PhysicalDefense.text = "Physical Defense: " + character.GetPhysicalDefense();
-        MentalPower.text = "Mental Power: " + character.GetMentalPower();
-        MentalDefense.text = "Mental Defense: " + character.GetMentalDefense();
-        Velocity.text = "Velocity: " + character.GetVelocity();
-        ForceValue.text = "Force Value: " + character.GetForceValue();
-        GridSpeed.text = "Grid Speed: " + character.GetGridSpeed();
+        HP.text = "HP: " + character.currentHp;
+        PhysicalPower.text = "Physical Power: " + character.currentPhysicalPower;
+        PhysicalDefense.text = "Physical Defense: " + character.currentPhysicalDefense;
+        MentalPower.text = "Mental Power: " + character.currentMentalPower;
+        MentalDefense.text = "Mental Defense: " + character.currentMentalDefense;
+        Velocity.text = "Velocity: " + character.currentVelocity;
+        ForceValue.text = "Force Value: " + character.stats.forceValue;
+        GridSpeed.text = "Grid Speed: " + character.currentGridSpeed;
     }
 
 }
