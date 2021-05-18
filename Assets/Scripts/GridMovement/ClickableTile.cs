@@ -8,7 +8,7 @@ public class ClickableTile : MonoBehaviour {
 	public TileMap map;
 	void OnMouseUp() {
         if (map.graph[tileX, tileY].isActive) { 
-			map.GeneratePathTo(tileX, tileY); 
+			map.GeneratePathTo(tileX, tileY, null); 
 		}
 	}
 

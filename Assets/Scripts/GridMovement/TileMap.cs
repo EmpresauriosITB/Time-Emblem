@@ -177,13 +177,25 @@ public class TileMap : MonoBehaviour {
 		return tileSet.tileTypes[ currentTiles[x,y] ].isWalkable;
 	}
 
-	public void GeneratePathTo(int x, int y) {
-        if (selectedUnit != null)
+	public void GeneratePathTo(int x, int y, GameObject gameObject) {
+		GameObject gameObjectToMove;
+		if (gameObject != null)
+		{
+			gameObjectToMove = gameObject;
+		}
+		else if (selectedUnit != null)
+		{
+			gameObjectToMove = selectedUnit;
+		}
+		else gameObjectToMove = null;
+		if (gameObjectToMove != null)
         {
-            // Clear out our unit's old path.
-            selectedUnit.GetComponent<Unit>().currentPath = null;
-
-            if (UnitCanEnterTile(x, y) == false)
+			
+			// Clear out our unit's old path.
+			gameObjectToMove.GetComponent<Unit>().currentPath = null;
+			Debug.Log("Error no esta aqui");
+			//Debug.Log("Tile: " + gameObjectToMove.GetComponent<Unit>().tileX + " - " + gameObjectToMove.GetComponent<Unit>().tileY);
+			if (UnitCanEnterTile(x, y) == false)
             {
                 // We probably clicked on a mountain or something, so just quit out.
                 return;
@@ -196,8 +208,8 @@ public class TileMap : MonoBehaviour {
             List<Node> unvisited = new List<Node>();
 
             Node source = graph[
-                                selectedUnit.GetComponent<Unit>().tileX,
-                                selectedUnit.GetComponent<Unit>().tileY
+								gameObjectToMove.GetComponent<Unit>().tileX,
+								gameObjectToMove.GetComponent<Unit>().tileY
                                 ];
 
             Node target = graph[
@@ -205,7 +217,7 @@ public class TileMap : MonoBehaviour {
                                 y
                                 ];
 
-            dist[source] = 0;
+			dist[source] = 0;
             prev[source] = null;
 
             // Initialize everything to have INFINITY distance, since
@@ -280,7 +292,7 @@ public class TileMap : MonoBehaviour {
 
             currentPath.Reverse();
 
-            selectedUnit.GetComponent<Unit>().currentPath = currentPath;
+			gameObjectToMove.GetComponent<Unit>().currentPath = currentPath;
         }
 	}
 

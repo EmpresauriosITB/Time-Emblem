@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab189e8d0eccfdf49b6c01ec653e04fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  map: {fileID: 1940790412}
 --- !u!114 &102860605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,10 +179,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5506373
+  m_Radius: 0.503188
   m_Height: 2.2707925
   m_Direction: 1
-  m_Center: {x: -0.16461903, y: -2.0751157, z: 0.081347466}
+  m_Center: {x: -0.015780449, y: -2.0751157, z: -0.0030242205}
 --- !u!114 &102860607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,9 +195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d16c06e521a151448837ba93f46c716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileX: 10
-  tileY: 10
-  map: {fileID: 0}
+  tileX: 0
+  tileY: 0
+  map: {fileID: 1940790412}
 --- !u!4 &102860608
 Transform:
   m_ObjectHideFlags: 0
@@ -205,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102860603}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 27.8, y: 18.64, z: 0}
+  m_LocalPosition: {x: 8, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1588211030}
@@ -740,10 +741,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5506373
+  m_Radius: 0.50027496
   m_Height: 2.2707925
   m_Direction: 1
-  m_Center: {x: -0.16461903, y: -2.0751157, z: 0.081347466}
+  m_Center: {x: 0.003254652, y: -2.0751157, z: 0.008602023}
 --- !u!114 &728637526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +944,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1588211029}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -1068,7 +1069,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1835520416}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
