@@ -15,7 +15,9 @@ public class CharacterController : MonoBehaviour {
     public event SetCurrentActiveCharacter setCurrentActiveCharacter;
 
 
-    void Start() {}
+    void Start() {
+        character.InitCurrentStats();
+    }
     
 	void OnMouseUp() {
 		setCurrentActiveCharacter(this.gameObject);

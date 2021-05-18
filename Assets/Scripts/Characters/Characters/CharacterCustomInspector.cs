@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Character))]
 public class CharacterCustomInspector : Editor
 {
     private Character character;
@@ -18,7 +17,7 @@ public class CharacterCustomInspector : Editor
 
     public void DefaultForHierarchy()
     {
-        character = (Character)target;
+        character = (Character) target;
 
         character.stats = EditorGUILayout.ObjectField("StatsObject", character.stats, typeof(Stats), true) as Stats;
         character.specialPassive = EditorGUILayout.ObjectField("SpecialPassive", character.specialPassive, typeof(Abilities), true) as Abilities;

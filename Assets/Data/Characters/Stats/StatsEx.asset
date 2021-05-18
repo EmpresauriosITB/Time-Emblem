@@ -19,4 +19,4 @@ MonoBehaviour:
   mentalDefense: 20
   velocity: 20
   forceValue: 20
-  gridSpeed: 3
+  gridSpeed: 5

@@ -47,9 +47,15 @@ public static class MenuManager
             case Menu.Actions_Menu:
                 actionsMenu.SetActive(true);
                 break;
+            case Menu.Deactivate_Menus:
+                startMenu.SetActive(false);
+                settingsMenu.SetActive(false);
+                gameMenu.SetActive(false);
+                statsMenu.SetActive(false);
+                actionsMenu.SetActive(false);
+                break;
         }
-
-        callingMenu.SetActive(false);
+        if (callingMenu != null) callingMenu.SetActive(false);
     }
   
 
@@ -57,9 +63,9 @@ public static class MenuManager
     {
         character = c;
     }
-    public static Character getCharacter()
+    public static GameObject getCharacter()
     {
-        return character.GetComponent<CharacterController>().character;
+        return character;
     }
 
 

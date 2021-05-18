@@ -6,6 +6,8 @@ using UnityEngine;
 public class Character : ScriptableObject {
 
     public Stats stats; 
+    public AbilitySet abilitieSet; 
+    public Abilities specialPassive; 
 
     public string characterName; 
 
@@ -17,8 +19,7 @@ public class Character : ScriptableObject {
     public int currentVelocity; 
     public int currentGridSpeed; 
 
-    public AbilitySet abilitieSet; 
-    public Abilities specialPassive; 
+
     public void InitCurrentStats() {
         currentHp = (int) stats.hp;
         currentPhysicalPower = (int) stats.physicalPower;

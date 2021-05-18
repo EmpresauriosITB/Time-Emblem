@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActionsMenu : MonoBehaviour
 {
-    Character character;
+    GameObject character;
     private string abilitiesName;
     public TextLogController textController;
 
@@ -15,6 +15,7 @@ public class ActionsMenu : MonoBehaviour
     {
         setTextAbilities();
     }
+
     public void OnClick_Back()
     {
         textController.DeleteTextItems();
@@ -24,15 +25,16 @@ public class ActionsMenu : MonoBehaviour
     public void setTextAbilities()
     {
         List<Abilities> listaAbilities = new List<Abilities>();
-        character = MenuManager.getCharacter();        
-        for (int i = 0; i < character.abilitieSet.abilities.Count; i++) {
-            Abilities a = character.abilitieSet.abilities[i];
+        character = MenuManager.getCharacter();
+        Character currentChar = character.GetComponent<CharacterController>().character;      
+        for (int i = 0; i < currentChar.abilitieSet.abilities.Count; i++) {
+            Abilities a = currentChar.abilitieSet.abilities[i];
             listaAbilities.Add(a);
         }
         for(int i = 0; i < listaAbilities.Count; i++)
         {
         
-            textController.LogText(listaAbilities[i]);
+            textController.LogText(listaAbilities[i], character);
         }
     }
 }

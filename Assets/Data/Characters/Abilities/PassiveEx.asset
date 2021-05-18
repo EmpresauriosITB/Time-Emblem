@@ -19,3 +19,5 @@ MonoBehaviour:
   HasAreaEffect: 0
   Area: 0
   HasBuffEfect: 0
+  abilityBehaviour: {fileID: 657365777690678040, guid: 0418c2bc3c66b50419c7b32e31b472ab,
+    type: 3}

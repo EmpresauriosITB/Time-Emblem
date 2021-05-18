@@ -11,6 +11,7 @@ public class Abilities : ScriptableObject {
     public bool HasAreaEffect;
     public int Area;
     public bool HasBuffEfect;
+    public bool isPhysical;
     
     public AbilityBehaviour abilityBehaviour;
 }

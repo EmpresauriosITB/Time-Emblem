@@ -11,7 +11,7 @@ public class TileMap : MonoBehaviour {
 	public int[,] currentTiles;
 	public Node[,] graph;
 
-	public delegate void ChangeTileMaterial(GameObject go, int x, int y);
+	public delegate void ChangeTileMaterial(GameObject go, int x, int y, TileState state);
 	public event ChangeTileMaterial changeTileMaterial;
 
 	public void Init(BattleManager manager) {
@@ -42,10 +42,21 @@ public class TileMap : MonoBehaviour {
 		}
 	} 
 
-	public void ActivateTile(int x, int y, bool isActive) {
+	public void ActivateTile(int x, int y, bool isActive, TileState state) {
 		graph[x,y].isActive = isActive;
-		if (isActive) { changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabActive, x, y); }
-		else { changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabNotActive, x, y); }
+		GameObject visualPrefab = null;
+		switch (state) {
+			case TileState.doingAbility:
+				visualPrefab = tileSet.tileTypes[0].tileVisualPrefabActive;
+				break;
+			case TileState.moving:
+				visualPrefab = tileSet.tileTypes[0].tileVisualPrefabActive;
+				break;
+			case TileState.nothing:
+				visualPrefab = tileSet.tileTypes[0].tileVisualPrefabNotActive;
+				break;
+		}
+		changeTileMaterial(visualPrefab, x, y, state);
 	}
 
 

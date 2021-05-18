@@ -8,6 +8,7 @@ public class BattleManager : MonoBehaviour {
     public State currentState = State.StartEncounter;
 
     private bool conGoNextState = true;
+    public bool isDefocused = false;
 
     public TileMap tileMap;
     private GameObject activeChar;
@@ -43,7 +44,7 @@ public class BattleManager : MonoBehaviour {
                 CheckNoCurrentActivePlayer();
                 break;           
             case State.CharacterActive:
-                
+                CheckDefocusingAction();
                 break;
             case State.BattleStopped:
                 ReaunudeGame();
@@ -54,6 +55,15 @@ public class BattleManager : MonoBehaviour {
     private void StartEncounter() {
         tileMap.Init(this);
         currentState = State.SelectTeam;
+    }
+
+    private void CheckDefocusingAction() {
+        if (isDefocused) {
+            DefocusCharacter();
+            MenuManager.OpenMenu(Menu.Deactivate_Menus, null);
+            isDefocused = false;
+            currentState = State.Battle;
+        }
     }
 
     private void StartBattle() {
@@ -85,10 +95,10 @@ public class BattleManager : MonoBehaviour {
             Character charInfo = activeChar.GetComponent<CharacterController>().character;
             Unit unit = activeChar.GetComponent<Unit>();
 
-            PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap);
+            PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap, TileState.moving);
 
             MenuManager.setCharacter(activeChar);
-            MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
+            MenuManager.OpenMenu(Menu.Game_Menu, null);
 
             currentState = State.CharacterActive;
         }
@@ -98,11 +108,13 @@ public class BattleManager : MonoBehaviour {
         return activeChar != null;
     }
 
-    private void ReaunudeGame() {}
+    private void ReaunudeGame() {
+
+    }
 
 
     public void SetCurrentaActiveCharacter(GameObject character) {
-        if (activeChar != null) { DefocusCharacter(); }
+        if (isCurrentPlayerActive()) { DefocusCharacter(); }
         activeChar = character;  
         tileMap.setSelectedUnit(activeChar);  
     }
@@ -111,7 +123,7 @@ public class BattleManager : MonoBehaviour {
         Character charInfo = activeChar.GetComponent<CharacterController>().character;
         Unit unit = activeChar.GetComponent<Unit>();
 
-        PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap);
+        PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap, TileState.nothing);
 
         activeChar = null;
         currentState = State.Battle;
