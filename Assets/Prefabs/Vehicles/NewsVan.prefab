@@ -564,7 +564,6 @@ GameObject:
   - component: {fileID: 180270791558207523}
   - component: {fileID: 214269134893810185}
   - component: {fileID: 206309662976595293}
-  - component: {fileID: 184263171641335803}
   - component: {fileID: 184263171641335783}
   - component: {fileID: 184263171641335782}
   - component: {fileID: 184263171641335781}
@@ -642,22 +641,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &184263171641335803
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183019363384434089}
-  serializedVersion: 2
-  m_Mass: 500
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!64 &184263171641335783
 MeshCollider:
   m_ObjectHideFlags: 0
