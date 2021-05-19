@@ -28,9 +28,6 @@ public class TextLogController : MonoBehaviour
         newText.GetComponent<ButtonFunction>().subscribeEvent(this, a, g);
         newText.transform.SetParent(this.transform.GetChild(0).transform.GetChild(0).transform, false);
 
-        Debug.Log(newText);
-        Debug.Log(textItems);
-
         textItems.Add(newText.gameObject);
 
     }

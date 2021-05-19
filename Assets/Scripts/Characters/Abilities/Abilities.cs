@@ -14,4 +14,5 @@ public class Abilities : ScriptableObject {
     public bool isPhysical;
     
     public AbilityBehaviour abilityBehaviour;
+    public AreaCalculator areaCalculator;
 }

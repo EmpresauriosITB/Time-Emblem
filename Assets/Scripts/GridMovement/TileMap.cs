@@ -9,10 +9,12 @@ public class TileMap : MonoBehaviour {
 	public TileSet tileSet;
 
 	public int[,] currentTiles;
-	public Node[,] graph;
+	public Node[,] moveGraph;
+	public Node[,] abilityGraph;
+	
 
-	public delegate void ChangeTileMaterial(GameObject go, int x, int y, TileState state);
-	public event ChangeTileMaterial changeTileMaterial;
+	public delegate void UpdateTileData(GameObject go, int x, int y, TileState state, Abilities abilities);
+	public event UpdateTileData updateTileData;
 
 	public void Init(BattleManager manager) {
         GenerateMapData();
@@ -42,8 +44,8 @@ public class TileMap : MonoBehaviour {
 		}
 	} 
 
-	public void ActivateTile(int x, int y, bool isActive, TileState state) {
-		graph[x,y].isActive = isActive;
+	public void ActivateTile(int x, int y, bool isActive, TileState state, Abilities abilities) {
+		moveGraph[x,y].isActive = isActive;
 		GameObject visualPrefab = null;
 		switch (state) {
 			case TileState.doingAbility:
@@ -56,7 +58,7 @@ public class TileMap : MonoBehaviour {
 				visualPrefab = tileSet.tileTypes[0].tileVisualPrefabNotActive;
 				break;
 		}
-		changeTileMaterial(visualPrefab, x, y, state);
+		updateTileData(visualPrefab, x, y, state, abilities);
 	}
 
 
@@ -95,65 +97,8 @@ public class TileMap : MonoBehaviour {
 	}
 
 	void GeneratePathfindingGraph() {
-		
-		// Initialize the array
-		graph = new Node[tileSet.GetX(),tileSet.GetY()];
-
-		// Initialize a Node for each spot in the array
-		for(int x=0; x < tileSet.GetX(); x++) {
-			for(int y=0; y < tileSet.GetY(); y++) {
-				graph[x,y] = new Node();
-				graph[x,y].x = x;
-				graph[x,y].y = y;
-			}
-		}
-
-		// Now that all the nodes exist, calculate their neighbours
-		for(int x=0; x < tileSet.GetX(); x++) {
-			for(int y=0; y < tileSet.GetY(); y++) {
-
-				// This is the 4-way connection version:
-				if(x > 0)
-					graph[x,y].neighbours.Add( graph[x-1, y] );
-				if(x < tileSet.GetX()-1)
-					graph[x,y].neighbours.Add( graph[x+1, y] );
-				if(y > 0)
-					graph[x,y].neighbours.Add( graph[x, y-1] );
-				if(y < tileSet.GetY()-1)
-					graph[x,y].neighbours.Add( graph[x, y+1] );
-
-
-				/*
-				// This is the 8-way connection version (allows diagonal movement)
-				// Try left
-				if(x > 0) {
-					graph[x,y].neighbours.Add( graph[x-1, y] );
-					if(y > 0)
-						graph[x,y].neighbours.Add( graph[x-1, y-1] );
-					if(y < tileSet.GetY()-1)
-						graph[x,y].neighbours.Add( graph[x-1, y+1] );
-				}
-
-				// Try Right
-				if(x < tileSet.GetX()-1) {
-					graph[x,y].neighbours.Add( graph[x+1, y] );
-					if(y > 0)
-						graph[x,y].neighbours.Add( graph[x+1, y-1] );
-					if(y < tileSet.GetY()-1)
-						graph[x,y].neighbours.Add( graph[x+1, y+1] );
-				}
-
-				// Try straight up and down
-				if(y > 0)
-					graph[x,y].neighbours.Add( graph[x, y-1] );
-				if(y < tileSet.GetY()-1)
-					graph[x,y].neighbours.Add( graph[x, y+1] );
-					*/
-
-				// This also works with 6-way hexes and n-way variable areas (like EU4)
-				
-			}
-		}
+		moveGraph = PathFindingGraphGenerator.generateNoCardinals(tileSet.GetX(),tileSet.GetY());
+		abilityGraph = PathFindingGraphGenerator.generateCardinals(tileSet.GetX(),tileSet.GetY());
 	}
 
 	void GenerateMapVisual(BattleManager manager) {
@@ -206,12 +151,12 @@ public class TileMap : MonoBehaviour {
             // Setup the "Q" -- the list of nodes we haven't checked yet.
             List<Node> unvisited = new List<Node>();
 
-            Node source = graph[
+            Node source = moveGraph[
                                 selectedUnit.GetComponent<Unit>().tileX,
                                 selectedUnit.GetComponent<Unit>().tileY
                                 ];
 
-            Node target = graph[
+            Node target = moveGraph[
                                 x,
                                 y
                                 ];
@@ -223,7 +168,7 @@ public class TileMap : MonoBehaviour {
             // we don't know any better right now. Also, it's possible
             // that some nodes CAN'T be reached from the source,
             // which would make INFINITY a reasonable value
-            foreach (Node v in graph)
+            foreach (Node v in moveGraph)
             {
                 if (v != source)
                 {

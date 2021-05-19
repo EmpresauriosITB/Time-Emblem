@@ -14,6 +14,7 @@ public class BattleManager : MonoBehaviour {
     private GameObject activeChar;
 
     public GameObject playerTeam;
+    public GameObject enemyTeam;
 
     
     void Start()
@@ -55,6 +56,7 @@ public class BattleManager : MonoBehaviour {
     private void StartEncounter() {
         tileMap.Init(this);
         currentState = State.SelectTeam;
+        BattleData.enemyTeam.Add(enemyTeam);
     }
 
     private void CheckDefocusingAction() {
@@ -95,7 +97,7 @@ public class BattleManager : MonoBehaviour {
             Character charInfo = activeChar.GetComponent<CharacterController>().character;
             Unit unit = activeChar.GetComponent<Unit>();
 
-            PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap, TileState.moving);
+            PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
 
             MenuManager.setCharacter(activeChar);
             MenuManager.OpenMenu(Menu.Game_Menu, null);
@@ -123,7 +125,7 @@ public class BattleManager : MonoBehaviour {
         Character charInfo = activeChar.GetComponent<CharacterController>().character;
         Unit unit = activeChar.GetComponent<Unit>();
 
-        PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap, TileState.nothing);
+        PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap, TileState.nothing, null);
 
         activeChar = null;
         currentState = State.Battle;

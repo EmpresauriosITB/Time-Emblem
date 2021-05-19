@@ -40,7 +40,7 @@ public class Unit : MonoBehaviour {
 		float remainingMovement = moveSpeed;
 
 		map.DesocupyTile(tileX, tileY);
-		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map, TileState.nothing);
+		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map, TileState.nothing, null);
 
 		while(remainingMovement > 0 && currentPath != null) {
 
@@ -66,6 +66,6 @@ public class Unit : MonoBehaviour {
 
 		map.OccupyTile(tileX, tileY);
 			
-		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving);
+		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving, null);
 	}
 }

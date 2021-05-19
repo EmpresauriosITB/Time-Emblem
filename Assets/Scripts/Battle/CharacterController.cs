@@ -9,6 +9,7 @@ public class CharacterController : MonoBehaviour {
     private int actionsLeft;
     
     public float timeToNextActivePeriod;
+    public bool isPlayer;
 
 
     public delegate void SetCurrentActiveCharacter(GameObject activeChar);
@@ -20,7 +21,7 @@ public class CharacterController : MonoBehaviour {
     }
     
 	void OnMouseUp() {
-		setCurrentActiveCharacter(this.gameObject);
+        if (isPlayer) {setCurrentActiveCharacter(this.gameObject);}
 	}
 
     public bool canCharBeActivated() {

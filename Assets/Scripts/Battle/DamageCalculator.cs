@@ -6,7 +6,7 @@ public class DamageCalculator {
 
     public static int CalculateDamage(int Power, int Atack, int Defense, bool Burn) {
 
-        double Damage = ((Power * ((Atack * 1.5) / Defense)) / 5 + 2) * CalculateModifier(Burn);
+        double Damage = (((Power * ((Atack * 1.5) / Defense)) / 5 + 2)  * CalculateModifier(Burn)) + 1;
 
         return (int) Damage;
     }
