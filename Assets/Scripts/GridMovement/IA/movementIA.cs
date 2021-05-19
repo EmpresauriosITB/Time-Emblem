@@ -6,30 +6,42 @@ using UnityEngine;
 public class movementIA : MonoBehaviour
 {
 
-    float radiusVision = 30f;
-    float speed = 8f;
+    float moveSpeed;
 
     public TileMap map;
-
-    private Vector3 startingPosition;
    
     GameObject player;
+
+    private float currentTime;
     
     private void Start()
     {
-        startingPosition = transform.position;     
+        currentTime = 0f;
         gameObject.GetComponent<Unit>().tileX = (int)gameObject.transform.position.x;
         gameObject.GetComponent<Unit>().tileY = (int)gameObject.transform.position.y;
+
+        moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
+        locatePlayer();
         
     }
 
     private void Update()
     {
-        locatePlayer();
-        setTarget();
-        Debug.Log(setTarget().x + " - " + setTarget().y);
+        if (currentTime < Time.deltaTime)
+        {
+            int[] positionTarget = setTarget();
+
+            Debug.Log("X & Y: x = " + positionTarget[0] + " y = " + positionTarget[1]);
+
+            map.GeneratePathTo(positionTarget[0], positionTarget[1], gameObject);
+
+            Debug.Log("EJECUTADO");
+            
+            currentTime = Time.deltaTime + 5f;
+        }
         
-        map.GeneratePathTo((int)setTarget().x, (int)setTarget().y, gameObject);
+
+
     }
 
     void locatePlayer()
@@ -37,11 +49,20 @@ public class movementIA : MonoBehaviour
         player = GameObject.Find("Unit");
     }
 
-    Vector3 setTarget()
+    int[] setTarget()
     {
-        Vector3 target = startingPosition;
+        int targetx = gameObject.GetComponent<Unit>().tileX;
+        int targety = gameObject.GetComponent<Unit>().tileY;
+
+
         float distancia = Vector3.Distance(player.transform.position, transform.position);
-        if (distancia < radiusVision) target = player.transform.position;
+        if (distancia < moveSpeed)
+        {
+            targetx = player.GetComponent<Unit>().tileX;
+            targety= player.GetComponent<Unit>().tileY;
+        }
+        
+        int[] target = new int[] { targetx, targety };
         return target;
     }
 

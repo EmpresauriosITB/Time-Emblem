@@ -12,6 +12,8 @@ public class Unit : MonoBehaviour {
 
 	void Start() {
 		moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
+		tileX = (int)gameObject.transform.position.x;
+		tileY = (int)gameObject.transform.position.y;
 	}
 
 	void Update() {

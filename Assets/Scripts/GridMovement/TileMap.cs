@@ -173,8 +173,11 @@ public class TileMap : MonoBehaviour {
 
 		// We could test the unit's walk/hover/fly type against various
 		// terrain flags here to see if they are allowed to enter the tile.
+		Debug.Log("CANENTERFILE - X & Y: " + x + " - " + y);
+		//Debug.Log("CURRENTTILES: " + currentTiles[x, y]);
+		// Debug.Log("ISWALKABLE: " + tileSet.tileTypes[currentTiles[x, y]].isWalkable);
 
-		return tileSet.tileTypes[ currentTiles[x,y] ].isWalkable;
+		return tileSet.tileTypes[currentTiles[x,y] ].isWalkable;
 	}
 
 	public void GeneratePathTo(int x, int y, GameObject gameObject) {
@@ -190,11 +193,9 @@ public class TileMap : MonoBehaviour {
 		else gameObjectToMove = null;
 		if (gameObjectToMove != null)
         {
-			
 			// Clear out our unit's old path.
 			gameObjectToMove.GetComponent<Unit>().currentPath = null;
-			Debug.Log("Error no esta aqui");
-			//Debug.Log("Tile: " + gameObjectToMove.GetComponent<Unit>().tileX + " - " + gameObjectToMove.GetComponent<Unit>().tileY);
+			Debug.Log("GENERATEPATH - X & Y: " + x + " - " + y);
 			if (UnitCanEnterTile(x, y) == false)
             {
                 // We probably clicked on a mountain or something, so just quit out.
