@@ -18,6 +18,7 @@ public class StoryIAMovement : MonoBehaviour
         if (transform.position != points[currentPoint].position)
         {
             transform.position = Vector3.MoveTowards(transform.position, points[currentPoint].position, speed * Time.deltaTime);
+            transform.LookAt(points[currentPoint].position);
         }
         else
             currentPoint = (currentPoint + 1) % points.Length;
