@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Threading;
+using System;
 
 public class movementIA : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class movementIA : MonoBehaviour
    
     GameObject player;
 
-    private float currentTime;
-    
+    private float nextActionTime = 0.1f;
+    public float period = 0.3f;
+
     private void Start()
     {
-        currentTime = 0f;
+        
         gameObject.GetComponent<Unit>().tileX = (int)gameObject.transform.position.x;
         gameObject.GetComponent<Unit>().tileY = (int)gameObject.transform.position.y;
 
@@ -27,8 +29,9 @@ public class movementIA : MonoBehaviour
 
     private void Update()
     {
-        if (currentTime < Time.deltaTime)
+        if (Time.time > nextActionTime)
         {
+            nextActionTime += period;
             int[] positionTarget = setTarget();
 
             Debug.Log("X & Y: x = " + positionTarget[0] + " y = " + positionTarget[1]);
@@ -36,14 +39,14 @@ public class movementIA : MonoBehaviour
             map.GeneratePathTo(positionTarget[0], positionTarget[1], gameObject);
 
             Debug.Log("EJECUTADO");
-            
-            currentTime = Time.deltaTime + 5f;
         }
-        
-
-
+       
+       
     }
 
+   
+
+  
     void locatePlayer()
     {
         player = GameObject.Find("Unit");

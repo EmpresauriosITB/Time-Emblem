@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour {
 
 	public List<Node> currentPath = null;
 	float moveSpeed;
-
+	 
 	void Start() {
 		moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
 		tileX = (int)gameObject.transform.position.x;
