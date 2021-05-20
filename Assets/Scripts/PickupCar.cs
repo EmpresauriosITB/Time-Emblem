@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class PickupCar : MonoBehaviour
     private void Update() {
         exitBoat();
     }
+
 
     void OnTriggerStay(Collider collider)
     {
