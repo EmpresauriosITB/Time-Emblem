@@ -6,7 +6,7 @@ using TMPro;
 public class ControlDialogs : MonoBehaviour
 {
     private Animator anim;
-    private Queue<string> queueDialogs;
+    private Queue <string> queueDialogs;
     Texts texts;
     [SerializeField] TextMeshProUGUI screenText;
 
