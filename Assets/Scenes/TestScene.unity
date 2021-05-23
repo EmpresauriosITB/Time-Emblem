@@ -377,7 +377,7 @@ MonoBehaviour:
   texts:
     arrayTexts:
     - "VIVA ESPA\xD1A"
-    - "VIVA ESPA\xD1A"
+    - VIVA CATALUNYA
 --- !u!1 &249326214
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 637528910}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -622,7 +622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637528908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.6, y: 13.82, z: -13.22}
+  m_LocalPosition: {x: 11.95, y: 13.82, z: -13.22}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children:
   - {fileID: 1494157287}
@@ -1185,6 +1185,7 @@ GameObject:
   - component: {fileID: 1751576002}
   - component: {fileID: 1751576006}
   - component: {fileID: 1751576005}
+  - component: {fileID: 1751576007}
   m_Layer: 5
   m_Name: BordeDialogo
   m_TagString: Untagged
@@ -1209,7 +1210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -158, y: 57}
+  m_AnchoredPosition: {x: 165, y: 57}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1751576002
@@ -1220,9 +1221,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751576000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e28db4ae5619aaf44a2d2f5e7e233c33, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0e25d95658e5a5c4292c7f1a92a4e262, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1334,7 +1335,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c99d7489255c54fa490a5db752e9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 1751576007}
   screenText: {fileID: 797746510}
+--- !u!111 &1751576007
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751576000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f63af66a317b7504e8228163f6b873b1, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f63af66a317b7504e8228163f6b873b1, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1785401720
 GameObject:
   m_ObjectHideFlags: 0

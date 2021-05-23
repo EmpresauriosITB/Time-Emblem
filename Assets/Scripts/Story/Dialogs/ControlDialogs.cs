@@ -5,14 +5,21 @@ using TMPro;
 
 public class ControlDialogs : MonoBehaviour
 {
-    private Animator anim;
-    private Queue <string> queueDialogs;
+    public Animation anim;
+    Queue <string> queueDialogs;
     Texts texts;
     [SerializeField] TextMeshProUGUI screenText;
 
+    private void Start()
+    {
+        anim = GetComponent<Animation>();
+        queueDialogs = new Queue<string>();
+
+    }
     public void ActivatePoster(Texts textObject)
     {
-        anim.SetBool("BordeDialogo", true);
+        anim.Play("BordeDialogo");
+        //anim.Play("BordeDialogoClose");
         texts = textObject;
     }
 
@@ -40,7 +47,7 @@ public class ControlDialogs : MonoBehaviour
 
     void ClosePoster()
     {
-        anim.SetBool("BordeDialogo", false);
+        anim.Play("BordeDialogoClose");
     }
 
 }

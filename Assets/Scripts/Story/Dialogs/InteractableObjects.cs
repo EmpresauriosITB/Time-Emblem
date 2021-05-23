@@ -6,19 +6,16 @@ public class InteractableObjects : MonoBehaviour
 {
     public Texts texts;
 
-    private void OnMouseDown()
+    private void OnTriggerStay(Collider collider)
     {
-        FindObjectOfType<ControlDialogs>().ActivatePoster(texts);
+        if (collider.gameObject.tag == "Player")
+        {
+            Debug.Log("DENTRO");  
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("E PULSADA");
+                FindObjectOfType<ControlDialogs>().ActivatePoster(texts);
+            }
+        }
     }
-
-    //private void OnTriggerStay(Collider collider)
-    //{
-    //  if (collider.gameObject.tag == "Player")
-    //{
-    //  if (Input.GetKeyDown(KeyCode.E))
-    //{
-    //  FindObjectOfType<ControlDialogs>().ActivatePoster(texts);
-    //}
-    //}
-    //}
 }
