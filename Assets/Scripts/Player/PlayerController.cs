@@ -67,7 +67,6 @@ public class PlayerController : MonoBehaviour
             void SetGravity()
             {
                 controller.SimpleMove(Physics.gravity);
-
             }
         }
     }
