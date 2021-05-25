@@ -5,12 +5,8 @@ using UnityEngine;
 public class InteractableObjects : MonoBehaviour
 {
     public Texts texts;
-    //ControlDialogs control;
+    bool talking = false;
 
-    //private void Start()
-    //{
-        //control = GetComponent<ControlDialogs>();
-    //}
 
 
     private void OnTriggerStay(Collider collider)
@@ -21,8 +17,8 @@ public class InteractableObjects : MonoBehaviour
             obj.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                //Personaje quieto 
-                //collider.gameObject.GetComponent<PlayerController>().speed = 0f;
+                talking = true;
+                FindObjectOfType<StoryIAMovement>().Stop();
                 FindObjectOfType<ControlDialogs>().ActivatePoster(texts);
             }
         }
@@ -32,6 +28,10 @@ public class InteractableObjects : MonoBehaviour
     {
         GameObject obj = other.transform.GetChild(2).gameObject;
         obj.SetActive(false);
-        FindObjectOfType<ControlDialogs>().ClosePoster();
+        if(talking == true) {
+            talking = false;
+            FindObjectOfType<StoryIAMovement>().Reload();
+            FindObjectOfType<ControlDialogs>().ClosePoster();
+        }
     }
 }

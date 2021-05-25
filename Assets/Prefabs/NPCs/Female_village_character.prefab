@@ -528,6 +528,8 @@ GameObject:
   - component: {fileID: 1016846714817671190}
   - component: {fileID: 1016846714817671273}
   - component: {fileID: 1016846714817671272}
+  - component: {fileID: 847940021821514714}
+  - component: {fileID: 1446429370548082361}
   m_Layer: 0
   m_Name: Character_Village
   m_TagString: Untagged
@@ -605,6 +607,33 @@ CapsuleCollider:
   m_Height: 2.136672
   m_Direction: 1
   m_Center: {x: 0, y: 0.8831239, z: 0}
+--- !u!135 &847940021821514714
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016846714817671188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1446429370548082361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016846714817671188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750367ba1697a9b45aed7ddd89655f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+    arrayTexts: []
 --- !u!1 &1016846714833415110
 GameObject:
   m_ObjectHideFlags: 0

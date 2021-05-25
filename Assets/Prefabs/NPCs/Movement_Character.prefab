@@ -528,6 +528,8 @@ GameObject:
   - component: {fileID: 3391372652750055789}
   - component: {fileID: 3391372652750055698}
   - component: {fileID: 3391372652750055699}
+  - component: {fileID: 2123466473067072177}
+  - component: {fileID: 7988764799907979514}
   m_Layer: 0
   m_Name: Character_Sensei
   m_TagString: Untagged
@@ -601,6 +603,33 @@ CapsuleCollider:
   m_Height: 2.136672
   m_Direction: 1
   m_Center: {x: 0, y: 0.8831239, z: 0}
+--- !u!135 &2123466473067072177
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3391372652750055791}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7988764799907979514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3391372652750055791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750367ba1697a9b45aed7ddd89655f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+    arrayTexts: []
 --- !u!1 &3391372652796095085
 GameObject:
   m_ObjectHideFlags: 0
