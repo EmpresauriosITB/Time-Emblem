@@ -18,7 +18,7 @@ public class InteractableObjects : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 talking = true;
-                FindObjectOfType<StoryIAMovement>().Stop();
+                this.gameObject.GetComponent<StoryIAMovement>().Stop();
                 FindObjectOfType<ControlDialogs>().ActivatePoster(texts);
             }
         }
@@ -30,7 +30,8 @@ public class InteractableObjects : MonoBehaviour
         obj.SetActive(false);
         if(talking == true) {
             talking = false;
-            FindObjectOfType<StoryIAMovement>().Reload();
+            this.gameObject.GetComponent<StoryIAMovement>().Reload();
+            Debug.Log(this.name);
             FindObjectOfType<ControlDialogs>().ClosePoster();
         }
     }
