@@ -20,7 +20,8 @@ public class InteractableObjects : MonoBehaviour
             obj.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                collider.gameObject.GetComponent<PlayerController>().speed = 0f;
+                //Personaje quieto 
+                //collider.gameObject.GetComponent<PlayerController>().speed = 0f;
                 FindObjectOfType<ControlDialogs>().ActivatePoster(texts);
             }
         }
@@ -30,5 +31,6 @@ public class InteractableObjects : MonoBehaviour
     {
         GameObject obj = other.transform.GetChild(2).gameObject;
         obj.SetActive(false);
+        FindObjectOfType<ControlDialogs>().ClosePoster();
     }
 }
