@@ -173,9 +173,8 @@ public class TileMap : MonoBehaviour {
 
 		// We could test the unit's walk/hover/fly type against various
 		// terrain flags here to see if they are allowed to enter the tile.
-		Debug.Log("CANENTERFILE - X & Y: " + x + " - " + y);
-		//Debug.Log("CURRENTTILES: " + currentTiles[x, y]);
-		// Debug.Log("ISWALKABLE: " + tileSet.tileTypes[currentTiles[x, y]].isWalkable);
+		
+		Debug.Log("ISWALKABLE: " + tileSet.tileTypes[currentTiles[x, y]].isWalkable);
 
 		return tileSet.tileTypes[currentTiles[x,y] ].isWalkable;
 	}
@@ -195,14 +194,16 @@ public class TileMap : MonoBehaviour {
         {
 			// Clear out our unit's old path.
 			gameObjectToMove.GetComponent<Unit>().currentPath = null;
-			Debug.Log("GENERATEPATH - X & Y: " + x + " - " + y);
+			//Debug.Log("GENERATEPATH - X & Y: " + x + " - " + y);
 			if (UnitCanEnterTile(x, y) == false)
             {
                 // We probably clicked on a mountain or something, so just quit out.
                 return;
             }
 
-            Dictionary<Node, float> dist = new Dictionary<Node, float>();
+			Debug.Log("EJECUTADO");
+
+			Dictionary<Node, float> dist = new Dictionary<Node, float>();
             Dictionary<Node, Node> prev = new Dictionary<Node, Node>();
 
             // Setup the "Q" -- the list of nodes we haven't checked yet.
@@ -292,8 +293,10 @@ public class TileMap : MonoBehaviour {
             // So we need to invert it!
 
             currentPath.Reverse();
+			
 
 			gameObjectToMove.GetComponent<Unit>().currentPath = currentPath;
+			Debug.Log("X: " + currentPath[currentPath.Count -1].x + "Y: " + currentPath[currentPath.Count - 1].y);
         }
 	}
 

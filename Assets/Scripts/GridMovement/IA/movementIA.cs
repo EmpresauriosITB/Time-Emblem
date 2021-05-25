@@ -13,8 +13,8 @@ public class movementIA : MonoBehaviour
    
     GameObject player;
 
-    private float nextActionTime = 0.1f;
-    public float period = 0.3f;
+    private float nextActionTime ;
+    private float period = 1f;
 
     private void Start()
     {
@@ -24,24 +24,15 @@ public class movementIA : MonoBehaviour
 
         moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
         locatePlayer();
-        
+        nextActionTime = Time.time + period;
+
+
     }
 
     private void Update()
     {
-        if (Time.time > nextActionTime)
-        {
-            nextActionTime += period;
-            int[] positionTarget = setTarget();
-
-            Debug.Log("X & Y: x = " + positionTarget[0] + " y = " + positionTarget[1]);
-
-            map.GeneratePathTo(positionTarget[0], positionTarget[1], gameObject);
-
-            Debug.Log("EJECUTADO");
-        }
        
-       
+        moveIA();
     }
 
    
@@ -67,6 +58,23 @@ public class movementIA : MonoBehaviour
         
         int[] target = new int[] { targetx, targety };
         return target;
+    }
+
+    void moveIA()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            
+            nextActionTime = Time.time + period;
+
+            int[] positionTarget = setTarget();
+
+            
+            map.GeneratePathTo(positionTarget[0] +1, positionTarget[1] +1, gameObject);
+
+            gameObject.GetComponent<Unit>().MoveNextTile();
+            
+        }
     }
 
 
