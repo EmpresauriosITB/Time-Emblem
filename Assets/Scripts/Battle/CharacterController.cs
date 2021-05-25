@@ -5,12 +5,14 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour {
 
     public Character character;
-    public int actionNum;
-    private int actionsLeft;
+    public Unit unit;
+    public int actionsLeft;
     
-    public float timeToNextActivePeriod;
+    private float timeToNextActivePeriod;
     public bool isPlayer;
+    private bool isDead = false;
 
+    private BattleManager bm;
 
     public delegate void SetCurrentActiveCharacter(GameObject activeChar);
     public event SetCurrentActiveCharacter setCurrentActiveCharacter;
@@ -18,14 +20,36 @@ public class CharacterController : MonoBehaviour {
 
     void Start() {
         character.InitCurrentStats();
+        timeToNextActivePeriod = Time.time + character.currentVelocity;
+        resetActions();
     }
-    
-	void OnMouseUp() {
-        if (isPlayer) {setCurrentActiveCharacter(this.gameObject);}
+
+    void Update() {
+        if (actionsLeft <= 0) {
+            bm.isDefocused = true;
+            timeToNextActivePeriod = Time.time + character.currentVelocity;
+            resetActions();
+        }
+        if (character.currentHp <= 0 && !isDead) {
+            isDead = true;
+        }
+    }
+
+    void OnMouseUp() {
+        if (!isDead) {
+            if (isPlayer && !bm.isCurrentPlayerActive() && timeToNextActivePeriod < Time.time) { setCurrentActiveCharacter(this.gameObject); }
+            else {
+                InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null);
+            }
+        }
 	}
 
     public bool canCharBeActivated() {
         return timeToNextActivePeriod < Time.deltaTime;
+    }
+
+    public void InitBattleManager(BattleManager bm) {
+        this.bm = bm;
     }
 
     public void ResetCooldown() {
@@ -33,14 +57,10 @@ public class CharacterController : MonoBehaviour {
     }
 
     public bool HasActionsLeft() {
-        return actionsLeft < 0;
+        return actionsLeft > 0;
     }
 
     public void resetActions() {
-        actionsLeft = actionNum;
-    }
-
-    public void doAction() {
-        
+        actionsLeft = (int)character.stats.numActions;
     }
 }

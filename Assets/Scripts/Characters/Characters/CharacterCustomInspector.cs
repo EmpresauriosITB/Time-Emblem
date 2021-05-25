@@ -6,10 +6,9 @@ using UnityEditor;
 public class CharacterCustomInspector : Editor
 {
     private Character character;
-    private bool statsFoldout = false, currentStatsFoldout = false, specialPassiveFoldout = false, abilitiesFoldout = false;
+    private bool currentStatsFoldout = false;
     private bool statsNotNull, abilitySetNotNull, specialPassiveNotNull, abilitiesNotNull;
-    private int indexer = 0;
-    private bool currentStatsInit = false, abilitiesInit = false, passiveInit = false;
+    private bool currentStatsInit = false;
 
     public override void OnInspectorGUI() {
         DefaultForHierarchy();

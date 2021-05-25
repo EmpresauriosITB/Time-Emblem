@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour {
-
-    public enum State {StartEncounter, SelectTeam, LocateTeam, StartBattle, Battle, CharacterActive, BattleStopped}
-    public State currentState = State.StartEncounter;
+    public GameStates.BattleManagerStates currentState = GameStates.BattleManagerStates.StartEncounter;
 
     private bool conGoNextState = true;
     public bool isDefocused = false;
@@ -29,25 +27,25 @@ public class BattleManager : MonoBehaviour {
 
     private void CheckState() {
         switch (currentState) {
-            case State.StartEncounter:
+            case GameStates.BattleManagerStates.StartEncounter:
                 StartEncounter();
                 break;
-            case State.SelectTeam:
+            case GameStates.BattleManagerStates.SelectTeam:
                 Next();
                 break;
-            case State.LocateTeam:
+            case GameStates.BattleManagerStates.LocateTeam:
                 Next();
                 break;
-            case State.StartBattle:
+            case GameStates.BattleManagerStates.StartBattle:
                 StartBattle();
                 break;
-            case State.Battle:
+            case GameStates.BattleManagerStates.Battle:
                 CheckNoCurrentActivePlayer();
                 break;           
-            case State.CharacterActive:
+            case GameStates.BattleManagerStates.CharacterActive:
                 CheckDefocusingAction();
                 break;
-            case State.BattleStopped:
+            case GameStates.BattleManagerStates.BattleStopped:
                 ReaunudeGame();
                 break;
         }
@@ -55,8 +53,10 @@ public class BattleManager : MonoBehaviour {
 
     private void StartEncounter() {
         tileMap.Init(this);
-        currentState = State.SelectTeam;
+        currentState = GameStates.BattleManagerStates.SelectTeam;
         BattleData.enemyTeam.Add(enemyTeam);
+        enemyTeam.GetComponent<CharacterController>().InitBattleManager(this);
+        playerTeam.GetComponent<CharacterController>().InitBattleManager(this);
     }
 
     private void CheckDefocusingAction() {
@@ -64,7 +64,7 @@ public class BattleManager : MonoBehaviour {
             DefocusCharacter();
             MenuManager.OpenMenu(Menu.Deactivate_Menus, null);
             isDefocused = false;
-            currentState = State.Battle;
+            currentState = GameStates.BattleManagerStates.Battle;
         }
     }
 
@@ -75,17 +75,17 @@ public class BattleManager : MonoBehaviour {
         controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
         tileMap.OccupyTile(unit.tileX, unit.tileY);
 
-        currentState = State.Battle;
+        currentState = GameStates.BattleManagerStates.Battle;
     }
 
     private void Next() {
         if (conGoNextState) {
             switch(currentState) {
-                case State.SelectTeam:
-                    currentState = State.LocateTeam;
+                case GameStates.BattleManagerStates.SelectTeam:
+                    currentState = GameStates.BattleManagerStates.LocateTeam;
                     break;
-                case State.LocateTeam:
-                    currentState = State.StartBattle;
+                case GameStates.BattleManagerStates.LocateTeam:
+                    currentState = GameStates.BattleManagerStates.StartBattle;
                     break; 
             }
             //conGoNextState = false;
@@ -102,7 +102,7 @@ public class BattleManager : MonoBehaviour {
             MenuManager.setCharacter(activeChar);
             MenuManager.OpenMenu(Menu.Game_Menu, null);
 
-            currentState = State.CharacterActive;
+            currentState = GameStates.BattleManagerStates.CharacterActive;
         }
     }
 
@@ -128,6 +128,6 @@ public class BattleManager : MonoBehaviour {
         PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap, TileState.nothing, null);
 
         activeChar = null;
-        currentState = State.Battle;
+        currentState = GameStates.BattleManagerStates.Battle;
     }
 }

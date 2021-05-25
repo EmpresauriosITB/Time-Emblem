@@ -67,5 +67,7 @@ public class Unit : MonoBehaviour {
 		map.OccupyTile(tileX, tileY);
 			
 		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving, null);
-	}
+
+        this.gameObject.GetComponent<CharacterController>().actionsLeft --;
+    }
 }

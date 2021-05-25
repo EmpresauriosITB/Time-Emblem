@@ -22,4 +22,8 @@ public class DamageCalculator {
 
         return Critical * random * burn;
     }
+
+    public static int CalculateHeal(int Power, int MentalPower) {
+        return ((Power * MentalPower) / 100) + 1;
+    }
 }

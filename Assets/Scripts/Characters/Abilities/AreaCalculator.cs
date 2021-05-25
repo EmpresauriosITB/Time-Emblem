@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AreaCalculator : MonoBehaviour
-{
-    public abstract List<GameObject> calculateArea(int initX, int initY, int range, bool isPlayerTeam);
+public abstract class AreaCalculator : MonoBehaviour {
+
+    public List<GameObject> targets = new List<GameObject>();
+
+    public abstract List<GameObject> calculateArea(int initX, int initY, int range, bool isPlayerTeam, string cardinalPosition);
 
     public GameObject getTarget(int x, int y, bool isPlayerTeam) {
         List<GameObject> team = getTeam(isPlayerTeam);
@@ -25,8 +27,22 @@ public abstract class AreaCalculator : MonoBehaviour
         return false;
     }
 
+    public void addTarget(int initX, int initY, bool isPlayerTeam) {
+        if (isTargetInTile(initX, initY, isPlayerTeam)) { targets.Add(getTarget(initX, initY, isPlayerTeam)); }
+    }
+
     public List<GameObject> getTeam(bool isPlayerTeam) {
         if (isPlayerTeam) return BattleData.playerTeam;
         else return BattleData.enemyTeam;
+    }
+
+    public string getCardinalPosition(int tileX, int tileY, int actorX, int actorY) {
+        string cardinalPoint = "";
+        if (tileX > actorX) cardinalPoint = "N";
+        else cardinalPoint = "S";
+        if (tileY > actorY) cardinalPoint = "E";
+        else cardinalPoint = "W";
+
+        return cardinalPoint;
     }
 }

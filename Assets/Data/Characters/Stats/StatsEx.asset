@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: StatsEx
   m_EditorClassIdentifier: 
   hp: 20
-  physicalPower: 20
-  physicalDefense: 20
+  physicalPower: 2
+  physicalDefense: 2
   mentalPower: 20
   mentalDefense: 20
-  velocity: 20
-  forceValue: 20
+  velocity: 2
+  forceValue: 2
   gridSpeed: 5
+  numActions: 2

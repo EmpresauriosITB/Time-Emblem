@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8e042f943a3ff448afcdd5ded01176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  currentAbility: {fileID: 0}
   tileX: 0
   tileY: 0
   map: {fileID: 0}

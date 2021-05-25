@@ -633,8 +633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: 3bee4cc77d62136419bee2d93c033056, type: 2}
-  actionNum: 0
-  timeToNextActivePeriod: 0
+  unit: {fileID: 491355464}
   isPlayer: 0
 --- !u!136 &491355463
 CapsuleCollider:
@@ -839,8 +838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: 3bee4cc77d62136419bee2d93c033056, type: 2}
-  actionNum: 0
-  timeToNextActivePeriod: 0
+  unit: {fileID: 728637523}
   isPlayer: 1
 --- !u!1 &798430278
 GameObject:

@@ -8,6 +8,7 @@ public class ClickableTile : MonoBehaviour {
 	public int tileX;
 	public int tileY;
 	public TileMap map;
+
 	void OnMouseUp() {
         if (map.moveGraph[tileX, tileY].isActive) { 
 			switch (currentState){
@@ -15,7 +16,7 @@ public class ClickableTile : MonoBehaviour {
 					map.GeneratePathTo(tileX, tileY); 
 					break;
 				case TileState.doingAbility:
-					currentAbility.abilityBehaviour.doAbility(currentAbility.Power, currentAbility.isPhysical, currentAbility.areaCalculator.calculateArea(tileX, tileY, currentAbility.Area, false), map.selectedUnit);
+                    InstanceAbilityData.doAbility(tileX, tileY, false, map.selectedUnit);
 					break;
 			}
 			
@@ -28,8 +29,11 @@ public class ClickableTile : MonoBehaviour {
 
 	public void UpdateTileData(GameObject go, int x, int y, TileState state, Abilities abilities) {
 		if (x == tileX && y == tileY) {
-			currentAbility = abilities;
 			currentState = state;
+            if (currentState == TileState.doingAbility) {
+                currentAbility = abilities;
+                InstanceAbilityData.instanceAbility(abilities, map, this);
+            }
 			this.gameObject.GetComponent<MeshRenderer>().material = go.GetComponent<MeshRenderer>().sharedMaterial;
 		}
 	}
