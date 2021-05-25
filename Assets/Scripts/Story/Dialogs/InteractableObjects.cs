@@ -5,12 +5,13 @@ using UnityEngine;
 public class InteractableObjects : MonoBehaviour
 {
     public Texts texts;
-    ControlDialogs controlDialogs;
+    //ControlDialogs control;
 
-    private void Start()
-    {
-        controlDialogs = GetComponent<ControlDialogs>();
-    }
+    //private void Start()
+    //{
+        //control = GetComponent<ControlDialogs>();
+    //}
+
 
     private void OnTriggerStay(Collider collider)
     {

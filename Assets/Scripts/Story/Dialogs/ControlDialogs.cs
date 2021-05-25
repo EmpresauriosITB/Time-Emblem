@@ -8,17 +8,26 @@ public class ControlDialogs : MonoBehaviour
     public Animation anim;
     public Queue <string> queueDialogs;
     Texts texts;
+    public bool talking;
     [SerializeField] TextMeshProUGUI screenText;
 
     private void Start()
     {
         anim = GetComponent<Animation>();
         queueDialogs = new Queue<string>();
+        talking = false;
     }
+
+    private void Update()
+    {
+        NextText();
+    }
+
 
     public void ActivatePoster(Texts textObject)
     {
         anim.Play("BordeDialogo");
+        talking = true;
         texts = textObject;
     }
 
@@ -37,11 +46,23 @@ public class ControlDialogs : MonoBehaviour
         if(queueDialogs.Count == 0)
         {
             ClosePoster();
+            talking = false;
             return;
         }
 
         string currentSentence = queueDialogs.Dequeue();
         screenText.text = currentSentence;
+    }
+
+    public void NextText()
+    {
+        if (talking == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                NextSentence();
+            }
+        }
     }
 
     public void ClosePoster()
