@@ -20,6 +20,10 @@ public class InteractableObjects : MonoBehaviour
                 talking = true;
                 this.gameObject.GetComponent<StoryIAMovement>().Stop();
                 FindObjectOfType<ControlDialogs>().ActivatePoster(texts);
+                //ERROR
+                if(this.gameObject.name.Equals("Sensei_Red_Temple")){
+                    GameObject.Find("Partner").SetActive(true);
+                }
             }
         }
     }
@@ -31,7 +35,6 @@ public class InteractableObjects : MonoBehaviour
         if(talking == true) {
             talking = false;
             this.gameObject.GetComponent<StoryIAMovement>().Reload();
-            Debug.Log(this.name);
             FindObjectOfType<ControlDialogs>().ClosePoster();
         }
     }

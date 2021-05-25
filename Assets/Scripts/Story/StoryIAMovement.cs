@@ -40,12 +40,10 @@ public class StoryIAMovement : MonoBehaviour
     public void Stop()
     {
         canMove = false;
-        Debug.Log("Me paro");
     }
 
     public void Reload()
     {
-        Debug.Log("Continuo");
         canMove = true;
     }
 }

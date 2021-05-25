@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Navegable
   - Text
+  - Partner
   layers:
   - Default
   - TransparentFX
