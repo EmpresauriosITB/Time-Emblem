@@ -12,7 +12,7 @@ public class movementIA : MonoBehaviour
 
     public TileMap map;
    
-    GameObject player;
+    
 
     GameObject[] enemies;
     GameObject closest;
@@ -30,7 +30,7 @@ public class movementIA : MonoBehaviour
         enemies = GameObject.FindGameObjectsWithTag("Allied");
         
         nextActionTime = Time.time + period;
-
+       
 
     }
 
@@ -68,8 +68,8 @@ public class movementIA : MonoBehaviour
         // Get the first element
 
 
-       // target.transform.position = closest.transform.position;
-
+        // target.transform.position = closest.transform.position;
+        Debug.Log(closest.name);
         return closest;
     }
 
@@ -84,8 +84,8 @@ public class movementIA : MonoBehaviour
         
         if (distancia < moveSpeed)
         {
-            targetx = player.GetComponent<Unit>().tileX;
-            targety= player.GetComponent<Unit>().tileY;
+            targetx = locatePlayer().GetComponent<Unit>().tileX;
+            targety= locatePlayer().GetComponent<Unit>().tileY;
         }
         
         int[] target = new int[] { targetx, targety };
@@ -112,33 +112,5 @@ public class movementIA : MonoBehaviour
 
 
 
-    //void Update()
-   // {
-       // for (int i = 0; i < Target.size; i++)
-        //Target.size returns the size of the array//
-       // {
-          //  if (Target[i] != null)
-            //Makes sure it's following a living target, I recommend creating a boolean inside the target to check if it's dead or not and referecing it here//
-           // {
-              //  float DistanceFromTarget = Vector3.Distance(Target[i].position, transform.position);
-
-              //  if (i > 0)
-                //Never let a script try to grab info from a null element from an array/list, as this creates an error. This makes sure it doesn't take information from Target[-1]//
-              //  {
-                  //  float DistanceFromLastTarget = Vector3.Distance(Target[i - 1].position, transform.position);
-              // }
-             //   else
-               // {
-               //     float DistanceFromLastTarget = 0f;
-               // }
-
-              //  if (DistanceFromTarget > DistanceFromLastTarget)
-              //  {
-                //    int MainTarget = i;
-              //  }
-           // }
-       // }
-
-       // Enemy.SetDestination(Target[MainTarget].position);
-    //}
+    
 }

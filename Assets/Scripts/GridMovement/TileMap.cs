@@ -174,7 +174,7 @@ public class TileMap : MonoBehaviour {
 		// We could test the unit's walk/hover/fly type against various
 		// terrain flags here to see if they are allowed to enter the tile.
 		
-		Debug.Log("ISWALKABLE: " + tileSet.tileTypes[currentTiles[x, y]].isWalkable);
+		//Debug.Log("ISWALKABLE: " + tileSet.tileTypes[currentTiles[x, y]].isWalkable);
 
 		return tileSet.tileTypes[currentTiles[x,y] ].isWalkable;
 	}
@@ -201,7 +201,7 @@ public class TileMap : MonoBehaviour {
                 return;
             }
 
-			Debug.Log("EJECUTADO");
+			//Debug.Log("EJECUTADO");
 
 			Dictionary<Node, float> dist = new Dictionary<Node, float>();
             Dictionary<Node, Node> prev = new Dictionary<Node, Node>();
@@ -296,7 +296,7 @@ public class TileMap : MonoBehaviour {
 			
 
 			gameObjectToMove.GetComponent<Unit>().currentPath = currentPath;
-			Debug.Log("X: " + currentPath[currentPath.Count -1].x + "Y: " + currentPath[currentPath.Count - 1].y);
+			//Debug.Log("X: " + currentPath[currentPath.Count -1].x + "Y: " + currentPath[currentPath.Count - 1].y);
         }
 	}
 
