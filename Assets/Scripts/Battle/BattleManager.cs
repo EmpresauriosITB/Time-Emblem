@@ -5,7 +5,7 @@ using UnityEngine;
 public class BattleManager : MonoBehaviour {
     public GameStates.BattleManagerStates currentState = GameStates.BattleManagerStates.StartEncounter;
 
-    private bool conGoNextState = true;
+    private bool conGoNextState = false;
     public bool isDefocused = false;
 
     public TileMap tileMap;
@@ -15,10 +15,7 @@ public class BattleManager : MonoBehaviour {
     public GameObject enemyTeam;
 
     
-    void Start()
-    {
-        
-    }
+    void Start() {}
 
     
     void Update() {
@@ -51,12 +48,17 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    public void allowToGoNextState() {
+        conGoNextState = true;
+    }
+
     private void StartEncounter() {
         tileMap.Init(this);
-        currentState = GameStates.BattleManagerStates.SelectTeam;
         BattleData.enemyTeam.Add(enemyTeam);
         enemyTeam.GetComponent<CharacterController>().InitBattleManager(this);
         playerTeam.GetComponent<CharacterController>().InitBattleManager(this);
+        MenuManager.OpenMenu(Menu.Drag_Menu, null);
+        currentState = GameStates.BattleManagerStates.SelectTeam;
     }
 
     private void CheckDefocusingAction() {
@@ -83,12 +85,13 @@ public class BattleManager : MonoBehaviour {
             switch(currentState) {
                 case GameStates.BattleManagerStates.SelectTeam:
                     currentState = GameStates.BattleManagerStates.LocateTeam;
+                    MenuManager.OpenMenu(Menu.Drag_Menu, MenuManager.dragMenu);
                     break;
                 case GameStates.BattleManagerStates.LocateTeam:
                     currentState = GameStates.BattleManagerStates.StartBattle;
                     break; 
             }
-            //conGoNextState = false;
+            conGoNextState = false;
         }
     }
 

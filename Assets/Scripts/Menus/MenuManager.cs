@@ -4,7 +4,7 @@ public static class MenuManager
 {
 
     public static bool IsInitialised { get; private set; }
-    public static GameObject startMenu, settingsMenu, gameMenu, statsMenu, actionsMenu, itemsMenu;
+    public static GameObject startMenu, settingsMenu, gameMenu, statsMenu, actionsMenu, dragMenu;
     private static GameObject character;
 
 
@@ -53,6 +53,7 @@ public static class MenuManager
                 gameMenu.SetActive(false);
                 statsMenu.SetActive(false);
                 actionsMenu.SetActive(false);
+                dragMenu.SetActive(false);
                 break;
             case Menu.Drag_Menu:
                 dragMenu.SetActive(true);
