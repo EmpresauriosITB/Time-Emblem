@@ -5,12 +5,11 @@ using UnityEngine;
 public class ActivateObject : MonoBehaviour
 {
 
-    public GameObject partner;
+    GameObject partner;
 
     private void Start()
     {
-        partner = GameObject.FindGameObjectWithTag("Partner");
-        partner.gameObject.SetActive(false);
+        partner = this.gameObject.transform.GetChild(0).gameObject;
     }
     public void activateObject()
     {

@@ -7,10 +7,12 @@ public class InteractableObjects : MonoBehaviour
     public Texts texts;
     bool talking = false;
     public GameObject Sensei;
+    public GameObject partner;
 
     private void Start()
     {
         Sensei = GameObject.Find("Sensei_Red_Temple");
+        partner = GameObject.Find("Partner");
     }
 
     private void OnTriggerStay(Collider collider)
@@ -38,16 +40,14 @@ public class InteractableObjects : MonoBehaviour
         obj.SetActive(false);
         if (talking == true)
         {
-            if (this.gameObject.name.Equals(Sensei))
+            if (this.gameObject.Equals(Sensei))
             {
-                FindObjectOfType<ActivateObject>().activateObject();
+                partner.GetComponent<ActivateObject>().activateObject();
+                this.GetComponent<StoryIAMovement>().enabled = false;
             }
-            else
-            {
-                talking = false;
-                this.gameObject.GetComponent<StoryIAMovement>().Reload();
-                FindObjectOfType<ControlDialogs>().ClosePoster();
-            }
+            talking = false;
+            this.gameObject.GetComponent<StoryIAMovement>().Reload();
+            FindObjectOfType<ControlDialogs>().ClosePoster();
         }
     }
 }

@@ -8,7 +8,7 @@ public class StoryIAMovement : MonoBehaviour
     int currentPoint;
     public float speed;
     public Animator anim;
-    bool canMove = true;
+    public bool canMove;
 
     private void Start()
     {
@@ -27,7 +27,9 @@ public class StoryIAMovement : MonoBehaviour
                 anim.SetBool("Idle", false);
                 anim.SetBool("Run", true);
             }
-            else currentPoint = (currentPoint + 1) % points.Length;
+            else {
+                currentPoint = (currentPoint + 1) % points.Length;
+            }
         } else
         {
             anim.SetBool("Idle", true);
