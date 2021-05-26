@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour {
     public GameStates.BattleManagerStates currentState = GameStates.BattleManagerStates.StartEncounter;
@@ -10,9 +11,13 @@ public class BattleManager : MonoBehaviour {
 
     public TileMap tileMap;
     private GameObject activeChar;
+    public List<GameObject> pt;
+    public PlayerData player;
 
-    public GameObject playerTeam;
-    public GameObject enemyTeam;
+
+    public DropZone board;
+
+    
 
     
     void Start() {}
@@ -31,7 +36,7 @@ public class BattleManager : MonoBehaviour {
                 Next();
                 break;
             case GameStates.BattleManagerStates.LocateTeam:
-                Next();
+                LocateUnits();
                 break;
             case GameStates.BattleManagerStates.StartBattle:
                 StartBattle();
@@ -53,12 +58,43 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void StartEncounter() {
-        tileMap.Init(this);
-        BattleData.enemyTeam.Add(enemyTeam);
-        enemyTeam.GetComponent<CharacterController>().InitBattleManager(this);
-        playerTeam.GetComponent<CharacterController>().InitBattleManager(this);
+        
         MenuManager.OpenMenu(Menu.Drag_Menu, null);
         currentState = GameStates.BattleManagerStates.SelectTeam;
+        
+        board.updateLimitNum(player.forceValue); 
+    }
+
+    private void LocateUnits() {
+        tileMap.Init(this);
+        BattleData.enemyTeam = asignarBMToGameObjects(tileMap.getEnemies());
+        pt = InstantiatePlayers();
+        BattleData.playerTeam = pt;
+        currentState = GameStates.BattleManagerStates.StartBattle;
+    }
+
+    public List<GameObject> InstantiatePlayers() {
+        int x = tileMap.tileSet.playerInitX;
+        int y = tileMap.tileSet.playerInitY;
+        List<GameObject> targets = new List<GameObject>();
+        for (int i = 0; i < pt.Count; i++) {
+            GameObject go = pt[i];
+            Vector3 v = new Vector3(x, y, pt[i].gameObject.transform.position.x);
+            go.transform.position = v;
+            go.GetComponent<CharacterController>().InitBattleManager(this);
+            GameObject.Instantiate(go);
+            x ++;
+            targets.Add(go);
+        }
+
+        return targets;
+    }
+
+    private List<GameObject> asignarBMToGameObjects(List<GameObject> list) {
+        foreach (GameObject obj in list) {
+            obj.GetComponent<CharacterController>().InitBattleManager(this);
+        }
+        return list;
     }
 
     private void CheckDefocusingAction() {
@@ -71,11 +107,13 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void StartBattle() {
-        CharacterController controller = playerTeam.GetComponent<CharacterController>();
-        Unit unit = playerTeam.GetComponent<Unit>();
+        for (int i = 0; i < pt.Count; i++) {
+            CharacterController controller = pt[i].GetComponent<CharacterController>();
+            Unit unit = pt[i].GetComponent<Unit>();
 
-        controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
-        tileMap.OccupyTile(unit.tileX, unit.tileY);
+            controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
+            tileMap.OccupyTile(unit.tileX, unit.tileY);
+        }
 
         currentState = GameStates.BattleManagerStates.Battle;
     }

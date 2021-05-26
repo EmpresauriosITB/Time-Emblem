@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler {
     public bool hasLimit;
-    public int limitNum;
+    private int limitNum;
     public int totalTeamNum = 0;
-    public void OnDrop(PointerEventData eventData)
-    {
-        Debug.Log(eventData.pointerDrag.name + "was dropped on" + gameObject.name);
+    public GameObject textMax, textCurrent;
+
+    public bool alreadyAdded;
+    public void OnDrop(PointerEventData eventData) {
+
 
         Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-        Character character = eventData.pointerDrag.GetComponent<DataCarta>().character;
+        Character character = eventData.pointerDrag.GetComponent<DataCarta>().character.GetComponent<CharacterController>().character;
         if (hasLimit) {
-            if (limitNum > totalTeamNum + character.stats.forceValue) {
+            if (limitNum + 1 >= totalTeamNum + character.stats.forceValue) {
                 if (d != null) {
-                    totalTeamNum += (int) character.stats.forceValue;
+                    updateTotalTeamNum((int) (character.stats.forceValue), true);
+                    alreadyAdded = true;
                     d.parentToReturnTo = this.transform;
                 }
             }
@@ -28,13 +32,24 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         }
     }
 
+    public void updateTotalTeamNum(int num, bool plus) {
+        if (plus)  totalTeamNum += num;
+        else totalTeamNum -= num;
+        textCurrent.GetComponent<Text>().text = "" + totalTeamNum;
+    }
+
+    public void updateLimitNum(int num) {
+        limitNum = num;
+        textMax.GetComponent<Text>().text = "" + limitNum;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("OnPointerEnter");
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("OnPointerExit");
+        
     }
 }

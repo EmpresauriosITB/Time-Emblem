@@ -1,5 +1,6 @@
-	using UnityEngine;
+using UnityEngine;
 using System.Collections;
+
 
 public class ClickableTile : MonoBehaviour {
 	public TileState currentState;
@@ -10,16 +11,18 @@ public class ClickableTile : MonoBehaviour {
 	public TileMap map;
 
 	void OnMouseUp() {
-        if (map.moveGraph[tileX, tileY].isActive) { 
-			switch (currentState){
-				case TileState.moving:
-					map.GeneratePathTo(tileX, tileY); 
-					break;
-				case TileState.doingAbility:
-                    InstanceAbilityData.doAbility(tileX, tileY, false, map.selectedUnit);
-					break;
+		if (map.activevate) {
+			if (map.moveGraph[tileX, tileY].isActive) { 
+				switch (currentState){
+					case TileState.moving:
+						map.GeneratePathTo(tileX, tileY); 
+						break;
+					case TileState.doingAbility:
+						InstanceAbilityData.doAbility(tileX, tileY, false, map.selectedUnit);
+						break;
+				}
+				
 			}
-			
 		}
 	}
 

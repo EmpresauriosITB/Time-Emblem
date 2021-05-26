@@ -12,7 +12,7 @@ public class CharacterController : MonoBehaviour {
     public bool isPlayer;
     private bool isDead = false;
 
-    private BattleManager bm;
+    public BattleManager bm;
 
     public delegate void SetCurrentActiveCharacter(GameObject activeChar);
     public event SetCurrentActiveCharacter setCurrentActiveCharacter;
@@ -37,10 +37,9 @@ public class CharacterController : MonoBehaviour {
 
     void OnMouseUp() {
         if (!isDead) {
+            Debug.Log(setCurrentActiveCharacter != null);
             if (isPlayer && !bm.isCurrentPlayerActive() && timeToNextActivePeriod < Time.time) { setCurrentActiveCharacter(this.gameObject); }
-            else {
-                InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null);
-            }
+            else { InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null); }
         }
 	}
 

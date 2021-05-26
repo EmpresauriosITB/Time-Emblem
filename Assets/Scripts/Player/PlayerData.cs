@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-    public List<Character> team;
+    public int forceValue;
+    public TeamSet teamSet;
+
 }

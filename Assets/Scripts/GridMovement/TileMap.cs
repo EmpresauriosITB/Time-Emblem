@@ -11,6 +11,9 @@ public class TileMap : MonoBehaviour {
 	public int[,] currentTiles;
 	public Node[,] moveGraph;
 	public Node[,] abilityGraph;
+
+    public bool activevate = false;
+    private List<GameObject> enemies;
 	
 
 	public delegate void UpdateTileData(GameObject go, int x, int y, TileState state, Abilities abilities);
@@ -20,6 +23,7 @@ public class TileMap : MonoBehaviour {
         GenerateMapData();
 		GenerateMapVisual(manager);
 		GeneratePathfindingGraph();
+        GenerateEnemies();
 	}
 
     public void setSelectedUnit(GameObject selectedUnit) {
@@ -27,7 +31,21 @@ public class TileMap : MonoBehaviour {
         selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
         selectedUnit.GetComponent<Unit>().map = this;
         this.selectedUnit = selectedUnit;
-        
+    }
+
+    public void GenerateEnemies() {
+        enemies = new List<GameObject>();
+        for (int i = 0; i < tileSet.enemyTeam.enemies.Count; i++) {
+            EnemyData d = tileSet.enemyTeam.enemies[i];
+            Vector3 v = new Vector3(d.initX, d.initY, d.enemy.transform.position.z);
+            d.enemy.transform.position = v;
+            GameObject.Instantiate(d.enemy);
+            enemies.Add(d.enemy);
+        }
+    }
+
+    public List<GameObject> getEnemies() {
+        return enemies;
     }
 
 	public void OccupyTile(int x, int y) {

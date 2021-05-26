@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class DataCarta : MonoBehaviour
 {
-    public Character character;
+    public GameObject character;
 }
