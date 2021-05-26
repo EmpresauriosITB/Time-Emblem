@@ -6,6 +6,8 @@ public static class MenuManager
     public static bool IsInitialised { get; private set; }
     public static GameObject startMenu, settingsMenu, gameMenu, statsMenu, actionsMenu, dragMenu;
     private static Character character;
+
+    
     
     
 
@@ -65,6 +67,6 @@ public static class MenuManager
     }
 
 
-
+   
 
 }
