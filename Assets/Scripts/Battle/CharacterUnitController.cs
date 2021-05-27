@@ -36,6 +36,7 @@ public class CharacterUnitController : MonoBehaviour {
     }
 
     void OnMouseUp() {
+        Debug.Log("Hey");
         if (!isDead) {
             if (isPlayer && timeToNextActivePeriod < Time.time) { bm.SetCurrentaActiveCharacter(this.gameObject); }
             else { InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null); }

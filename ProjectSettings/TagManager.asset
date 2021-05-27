@@ -7,6 +7,9 @@ TagManager:
   - Navegable
   - Text
   - Partner
+  - enemieBattle
+  - Collide
+  - Wall
   layers:
   - Default
   - TransparentFX

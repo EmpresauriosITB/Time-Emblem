@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a5e7e91d454424490437100cb82903, type: 3}
   m_Name: New Tile Set
   m_EditorClassIdentifier: 
-  x: 50
-  y: 50
-  playerInitX: 2
-  playerInitY: 2
+  x: 60
+  y: 70
+  playerInitX: 20
+  playerInitY: 20
   tileMapData:
   - posX: 0
     posY: 0
@@ -7521,7 +7521,7 @@ MonoBehaviour:
   - name: Default
     tileVisualPrefabNotActive: {fileID: 130280, guid: fe846d821f03406459b00accdd18d267,
       type: 3}
-    tileVisualPrefabActive: {fileID: 173604, guid: 0eefaabb347f4d145bb2d8979b23b327,
+    tileVisualPrefabActive: {fileID: 130280, guid: 56e5d3842d98c7448b0d6e918c021f64,
       type: 3}
     isWalkable: 1
     movementCost: 1
