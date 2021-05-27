@@ -28,7 +28,7 @@ public class TileMap : MonoBehaviour {
 
     public void setSelectedUnit(GameObject selectedUnit) {
         selectedUnit.GetComponent<Unit>().tileX = (int)selectedUnit.transform.position.x;
-        selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
+        selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.z;
         selectedUnit.GetComponent<Unit>().map = this;
         this.selectedUnit = selectedUnit;
     }
@@ -41,7 +41,9 @@ public class TileMap : MonoBehaviour {
             Transform t = d.enemy.transform;
             t.position = v;
             OccupyTile(d.initX,d.initY);
-            GameObject.Instantiate(d.enemy, t);
+            GameObject go = GameObject.Instantiate(d.enemy, t);
+
+            go.transform.parent = this.gameObject.transform.parent.GetChild(0).GetChild(1);
             enemies.Add(d.enemy);
         }
     }

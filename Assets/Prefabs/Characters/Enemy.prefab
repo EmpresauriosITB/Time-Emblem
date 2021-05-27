@@ -172,5 +172,6 @@ MonoBehaviour:
   character: {fileID: 11400000, guid: 3bee4cc77d62136419bee2d93c033056, type: 2}
   unit: {fileID: 5041609162413508730}
   actionsLeft: 2
+  timeToNextActivePeriod: 0
   isPlayer: 0
   bm: {fileID: 0}
