@@ -16,7 +16,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         d =  parentToReturnTo.GetComponent<DropZone>();
         d.alreadyAdded = false;
         if (d.hasLimit) {
-            d.updateTotalTeamNum((int) this.GetComponent<DataCarta>().character.GetComponent<CharacterController>().character.stats.forceValue, false);
+            d.updateTotalTeamNum((int) this.GetComponent<DataCarta>().character.GetComponent<CharacterUnitController>().character.stats.forceValue, false);
         }
         this.transform.SetParent(this.transform.parent.parent);
 
@@ -34,7 +34,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         this.transform.SetParent(parentToReturnTo);
         if (!parentToReturnTo.GetComponent<DropZone>().alreadyAdded && parentToReturnTo.GetComponent<DropZone>().hasLimit) {
             Debug.Log("Suma");
-            d.updateTotalTeamNum((int)  this.GetComponent<DataCarta>().character.GetComponent<CharacterController>().character.stats.forceValue, true);
+            d.updateTotalTeamNum((int)  this.GetComponent<DataCarta>().character.GetComponent<CharacterUnitController>().character.stats.forceValue, true);
         }
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }

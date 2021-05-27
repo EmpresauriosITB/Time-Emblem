@@ -36,7 +36,7 @@ public class StatsMenu : MonoBehaviour
 
     public void setTextStats()
     {
-        character = MenuManager.getCharacter().GetComponent<CharacterController>().character;
+        character = MenuManager.getCharacter().GetComponent<CharacterUnitController>().character;
         
         HP.text = "HP: " + character.currentHp;
         PhysicalPower.text = "Physical Power: " + character.currentPhysicalPower;

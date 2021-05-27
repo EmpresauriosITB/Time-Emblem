@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour {
 	float moveSpeed;
 
 	void Start() {
-		moveSpeed = this.gameObject.GetComponent<CharacterController>().character.stats.gridSpeed;
+		moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().character.stats.gridSpeed;
 		tileX = (int) this.transform.position.x;
 		tileY = (int) this.transform.position.y;
 	}
@@ -70,6 +70,6 @@ public class Unit : MonoBehaviour {
 			
 		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving, null);
 
-        this.gameObject.GetComponent<CharacterController>().actionsLeft --;
+        this.gameObject.GetComponent<CharacterUnitController>().actionsLeft --;
     }
 }

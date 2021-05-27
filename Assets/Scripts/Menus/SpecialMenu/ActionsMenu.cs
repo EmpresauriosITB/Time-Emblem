@@ -29,7 +29,7 @@ public class ActionsMenu : MonoBehaviour
     {
         List<Abilities> listaAbilities = new List<Abilities>();
         character = MenuManager.getCharacter();
-        Character currentChar = character.GetComponent<CharacterController>().character;      
+        Character currentChar = character.GetComponent<CharacterUnitController>().character;      
         for (int i = 0; i < currentChar.abilitieSet.abilities.Count; i++) {
             Abilities a = currentChar.abilitieSet.abilities[i];
             listaAbilities.Add(a);

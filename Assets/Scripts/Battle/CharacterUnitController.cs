@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour {
+public class CharacterUnitController : MonoBehaviour {
 
     public Character character;
     public Unit unit;

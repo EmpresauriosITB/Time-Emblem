@@ -23,7 +23,7 @@ public static class InstanceAbilityData {
             bool abilityDone = ability.abilityBehaviour.doAbility(ability.Power, ability.isPhysical, ability.areaCalculator.calculateArea(x, y, ability.Area, targetIsPlayer, cardinalPosition), map.selectedUnit);
             deleteInstance();
             if (abilityDone) {
-                actor.GetComponent<CharacterController>().actionsLeft--;
+                actor.GetComponent<CharacterUnitController>().actionsLeft--;
             }
         }
     }

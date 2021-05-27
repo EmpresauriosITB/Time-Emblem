@@ -77,7 +77,7 @@ public class BattleManager : MonoBehaviour {
             GameObject go = pt[i];
             Vector3 v = new Vector3(x, y, pt[i].gameObject.transform.position.x);
             go.transform.position = v;
-            go.GetComponent<CharacterController>().InitBattleManager(this);
+            go.GetComponent<CharacterUnitController>().InitBattleManager(this);
             GameObject.Instantiate(go);
             x ++;
             targets.Add(go);
@@ -88,7 +88,7 @@ public class BattleManager : MonoBehaviour {
 
     private List<GameObject> asignarBMToGameObjects(List<GameObject> list) {
         foreach (GameObject obj in list) {
-            obj.GetComponent<CharacterController>().InitBattleManager(this);
+            obj.GetComponent<CharacterUnitController>().InitBattleManager(this);
         }
         return list;
     }
@@ -104,7 +104,7 @@ public class BattleManager : MonoBehaviour {
 
     private void StartBattle() {
         for (int i = 0; i < pt.Count; i++) {
-            CharacterController controller = pt[i].GetComponent<CharacterController>();
+            CharacterUnitController controller = pt[i].GetComponent<CharacterUnitController>();
             Unit unit = pt[i].GetComponent<Unit>();
 
             controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
@@ -131,7 +131,7 @@ public class BattleManager : MonoBehaviour {
 
     private void CheckNoCurrentActivePlayer() {
         if (isCurrentPlayerActive()) {
-            Character charInfo = activeChar.GetComponent<CharacterController>().character;
+            Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
             Unit unit = activeChar.GetComponent<Unit>();
 
             PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
@@ -152,7 +152,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     public void ShowMovementTiles() {
-        Character charInfo = activeChar.GetComponent<CharacterController>().character;
+        Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
         Unit unit = activeChar.GetComponent<Unit>();
 
         PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed, unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
@@ -165,7 +165,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     public void DefocusCharacter() {
-        Character charInfo = activeChar.GetComponent<CharacterController>().character;
+        Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
         Unit unit = activeChar.GetComponent<Unit>();
 
         PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap, TileState.nothing, null);
