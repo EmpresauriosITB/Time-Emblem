@@ -11,9 +11,9 @@ public class Unit : MonoBehaviour {
 	float moveSpeed;
 	 
 	void Start() {
-		moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
-		tileX = (int)gameObject.transform.position.x;
-		tileY = (int)gameObject.transform.position.y;
+		moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().character.stats.gridSpeed;
+		tileX = (int) this.transform.position.x;
+		tileY = (int) this.transform.position.z;
 	}
 
 	void Update() {
@@ -24,9 +24,9 @@ public class Unit : MonoBehaviour {
 			while( currNode < currentPath.Count-1 ) {
 
 				Vector3 start = map.TileCoordToWorldCoord( currentPath[currNode].x, currentPath[currNode].y ) + 
-					new Vector3(0, 0, -1f) ;
+					new Vector3(0, -1f, 0) ;
 				Vector3 end   = map.TileCoordToWorldCoord( currentPath[currNode+1].x, currentPath[currNode+1].y )  + 
-					new Vector3(0, 0, -1f) ;
+					new Vector3(0, -1f, 0) ;
 
 				Debug.DrawLine(start, end, Color.red);
 
@@ -42,7 +42,7 @@ public class Unit : MonoBehaviour {
 		float remainingMovement = moveSpeed;
 
 		map.DesocupyTile(tileX, tileY);
-		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map);
+		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map, TileState.nothing, null);
 
 		while(remainingMovement > 0 && currentPath != null) {
 
@@ -68,6 +68,8 @@ public class Unit : MonoBehaviour {
 
 		map.OccupyTile(tileX, tileY);
 			
-		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map);
-	}
+		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving, null);
+
+        this.gameObject.GetComponent<CharacterUnitController>().actionsLeft --;
+    }
 }

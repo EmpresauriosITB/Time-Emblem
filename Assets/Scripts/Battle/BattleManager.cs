@@ -1,96 +1,150 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour {
+    public GameStates.BattleManagerStates currentState = GameStates.BattleManagerStates.StartEncounter;
 
-    public enum State {StartEncounter, SelectTeam, LocateTeam, StartBattle, Battle, CharacterActive, BattleStopped}
-    public State currentState = State.StartEncounter;
-
-    private bool conGoNextState = true;
+    private bool conGoNextState = false;
+    public bool isDefocused = false;
 
     public TileMap tileMap;
     private GameObject activeChar;
+    public List<GameObject> pt;
+    public PlayerData player;
 
-    public GameObject playerTeam;
+    public DropZone board;
 
-    
-    void Start()
-    {
-        
-    }
+    void Start() {}
 
-    
     void Update() {
         CheckState();
     }
 
     private void CheckState() {
         switch (currentState) {
-            case State.StartEncounter:
+            case GameStates.BattleManagerStates.StartEncounter:
                 StartEncounter();
                 break;
-            case State.SelectTeam:
+            case GameStates.BattleManagerStates.SelectTeam:
                 Next();
                 break;
-            case State.LocateTeam:
-                Next();
+            case GameStates.BattleManagerStates.LocateTeam:
+                LocateUnits();
                 break;
-            case State.StartBattle:
+            case GameStates.BattleManagerStates.StartBattle:
                 StartBattle();
                 break;
-            case State.Battle:
+            case GameStates.BattleManagerStates.Battle:
                 CheckNoCurrentActivePlayer();
                 break;           
-            case State.CharacterActive:
-                
+            case GameStates.BattleManagerStates.CharacterActive:
+                CheckDefocusingAction();
                 break;
-            case State.BattleStopped:
+            case GameStates.BattleManagerStates.BattleStopped:
                 ReaunudeGame();
                 break;
         }
     }
 
+    public void allowToGoNextState() {
+        conGoNextState = true;
+    }
+
     private void StartEncounter() {
+        
+        MenuManager.OpenMenu(Menu.Drag_Menu, null);
+        MenuManager.SetBattleManager(this);
+        currentState = GameStates.BattleManagerStates.SelectTeam;
+        
+        board.updateLimitNum(player.forceValue); 
+    }
+
+    private void LocateUnits() {
         tileMap.Init(this);
-        currentState = State.SelectTeam;
+        BattleData.enemyTeam = asignarBMToGameObjects(tileMap.getEnemies());
+        pt = InstantiatePlayers();
+        BattleData.playerTeam = pt;
+        currentState = GameStates.BattleManagerStates.StartBattle;
+    }
+
+    public List<GameObject> InstantiatePlayers() {
+        int x = tileMap.tileSet.playerInitX;
+        int y = tileMap.tileSet.playerInitY;
+        List<GameObject> targets = new List<GameObject>();
+        for (int i = 0; i < pt.Count; i++) {
+            GameObject go = pt[i];
+            Vector3 v = new Vector3(x, pt[i].gameObject.transform.position.y, y);
+            Transform t = go.transform;
+            t.position = v;
+            go.GetComponent<CharacterUnitController>().InitBattleManager(this);
+            GameObject goInit = GameObject.Instantiate(go, t);
+            goInit.transform.parent = this.gameObject.transform.parent.GetChild(0).GetChild(0);
+            tileMap.OccupyTile(x,y);
+            x ++;
+            targets.Add(go);
+        }
+
+        return targets;
+    }
+
+    private List<GameObject> asignarBMToGameObjects(List<GameObject> list) {
+        foreach (GameObject obj in list) {
+            obj.GetComponent<CharacterUnitController>().InitBattleManager(this);
+        }
+        return list;
+    }
+
+    private void CheckDefocusingAction() {
+        if (isDefocused) {
+            DefocusCharacter();
+            MenuManager.OpenMenu(Menu.Deactivate_Menus, null);
+            isDefocused = false;
+            currentState = GameStates.BattleManagerStates.Battle;
+        }
     }
 
     private void StartBattle() {
-        CharacterController controller = playerTeam.GetComponent<CharacterController>();
-        Unit unit = playerTeam.GetComponent<Unit>();
+        for (int i = 0; i < pt.Count; i++) {
+            CharacterUnitController controller = pt[i].GetComponent<CharacterUnitController>();
+            Unit unit = pt[i].GetComponent<Unit>();
 
-        controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
-        tileMap.OccupyTile(unit.tileX, unit.tileY);
-
-        currentState = State.Battle;
+            controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
+            tileMap.OccupyTile(unit.tileX, unit.tileY);
+        }
+        tileMap.activevate = true;
+        currentState = GameStates.BattleManagerStates.Battle;
     }
 
     private void Next() {
         if (conGoNextState) {
             switch(currentState) {
-                case State.SelectTeam:
-                    currentState = State.LocateTeam;
+                case GameStates.BattleManagerStates.SelectTeam:
+                    currentState = GameStates.BattleManagerStates.LocateTeam;
+                    MenuManager.OpenMenu(Menu.Drag_Menu, MenuManager.dragMenu);
                     break;
-                case State.LocateTeam:
-                    currentState = State.StartBattle;
+                case GameStates.BattleManagerStates.LocateTeam:
+                    currentState = GameStates.BattleManagerStates.StartBattle;
                     break; 
             }
-            //conGoNextState = false;
+            conGoNextState = false;
         }
     }
 
     private void CheckNoCurrentActivePlayer() {
         if (isCurrentPlayerActive()) {
-            Character charInfo = activeChar.GetComponent<CharacterController>().character;
+            Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
             Unit unit = activeChar.GetComponent<Unit>();
 
-            PathFind.setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, true, tileMap);
+            Debug.Log(unit.tileX);
+            Debug.Log(unit.tileY);
+            PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
 
             MenuManager.setCharacter(activeChar);
-            MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
+            MenuManager.OpenMenu(Menu.Game_Menu, null);
 
-            currentState = State.CharacterActive;
+            currentState = GameStates.BattleManagerStates.CharacterActive;
         }
     }
 
@@ -98,22 +152,30 @@ public class BattleManager : MonoBehaviour {
         return activeChar != null;
     }
 
-    private void ReaunudeGame() {}
+    private void ReaunudeGame() {
 
+    }
+
+    public void ShowMovementTiles() {
+        Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
+        Unit unit = activeChar.GetComponent<Unit>();
+
+        PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed, unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
+    }
 
     public void SetCurrentaActiveCharacter(GameObject character) {
-        if (activeChar != null) { DefocusCharacter(); }
-        activeChar = character;  
-        tileMap.setSelectedUnit(activeChar);  
+        if (isCurrentPlayerActive()) { DefocusCharacter(); }
+        activeChar = character;
+        tileMap.setSelectedUnit(activeChar);
     }
 
     public void DefocusCharacter() {
-        Character charInfo = activeChar.GetComponent<CharacterController>().character;
+        Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
         Unit unit = activeChar.GetComponent<Unit>();
 
-        PathFind.setAllowedToCLickTiles(charInfo.GetGridSpeed() ,unit.tileX, unit.tileY, false, tileMap);
+        PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap, TileState.nothing, null);
 
         activeChar = null;
-        currentState = State.Battle;
+        currentState = GameStates.BattleManagerStates.Battle;
     }
 }

@@ -16,7 +16,7 @@ public class TextLogController : MonoBehaviour
 
     }
 
-    public void LogText( Abilities a)
+    public void LogText(Abilities a, GameObject g)
     {
         
         textItems = new List<GameObject>();
@@ -24,18 +24,20 @@ public class TextLogController : MonoBehaviour
         Button newText = Instantiate(button) as Button;
         newText.gameObject.SetActive(true);
 
-        newText.GetComponentInChildren<TextLogItem>().SetText(a.GetName());
-        newText.GetComponent<ButtonFunction>().subscribeEvent(this, a);
+        newText.GetComponentInChildren<TextLogItem>().SetText(a.AbilityName);
+        newText.GetComponent<ButtonFunction>().subscribeEvent(this, a, g);
         newText.transform.SetParent(this.transform.GetChild(0).transform.GetChild(0).transform, false);
-
-        Debug.Log(newText);
-        Debug.Log(textItems);
 
         textItems.Add(newText.gameObject);
 
     }
 
     public void DeleteTextItems() {
+        Debug.Log(destroyText != null);
         destroyText();
+    }
+
+    public bool DestroyTextHasSucribedEvents() {
+        return destroyText != null;
     }
 }

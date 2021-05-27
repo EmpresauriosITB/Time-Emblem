@@ -6,8 +6,13 @@ using UnityEngine;
 public class TileSet : ScriptableObject {
 
     public int x, y;
+
+    public int playerInitX, playerInitY;
     public TileData[] tileMapData;
     public TileType[] tileTypes;
+    public EnemyTeam enemyTeam;
+
+
 
     public void Init() {
         tileMapData = new TileData[x*y];

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 50
   y: 50
+  playerInitX: 2
+  playerInitY: 2
   tileMapData:
   - posX: 0
     posY: 0
@@ -7537,3 +7539,4 @@ MonoBehaviour:
       type: 3}
     isWalkable: 1
     movementCost: 2
+  enemyTeam: {fileID: 11400000, guid: 1a14420497d04c648aebb42b0239a746, type: 2}

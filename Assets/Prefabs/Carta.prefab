@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2606287209517409160}
   - component: {fileID: 5667638646931700265}
   - component: {fileID: 7274202985150207126}
+  - component: {fileID: 8535449948657429473}
   m_Layer: 5
   m_Name: Carta
   m_TagString: Untagged
@@ -90,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd9a7bbbc8073d4fbf2c11117f97877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentToReturnTo: {fileID: 0}
 --- !u!114 &5667638646931700265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +124,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8535449948657429473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2606287209517409166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc32b0e081c324741b3bbbdda87edf1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 5664878635461150044, guid: 60473f9b12db0a84dbf2a63a1d8a6335,
+    type: 3}
 --- !u!1 &2606287209684933847
 GameObject:
   m_ObjectHideFlags: 0
