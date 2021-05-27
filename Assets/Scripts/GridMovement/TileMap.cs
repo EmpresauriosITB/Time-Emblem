@@ -28,7 +28,7 @@ public class TileMap : MonoBehaviour {
 
     public void setSelectedUnit(GameObject selectedUnit) {
         selectedUnit.GetComponent<Unit>().tileX = (int)selectedUnit.transform.position.x;
-        selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
+        selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.z;
         selectedUnit.GetComponent<Unit>().map = this;
         this.selectedUnit = selectedUnit;
     }
@@ -37,9 +37,13 @@ public class TileMap : MonoBehaviour {
         enemies = new List<GameObject>();
         for (int i = 0; i < tileSet.enemyTeam.enemies.Count; i++) {
             EnemyData d = tileSet.enemyTeam.enemies[i];
-            Vector3 v = new Vector3(d.initX, d.initY, d.enemy.transform.position.z);
-            d.enemy.transform.position = v;
-            GameObject.Instantiate(d.enemy);
+            Vector3 v = new Vector3(d.initX, d.enemy.transform.position.y, d.initY);
+            Transform t = d.enemy.transform;
+            t.position = v;
+            OccupyTile(d.initX,d.initY);
+            GameObject go = GameObject.Instantiate(d.enemy, t);
+
+            go.transform.parent = this.gameObject.transform.parent.GetChild(0).GetChild(1);
             enemies.Add(d.enemy);
         }
     }
@@ -140,7 +144,7 @@ public class TileMap : MonoBehaviour {
 	}
 
 	public Vector3 TileCoordToWorldCoord(int x, int y) {
-		return new Vector3(x, y, 0);
+		return new Vector3(x, 1.5f, y);
 	}
 
 	public bool UnitCanEnterTile(int x, int y) {
