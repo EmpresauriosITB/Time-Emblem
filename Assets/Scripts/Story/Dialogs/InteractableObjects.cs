@@ -46,6 +46,7 @@ public class InteractableObjects : MonoBehaviour
             if (this.gameObject.Equals(partner_character)) {
                 partner.GetComponent<ActivateObject>().disableGuards();
                 partner.GetComponent<ActivateObject>().activateEnemies();
+                partner.GetComponent<ActivateObject>().activatePartnerFollow();
             }
             talking = false;
             this.gameObject.GetComponent<StoryIAMovement>().Reload();

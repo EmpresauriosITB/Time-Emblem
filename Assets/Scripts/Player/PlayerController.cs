@@ -15,14 +15,19 @@ public class PlayerController : MonoBehaviour
     private Vector3 PlayerInput;
     public bool canMove;
     public GameObject camara;
-
+    public Camera PixelCamera;
     Vector3 velocity;
+    GameObject playerCharacter;
+    GameObject partnerCharacter;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         camara = GameObject.Find("Camera");
+        PixelCamera = FindObjectOfType<Camera>();
+        playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        partnerCharacter = playerCharacter.transform.GetChild(3).gameObject;
     }
 
     void Update()
@@ -54,6 +59,7 @@ public class PlayerController : MonoBehaviour
                 if(anim != null)
                 {
                     anim.SetBool("Run", true);
+                    partnerCharacter.GetComponent<Partner_follow>().Run();
                 }
             }
             else
@@ -61,6 +67,7 @@ public class PlayerController : MonoBehaviour
                 if(anim != null)
                 {
                     anim.SetBool("Run", false);
+                    partnerCharacter.GetComponent<Partner_follow>().StopRun();
                 }
             }
 

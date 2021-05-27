@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TextIntro : MonoBehaviour
 {
     public Camera pixelCamera;
     public GameObject textIntro;
     Animation textAnim;
+    public RenderTexture renderTexture;
+    public RawImage raw;
 
     void Start()
     {
-        pixelCamera = GameObject.FindObjectOfType<Camera>();
+        pixelCamera = FindObjectOfType<Camera>();
         textIntro = GameObject.Find("TextIntro");
         textAnim = textIntro.GetComponent<Animation>();
     }
