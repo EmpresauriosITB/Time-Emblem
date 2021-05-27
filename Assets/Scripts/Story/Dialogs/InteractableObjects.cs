@@ -9,12 +9,18 @@ public class InteractableObjects : MonoBehaviour
     public GameObject Sensei;
     public GameObject partner;
     GameObject partner_character;
+    private Sensei1Text Sensei1Text;
+    private Sensei2Text Sensei2Text;
 
     private void Start()
     {
         Sensei = GameObject.Find("Sensei_Red_Temple");
         partner = GameObject.Find("Partner");
         partner_character = partner.transform.GetChild(0).gameObject;
+        Sensei1Text = FindObjectOfType<Sensei1Text>();
+        Sensei1Text.gameObject.SetActive(false);
+        Sensei2Text = FindObjectOfType<Sensei2Text>();
+        Sensei2Text.gameObject.SetActive(false);
     }
 
     private void OnTriggerStay(Collider collider)
@@ -42,6 +48,9 @@ public class InteractableObjects : MonoBehaviour
             {
                 partner.GetComponent<ActivateObject>().activatePartner();
                 this.GetComponent<StoryIAMovement>().enabled = false;
+                GetComponent<InteractableObjects>().enabled = false;
+                Sensei1Text.gameObject.SetActive(true);
+                
             }
             if (this.gameObject.Equals(partner_character)) {
                 partner.GetComponent<ActivateObject>().disableGuards();
