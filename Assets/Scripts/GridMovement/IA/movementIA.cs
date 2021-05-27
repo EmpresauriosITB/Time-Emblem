@@ -17,8 +17,7 @@ public class movementIA : MonoBehaviour
     GameObject[] enemies;
     GameObject closest;
     Vector3 position;
-    private float nextActionTime ;
-    private float period = 1f;
+    
 
     private void Start()
     {
@@ -27,24 +26,23 @@ public class movementIA : MonoBehaviour
         gameObject.GetComponent<Unit>().tileY = (int)gameObject.transform.position.y;
 
         moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
-        enemies = GameObject.FindGameObjectsWithTag("Allied");
         
-        nextActionTime = Time.time + period;
+        
        
 
     }
 
     private void Update()
     {
-        moveIA();
+       
     }
 
    
 
   
-    GameObject locatePlayer()
+    public GameObject locatePlayer()
     {
-                
+        enemies = GameObject.FindGameObjectsWithTag("Allied");
         position = transform.position;
 
         if (enemies.Length == 0)
@@ -53,7 +51,7 @@ public class movementIA : MonoBehaviour
             return null;
         }
 
-        // If there is only exactly one anyway skip the rest and return it directly
+        
         if (enemies.Length == 1)
         {
             closest = enemies[0];
@@ -63,50 +61,30 @@ public class movementIA : MonoBehaviour
 
         // Otherwise: Take the enemies
         closest = enemies.OrderBy(go => (position - go.transform.position).sqrMagnitude).First();
-        // Order them by distance (ascending) => smallest distance is first element
-
-        // Get the first element
-
-
-        // target.transform.position = closest.transform.position;
-        Debug.Log(closest.name);
+                
         return closest;
     }
 
-    int[] setTarget()
+    public int[] setTarget()
     {
-        int targetx = gameObject.GetComponent<Unit>().tileX;
-        int targety = gameObject.GetComponent<Unit>().tileY;
-
-
-        float distancia = Vector3.Distance(locatePlayer().transform.position, transform.position);
         
-        
-        if (distancia < moveSpeed)
-        {
-            targetx = locatePlayer().GetComponent<Unit>().tileX;
-            targety= locatePlayer().GetComponent<Unit>().tileY;
-        }
+        int targetx = locatePlayer().GetComponent<Unit>().tileX;
+        int targety = locatePlayer().GetComponent<Unit>().tileY;
         
         int[] target = new int[] { targetx, targety };
         return target;
     }
 
-    void moveIA()
+    public void moveIA(int[] target)
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            
-            nextActionTime = Time.time + period;
+       
+        int[] positionTarget = target;
+                   
+        map.GeneratePathTo(positionTarget[0] +1, positionTarget[1] +1, gameObject);
 
-            int[] positionTarget = setTarget();
+        gameObject.GetComponent<Unit>().MoveNextTile();
 
-            
-            map.GeneratePathTo(positionTarget[0] +1, positionTarget[1] +1, gameObject);
-
-            gameObject.GetComponent<Unit>().MoveNextTile();
-            
-        }
+        gameObject.GetComponent<StatesMachine>().state = StatesMachine.State.NotActive;
     }
 
 
