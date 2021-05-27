@@ -14,15 +14,10 @@ public class BattleManager : MonoBehaviour {
     public List<GameObject> pt;
     public PlayerData player;
 
-
     public DropZone board;
 
-    
-
-    
     void Start() {}
 
-    
     void Update() {
         CheckState();
     }
@@ -60,6 +55,7 @@ public class BattleManager : MonoBehaviour {
     private void StartEncounter() {
         
         MenuManager.OpenMenu(Menu.Drag_Menu, null);
+        MenuManager.SetBattleManager(this);
         currentState = GameStates.BattleManagerStates.SelectTeam;
         
         board.updateLimitNum(player.forceValue); 
@@ -114,7 +110,7 @@ public class BattleManager : MonoBehaviour {
             controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
             tileMap.OccupyTile(unit.tileX, unit.tileY);
         }
-
+        tileMap.activevate = true;
         currentState = GameStates.BattleManagerStates.Battle;
     }
 
@@ -155,11 +151,17 @@ public class BattleManager : MonoBehaviour {
 
     }
 
+    public void ShowMovementTiles() {
+        Character charInfo = activeChar.GetComponent<CharacterController>().character;
+        Unit unit = activeChar.GetComponent<Unit>();
+
+        PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed, unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
+    }
 
     public void SetCurrentaActiveCharacter(GameObject character) {
         if (isCurrentPlayerActive()) { DefocusCharacter(); }
-        activeChar = character;  
-        tileMap.setSelectedUnit(activeChar);  
+        activeChar = character;
+        tileMap.setSelectedUnit(activeChar);
     }
 
     public void DefocusCharacter() {

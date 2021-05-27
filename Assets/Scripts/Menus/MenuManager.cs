@@ -6,6 +6,7 @@ public static class MenuManager
     public static bool IsInitialised { get; private set; }
     public static GameObject startMenu, settingsMenu, gameMenu, statsMenu, actionsMenu, dragMenu;
     private static GameObject character;
+    private static BattleManager bm;
 
 
     public static void MoveClicked() {
@@ -21,7 +22,16 @@ public static class MenuManager
         actionsMenu = canva.transform.Find("ActionsMenu").gameObject;
         dragMenu = canva.transform.Find("Drag&Drop").gameObject;
         IsInitialised = true;
+    }
 
+    public static void SetBattleManager(BattleManager battle)
+    {
+        bm = battle;
+    }
+
+    public static BattleManager GetBattle()
+    {
+        return bm;
     }
 
     public static void OpenMenu (Menu menu, GameObject callingMenu)
@@ -46,8 +56,10 @@ public static class MenuManager
                 break;
             case Menu.Actions_Menu:
                 actionsMenu.SetActive(true);
+                actionsMenu.GetComponent<ActionsMenu>().bm = bm;
                 break;
             case Menu.Deactivate_Menus:
+                actionsMenu.GetComponent<ActionsMenu>().textController.DeleteTextItems();
                 startMenu.SetActive(false);
                 settingsMenu.SetActive(false);
                 gameMenu.SetActive(false);

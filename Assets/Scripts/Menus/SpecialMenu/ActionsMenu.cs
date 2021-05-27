@@ -7,6 +7,7 @@ public class ActionsMenu : MonoBehaviour
     GameObject character;
     private string abilitiesName;
     public TextLogController textController;
+    public BattleManager bm;
 
 
 
@@ -16,10 +17,12 @@ public class ActionsMenu : MonoBehaviour
         setTextAbilities();
     }
 
+
     public void OnClick_Back()
     {
         textController.DeleteTextItems();
         MenuManager.OpenMenu(Menu.Game_Menu, gameObject);
+        bm.ShowMovementTiles();
     }
 
     public void setTextAbilities()
