@@ -10,7 +10,8 @@ public class CharacterUnitController : MonoBehaviour {
     [SerializeField]
     private float timeToNextActivePeriod;
     public bool isPlayer;
-    private bool isDead = false;
+    public bool isDead = false;
+    public TileMap map;
 
     public BattleManager bm;
 
@@ -46,8 +47,9 @@ public class CharacterUnitController : MonoBehaviour {
         return timeToNextActivePeriod < Time.deltaTime;
     }
 
-    public void InitBattleManager(BattleManager bm) {
+    public void InitBattleManager(BattleManager bm, TileMap map) {
         this.bm = bm;
+        this.map = map;
     }
 
     public void ResetCooldown() {

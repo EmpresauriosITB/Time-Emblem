@@ -8,11 +8,7 @@ using System.Linq;
 public class movementIA : MonoBehaviour
 {
 
-    float moveSpeed;
-
-    public TileMap map;
-   
-    
+    TileMap map;
 
     GameObject[] enemies;
     GameObject closest;
@@ -21,28 +17,13 @@ public class movementIA : MonoBehaviour
 
     private void Start()
     {
-        
-        gameObject.GetComponent<Unit>().tileX = (int)gameObject.transform.position.x;
-        gameObject.GetComponent<Unit>().tileY = (int)gameObject.transform.position.y;
-
-        moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().character.currentGridSpeed;
-        
-        
-       
-
+        map = this.gameObject.GetComponent<CharacterUnitController>().map;
     }
 
-    private void Update()
-    {
-       
-    }
-
-   
-
-  
+    
     public GameObject locatePlayer()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Allied");
+        enemies = GameObject.FindGameObjectsWithTag("Enemies");
         position = transform.position;
 
         if (enemies.Length == 0)
@@ -85,6 +66,7 @@ public class movementIA : MonoBehaviour
         gameObject.GetComponent<Unit>().MoveNextTile();
 
         gameObject.GetComponent<StatesMachine>().state = StatesMachine.State.NotActive;
+            
     }
 
 

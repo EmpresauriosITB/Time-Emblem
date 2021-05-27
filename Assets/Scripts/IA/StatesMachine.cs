@@ -48,7 +48,7 @@ public class StatesMachine : MonoBehaviour
     IEnumerator DeadState()
     {
         Debug.Log("Dead: Enter");
-        gameObject.SetActive(false);
+        gameObject.GetComponent<CharacterUnitController>().isDead = true;
         yield return 0;
         
     }

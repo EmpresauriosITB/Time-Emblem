@@ -188,8 +188,8 @@ public class TileMap : MonoBehaviour {
             List<Node> unvisited = new List<Node>();
 
             Node source = moveGraph[
-                                selectedUnit.GetComponent<Unit>().tileX,
-                                selectedUnit.GetComponent<Unit>().tileY
+                                gameObjectToMove.GetComponent<Unit>().tileX,
+								gameObjectToMove.GetComponent<Unit>().tileY
                                 ];
 
             Node target = moveGraph[

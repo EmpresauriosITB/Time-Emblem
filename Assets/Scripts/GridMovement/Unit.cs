@@ -14,6 +14,11 @@ public class Unit : MonoBehaviour {
 		moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().character.stats.gridSpeed;
 		tileX = (int) this.transform.position.x;
 		tileY = (int) this.transform.position.z;
+		if (!this.gameObject.GetComponent<CharacterUnitController>().isPlayer)
+		{
+			map = this.gameObject.GetComponent<CharacterUnitController>().map;
+		}	
+		
 	}
 
 	void Update() {
@@ -67,9 +72,9 @@ public class Unit : MonoBehaviour {
 		}
 
 		map.OccupyTile(tileX, tileY);
-			
-		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving, null);
-
+		if(!this.gameObject.GetComponent<CharacterUnitController>().isPlayer){
+			PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving, null);
+		}	
         this.gameObject.GetComponent<CharacterUnitController>().actionsLeft --;
     }
 }
