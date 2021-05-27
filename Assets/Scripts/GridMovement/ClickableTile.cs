@@ -15,7 +15,7 @@ public class ClickableTile : MonoBehaviour {
 			if (map.moveGraph[tileX, tileY].isActive) { 
 				switch (currentState){
 					case TileState.moving:
-						map.GeneratePathTo(tileX, tileY); 
+						map.GeneratePathTo(tileX, tileY, null); 
 						break;
 					case TileState.doingAbility:
 						InstanceAbilityData.doAbility(tileX, tileY, false, map.selectedUnit);

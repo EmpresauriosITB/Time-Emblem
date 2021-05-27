@@ -25,7 +25,7 @@ public class movementIA : MonoBehaviour
         gameObject.GetComponent<Unit>().tileX = (int)gameObject.transform.position.x;
         gameObject.GetComponent<Unit>().tileY = (int)gameObject.transform.position.y;
 
-        moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
+        moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().character.currentGridSpeed;
         
         
        

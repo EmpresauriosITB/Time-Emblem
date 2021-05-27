@@ -22,6 +22,7 @@ public static class MenuManager
         gameMenu = canva.transform.Find("GameMenu").gameObject;
         statsMenu = canva.transform.Find("StatsMenu").gameObject;
         actionsMenu = canva.transform.Find("ActionsMenu").gameObject;
+        dragMenu = canva.transform.Find("Drag&Drop").gameObject;
 
         IsInitialised = true;
     }
