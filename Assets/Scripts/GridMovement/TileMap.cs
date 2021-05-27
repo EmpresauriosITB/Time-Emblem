@@ -126,7 +126,7 @@ public class TileMap : MonoBehaviour {
 				num ++;
 				TileType tt = tileSet.tileTypes[ currentTiles[x,y] ];
 				
-				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefabNotActive, new Vector3(x, y, 0), Quaternion.identity );
+				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefabNotActive, new Vector3(x, 0, y), Quaternion.identity );
 				go.name = "Tile " + num;
 				go.transform.parent = this.gameObject.transform.GetChild(0).transform;
 

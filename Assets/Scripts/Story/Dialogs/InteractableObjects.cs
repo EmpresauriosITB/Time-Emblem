@@ -6,15 +6,16 @@ public class InteractableObjects : MonoBehaviour
 {
     public Texts texts;
     bool talking = false;
-    public GameObject Sensei;
-    public GameObject partner;
-    GameObject partner_character;
+    public GameObject Sensei, partner, partner_character, enemie1, enemie2;
 
     private void Start()
     {
         Sensei = GameObject.Find("Sensei_Red_Temple");
         partner = GameObject.Find("Partner");
         partner_character = partner.transform.GetChild(0).gameObject;
+        GameObject enemie = GameObject.Find("Enemies");
+        enemie1 = enemie.transform.GetChild(0).GetChild(0).gameObject;
+        enemie2 = enemie.transform.GetChild(5).GetChild(0).gameObject;
     }
 
     private void OnTriggerStay(Collider collider)
@@ -40,18 +41,32 @@ public class InteractableObjects : MonoBehaviour
         {
             if (this.gameObject.Equals(Sensei))
             {
-                partner.GetComponent<ActivateObject>().activatePartner();
-                this.GetComponent<StoryIAMovement>().enabled = false;
-                
+                EventActivatePartner();
             }
             if (this.gameObject.Equals(partner_character)) {
-                partner.GetComponent<ActivateObject>().disableGuards();
-                partner.GetComponent<ActivateObject>().activateEnemies();
-                partner.GetComponent<ActivateObject>().activatePartnerFollow();
+                EventPartnerFollow();
+            }
+            if (this.gameObject.Equals(enemie1) || this.gameObject.Equals(enemie2)) {
+                EventBattle();
             }
             talking = false;
             this.gameObject.GetComponent<StoryIAMovement>().Reload();
             FindObjectOfType<ControlDialogs>().ClosePoster();
         }
+    }
+
+    public void EventActivatePartner() {
+        partner.GetComponent<ActivateObject>().activatePartner();
+        this.GetComponent<StoryIAMovement>().enabled = false;
+    }
+
+    public void EventPartnerFollow() {
+        partner.GetComponent<ActivateObject>().disableGuards();
+        partner.GetComponent<ActivateObject>().activateEnemies();
+        partner.GetComponent<ActivateObject>().activatePartnerFollow();
+    }
+
+    public void EventBattle() {
+        Debug.Log("EMPIEZA BATALLA");
     }
 }

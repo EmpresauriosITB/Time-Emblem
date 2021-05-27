@@ -6,7 +6,7 @@ public class PassInformationTOBattleManager : MonoBehaviour
 {
 
     public BattleManager battleManager;
-    public GameObject board;
+    public GameObject board, canvasMap;
 
     public void PassPlayerTeam() {
         if (board.transform.childCount > 0) {
@@ -15,6 +15,7 @@ public class PassInformationTOBattleManager : MonoBehaviour
                 cards.Add(board.transform.GetChild(i).gameObject.GetComponent<DataCarta>().character);
             }
             battleManager.pt = cards;
+            canvasMap.SetActive(true);
             battleManager.allowToGoNextState();
         }
     }

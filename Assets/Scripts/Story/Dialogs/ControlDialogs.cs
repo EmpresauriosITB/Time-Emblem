@@ -49,7 +49,6 @@ public class ControlDialogs : MonoBehaviour
             talking = false;
             return;
         }
-
         string currentSentence = queueDialogs.Dequeue();
         screenText.text = currentSentence;
     }
