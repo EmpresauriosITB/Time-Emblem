@@ -59,7 +59,9 @@ public static class MenuManager
                 actionsMenu.GetComponent<ActionsMenu>().bm = bm;
                 break;
             case Menu.Deactivate_Menus:
-                actionsMenu.GetComponent<ActionsMenu>().textController.DeleteTextItems();
+                if (actionsMenu.GetComponent<ActionsMenu>().textController.DestroyTextHasSucribedEvents()) {
+                    actionsMenu.GetComponent<ActionsMenu>().textController.DeleteTextItems();
+                }
                 startMenu.SetActive(false);
                 settingsMenu.SetActive(false);
                 gameMenu.SetActive(false);

@@ -37,9 +37,11 @@ public class TileMap : MonoBehaviour {
         enemies = new List<GameObject>();
         for (int i = 0; i < tileSet.enemyTeam.enemies.Count; i++) {
             EnemyData d = tileSet.enemyTeam.enemies[i];
-            Vector3 v = new Vector3(d.initX, d.initY, d.enemy.transform.position.z);
-            d.enemy.transform.position = v;
-            GameObject.Instantiate(d.enemy);
+            Vector3 v = new Vector3(d.initX, d.enemy.transform.position.y, d.initY);
+            Transform t = d.enemy.transform;
+            t.position = v;
+            OccupyTile(d.initX,d.initY);
+            GameObject.Instantiate(d.enemy, t);
             enemies.Add(d.enemy);
         }
     }
@@ -126,7 +128,7 @@ public class TileMap : MonoBehaviour {
 				num ++;
 				TileType tt = tileSet.tileTypes[ currentTiles[x,y] ];
 				
-				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefabNotActive, new Vector3(x, y, 0), Quaternion.identity );
+				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefabNotActive, new Vector3(x, 0, y), Quaternion.identity );
 				go.name = "Tile " + num;
 				go.transform.parent = this.gameObject.transform.GetChild(0).transform;
 
@@ -140,7 +142,7 @@ public class TileMap : MonoBehaviour {
 	}
 
 	public Vector3 TileCoordToWorldCoord(int x, int y) {
-		return new Vector3(x, y, 0);
+		return new Vector3(x, 1.5f, y);
 	}
 
 	public bool UnitCanEnterTile(int x, int y) {

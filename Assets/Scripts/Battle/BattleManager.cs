@@ -75,10 +75,11 @@ public class BattleManager : MonoBehaviour {
         List<GameObject> targets = new List<GameObject>();
         for (int i = 0; i < pt.Count; i++) {
             GameObject go = pt[i];
-            Vector3 v = new Vector3(x, y, pt[i].gameObject.transform.position.x);
+            Vector3 v = new Vector3(x, pt[i].gameObject.transform.position.y, y);
             go.transform.position = v;
             go.GetComponent<CharacterUnitController>().InitBattleManager(this);
             GameObject.Instantiate(go);
+            tileMap.OccupyTile(x,y);
             x ++;
             targets.Add(go);
         }
@@ -134,7 +135,9 @@ public class BattleManager : MonoBehaviour {
             Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
             Unit unit = activeChar.GetComponent<Unit>();
 
-            PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
+            Debug.Log(unit.tileX);
+            Debug.Log(unit.tileY);
+            PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY-1, true, tileMap, TileState.moving, null);
 
             MenuManager.setCharacter(activeChar);
             MenuManager.OpenMenu(Menu.Game_Menu, null);

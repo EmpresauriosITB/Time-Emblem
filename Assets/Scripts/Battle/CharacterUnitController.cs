@@ -7,7 +7,7 @@ public class CharacterUnitController : MonoBehaviour {
     public Character character;
     public Unit unit;
     public int actionsLeft;
-    
+    [SerializeField]
     private float timeToNextActivePeriod;
     public bool isPlayer;
     private bool isDead = false;
@@ -37,7 +37,7 @@ public class CharacterUnitController : MonoBehaviour {
 
     void OnMouseUp() {
         if (!isDead) {
-            if (isPlayer && !bm.isCurrentPlayerActive() && timeToNextActivePeriod < Time.time) { bm.SetCurrentaActiveCharacter(this.gameObject); }
+            if (isPlayer && timeToNextActivePeriod < Time.time) { bm.SetCurrentaActiveCharacter(this.gameObject); }
             else { InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null); }
         }
 	}
