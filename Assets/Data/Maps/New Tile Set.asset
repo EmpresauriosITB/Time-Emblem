@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 50
   y: 50
-  playerInitX: 2
-  playerInitY: 2
+  playerInitX: 1
+  playerInitY: 5
   tileMapData:
   - posX: 0
     posY: 0

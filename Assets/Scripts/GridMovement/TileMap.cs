@@ -151,31 +151,45 @@ public class TileMap : MonoBehaviour {
 
 		// We could test the unit's walk/hover/fly type against various
 		// terrain flags here to see if they are allowed to enter the tile.
+		
+		//Debug.Log("ISWALKABLE: " + tileSet.tileTypes[currentTiles[x, y]].isWalkable);
 
-		return tileSet.tileTypes[ currentTiles[x,y] ].isWalkable;
+		return tileSet.tileTypes[currentTiles[x,y] ].isWalkable;
 	}
 
-	public void GeneratePathTo(int x, int y) {
-        if (selectedUnit != null)
+	public void GeneratePathTo(int x, int y, GameObject gameObject) {
+		GameObject gameObjectToMove;
+		if (gameObject != null)
+		{
+			gameObjectToMove = gameObject;
+		}
+		else if (selectedUnit != null)
+		{
+			gameObjectToMove = selectedUnit;
+		}
+		else gameObjectToMove = null;
+		if (gameObjectToMove != null)
         {
-            // Clear out our unit's old path.
-            selectedUnit.GetComponent<Unit>().currentPath = null;
-
-            if (UnitCanEnterTile(x, y) == false)
+			// Clear out our unit's old path.
+			gameObjectToMove.GetComponent<Unit>().currentPath = null;
+			//Debug.Log("GENERATEPATH - X & Y: " + x + " - " + y);
+			if (UnitCanEnterTile(x, y) == false)
             {
                 // We probably clicked on a mountain or something, so just quit out.
                 return;
             }
 
-            Dictionary<Node, float> dist = new Dictionary<Node, float>();
+			//Debug.Log("EJECUTADO");
+
+			Dictionary<Node, float> dist = new Dictionary<Node, float>();
             Dictionary<Node, Node> prev = new Dictionary<Node, Node>();
 
             // Setup the "Q" -- the list of nodes we haven't checked yet.
             List<Node> unvisited = new List<Node>();
 
             Node source = moveGraph[
-                                selectedUnit.GetComponent<Unit>().tileX,
-                                selectedUnit.GetComponent<Unit>().tileY
+                                gameObjectToMove.GetComponent<Unit>().tileX,
+								gameObjectToMove.GetComponent<Unit>().tileY
                                 ];
 
             Node target = moveGraph[
@@ -183,7 +197,7 @@ public class TileMap : MonoBehaviour {
                                 y
                                 ];
 
-            dist[source] = 0;
+			dist[source] = 0;
             prev[source] = null;
 
             // Initialize everything to have INFINITY distance, since
@@ -257,8 +271,10 @@ public class TileMap : MonoBehaviour {
             // So we need to invert it!
 
             currentPath.Reverse();
+			
 
-            selectedUnit.GetComponent<Unit>().currentPath = currentPath;
+			gameObjectToMove.GetComponent<Unit>().currentPath = currentPath;
+			//Debug.Log("X: " + currentPath[currentPath.Count -1].x + "Y: " + currentPath[currentPath.Count - 1].y);
         }
 	}
 

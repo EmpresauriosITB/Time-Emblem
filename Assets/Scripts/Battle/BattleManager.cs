@@ -94,7 +94,7 @@ public class BattleManager : MonoBehaviour {
             Vector3 v = new Vector3(x, pt[i].gameObject.transform.position.y, y);
             Transform t = go.transform;
             t.position = v;
-            go.GetComponent<CharacterUnitController>().InitBattleManager(this);
+            go.GetComponent<CharacterUnitController>().InitBattleManager(this, tileMap);
             GameObject goInit = GameObject.Instantiate(go, t);
             goInit.transform.parent = this.gameObject.transform.parent.GetChild(0).GetChild(0);
             tileMap.OccupyTile(x,y);
@@ -103,10 +103,12 @@ public class BattleManager : MonoBehaviour {
     }
 
     private List<GameObject> asignarBMToGameObjects(List<GameObject> list) {
+        List<GameObject> listGameObjects = new List<GameObject>();
         foreach (GameObject obj in list) {
-            obj.GetComponent<CharacterUnitController>().InitBattleManager(this);
+            obj.GetComponent<CharacterUnitController>().InitBattleManager(this, tileMap);
+            listGameObjects.Add(obj);
         }
-        return list;
+        return listGameObjects;
     }
 
     private void CheckDefocusingAction() {

@@ -9,11 +9,13 @@ public static class MenuManager
     private static BattleManager bm;
 
 
-    public static void MoveClicked() {
+    public static void MoveClicked()
+    {
         character.GetComponent<Unit>().MoveNextTile();
     }
 
-    public static void Init() {
+    public static void Init()
+    {
         GameObject canva = GameObject.Find("MenuCanvas");
         startMenu = canva.transform.Find("MainMenu").gameObject;
         settingsMenu = canva.transform.Find("SettingMenu").gameObject;
@@ -21,6 +23,7 @@ public static class MenuManager
         statsMenu = canva.transform.Find("StatsMenu").gameObject;
         actionsMenu = canva.transform.Find("ActionsMenu").gameObject;
         dragMenu = canva.transform.Find("Drag&Drop").gameObject;
+
         IsInitialised = true;
     }
 
@@ -75,7 +78,7 @@ public static class MenuManager
         }
         if (callingMenu != null) callingMenu.SetActive(false);
     }
-  
+
 
     public static void setCharacter(GameObject c)
     {

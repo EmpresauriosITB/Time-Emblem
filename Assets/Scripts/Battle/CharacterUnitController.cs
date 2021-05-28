@@ -11,8 +11,10 @@ public class CharacterUnitController : MonoBehaviour {
     public float timeToNextActivePeriod;
     public bool isPlayer;
     public bool isDead = false;
+    public TileMap map;
 
     public BattleManager bm;
+    public StatesMachine sm;
 
     public int currentHp;
     public int currentPhysicalPower;
@@ -46,6 +48,11 @@ public class CharacterUnitController : MonoBehaviour {
             bm.isDefocused = true;
             timeToNextActivePeriod = Time.time + currentVelocity;
             resetActions();
+            if (!isPlayer)
+            {
+                sm.state = StatesMachine.State.NotActive;
+            }
+            
         }
         if (currentHp <= 0 && !isDead) {
             isDead = true;
@@ -54,7 +61,7 @@ public class CharacterUnitController : MonoBehaviour {
 
     void OnMouseUp() {
         if (!isDead) {
-            if (isPlayer && timeToNextActivePeriod < Time.time) { bm.SetCurrentaActiveCharacter(this.gameObject); }
+            if (isPlayer && checkTime()) { bm.SetCurrentaActiveCharacter(this.gameObject); }
             else { InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null); }
         }
 	}
@@ -63,8 +70,9 @@ public class CharacterUnitController : MonoBehaviour {
         return timeToNextActivePeriod < Time.deltaTime;
     }
 
-    public void InitBattleManager(BattleManager bm) {
+    public void InitBattleManager(BattleManager bm, TileMap map) {
         this.bm = bm;
+        this.map = map; 
     }
 
     public void ResetCooldown() {
@@ -72,10 +80,16 @@ public class CharacterUnitController : MonoBehaviour {
     }
 
     public bool HasActionsLeft() {
+
         return actionsLeft > 0;
     }
 
     public void resetActions() {
         actionsLeft = (int)character.stats.numActions;
+    }
+
+    public bool checkTime()
+    {
+        return timeToNextActivePeriod < Time.time;
     }
 }

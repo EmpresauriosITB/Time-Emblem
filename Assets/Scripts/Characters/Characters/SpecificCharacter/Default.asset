@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9946fccffafcc944a98048304defbc7d, type: 3}
-  m_Name: CharacterEx
+  m_Name: Default
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: a033f054ffc89f84395a1e586a65b088, type: 2}
+  stats: {fileID: 11400000, guid: ff0754640e242484ea05271b4bdf878a, type: 2}
   abilitieSet: {fileID: 11400000, guid: 3875e457964599b4eb55af47db910457, type: 2}
-  specialPassive: {fileID: 11400000, guid: 72f58f85222fe9342ae382f2a8802eb8, type: 2}
-  characterName: Ejemplo
-  currentHp: 20
-  currentPhysicalPower: 2
-  currentPhysicalDefense: 2
-  currentMentalPower: 20
-  currentMentalDefense: 20
-  currentVelocity: 10
-  currentGridSpeed: 5
+  specialPassive: {fileID: 11400000, guid: 092ed38e8a18ce54a8105a93bf6eb026, type: 2}
+  characterName: 
+  currentHp: 0
+  currentPhysicalPower: 0
+  currentPhysicalDefense: 0
+  currentMentalPower: 0
+  currentMentalDefense: 0
+  currentVelocity: 0
+  currentGridSpeed: 0
