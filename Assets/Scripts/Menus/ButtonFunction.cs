@@ -25,7 +25,7 @@ public class ButtonFunction : MonoBehaviour
 
     public void buttonClicked() {
         Unit unit = character.GetComponent<Unit>();
-        Character currentChar = character.GetComponent<CharacterUnitController>().character; 
+        CharacterUnitController currentChar = character.GetComponent<CharacterUnitController>(); 
         PathFind.setAllowedToCLickTiles(currentChar.currentGridSpeed ,unit.tileX, unit.tileY, false, unit.map, TileState.nothing, null);
         PathFind.setAllowedToCLickTiles(abilities.Range, unit.tileX, unit.tileY, true, unit.map, TileState.doingAbility, abilities);
     }

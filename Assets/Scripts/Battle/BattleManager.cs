@@ -19,6 +19,8 @@ public class BattleManager : MonoBehaviour {
     void Start() {}
 
     void Update() {
+        if (BattleData.CheckIfPlayerWins()) { Debug.Log("PlayerWins"); }
+        if (BattleData.CheckIfEnemyWins()) { Debug.Log("EnemyWins"); }
         CheckState();
     }
 
@@ -63,16 +65,30 @@ public class BattleManager : MonoBehaviour {
 
     private void LocateUnits() {
         tileMap.Init(this);
-        BattleData.enemyTeam = asignarBMToGameObjects(tileMap.getEnemies());
-        pt = InstantiatePlayers();
-        BattleData.playerTeam = pt;
+        InstantiatePlayers();
+        InstantiateBattleData();
         currentState = GameStates.BattleManagerStates.StartBattle;
     }
 
-    public List<GameObject> InstantiatePlayers() {
+    private void InstantiateBattleData() {
+        GameObject teamManager = this.gameObject.transform.parent.GetChild(0).gameObject;
+        GameObject playerTeam = teamManager.transform.GetChild(0).gameObject;
+        GameObject enemyTeam = teamManager.transform.GetChild(1).gameObject;
+        SetTeamInBattleData(playerTeam, true);
+        SetTeamInBattleData(enemyTeam, false);
+    }
+
+    private void SetTeamInBattleData(GameObject team, bool isPlayer) {
+        for (int i = 0; i < team.transform.childCount; i++) {
+            GameObject go = team.transform.GetChild(i).gameObject;
+            if (isPlayer) { BattleData.playerTeam.Add(go); }
+            else { BattleData.enemyTeam.Add(go); }
+        }
+    }
+
+    public void InstantiatePlayers() {
         int x = tileMap.tileSet.playerInitX;
         int y = tileMap.tileSet.playerInitY;
-        List<GameObject> targets = new List<GameObject>();
         for (int i = 0; i < pt.Count; i++) {
             GameObject go = pt[i];
             Vector3 v = new Vector3(x, pt[i].gameObject.transform.position.y, y);
@@ -83,10 +99,7 @@ public class BattleManager : MonoBehaviour {
             goInit.transform.parent = this.gameObject.transform.parent.GetChild(0).GetChild(0);
             tileMap.OccupyTile(x,y);
             x ++;
-            targets.Add(go);
         }
-
-        return targets;
     }
 
     private List<GameObject> asignarBMToGameObjects(List<GameObject> list) {
@@ -132,7 +145,7 @@ public class BattleManager : MonoBehaviour {
 
     private void CheckNoCurrentActivePlayer() {
         if (isCurrentPlayerActive()) {
-            Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
+            CharacterUnitController charInfo = activeChar.GetComponent<CharacterUnitController>();
             Unit unit = activeChar.GetComponent<Unit>();
 
             PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
@@ -153,7 +166,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     public void ShowMovementTiles() {
-        Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
+        CharacterUnitController charInfo = activeChar.GetComponent<CharacterUnitController>();
         Unit unit = activeChar.GetComponent<Unit>();
 
         PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed, unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
@@ -166,7 +179,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     public void DefocusCharacter() {
-        Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
+        CharacterUnitController charInfo = activeChar.GetComponent<CharacterUnitController>();
         Unit unit = activeChar.GetComponent<Unit>();
 
         PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, false, tileMap, TileState.nothing, null);

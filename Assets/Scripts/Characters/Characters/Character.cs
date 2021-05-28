@@ -11,22 +11,5 @@ public class Character : ScriptableObject {
 
     public string characterName; 
 
-    public int currentHp; 
-    public int currentPhysicalPower; 
-    public int currentPhysicalDefense; 
-    public int currentMentalPower; 
-    public int currentMentalDefense; 
-    public int currentVelocity; 
-    public int currentGridSpeed; 
-
-
-    public void InitCurrentStats() {
-        currentHp = (int) stats.hp;
-        currentPhysicalPower = (int) stats.physicalPower;
-        currentPhysicalDefense = (int) stats.physicalDefense;
-        currentMentalPower = (int) stats.mentalPower;
-        currentMentalDefense = (int) stats.mentalDefense;
-        currentVelocity = (int) stats.velocity;
-        currentGridSpeed = (int) stats.gridSpeed;
-    }
+    
 }

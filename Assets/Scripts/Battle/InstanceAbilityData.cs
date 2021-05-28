@@ -23,9 +23,7 @@ public static class InstanceAbilityData {
             if (ability.TargetAllies) { targetIsPlayer = !targetIsPlayer; }
             bool abilityDone = ability.abilityBehaviour.doAbility(ability.Power, ability.isPhysical, ability.areaCalculator.calculateArea(x, y, ability.Area, targetIsPlayer, cardinalPosition), map.selectedUnit);
             deleteInstance();
-            if (abilityDone) {
-                actor.GetComponent<CharacterUnitController>().actionsLeft--;
-            }
+            if (abilityDone) { actor.GetComponent<CharacterUnitController>().actionsLeft--; }
         }
     }
 

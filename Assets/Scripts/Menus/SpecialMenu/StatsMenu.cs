@@ -16,7 +16,7 @@ public class StatsMenu : MonoBehaviour
     public Text ForceValue;
     public Text GridSpeed;
 
-    Character character;
+    CharacterUnitController character;
 
     private void Start()
     {
@@ -36,7 +36,7 @@ public class StatsMenu : MonoBehaviour
 
     public void setTextStats()
     {
-        character = MenuManager.getCharacter().GetComponent<CharacterUnitController>().character;
+        character = MenuManager.getCharacter().GetComponent<CharacterUnitController>();
         
         HP.text = "HP: " + character.currentHp;
         PhysicalPower.text = "Physical Power: " + character.currentPhysicalPower;
@@ -44,7 +44,7 @@ public class StatsMenu : MonoBehaviour
         MentalPower.text = "Mental Power: " + character.currentMentalPower;
         MentalDefense.text = "Mental Defense: " + character.currentMentalDefense;
         Velocity.text = "Velocity: " + character.currentVelocity;
-        ForceValue.text = "Force Value: " + character.stats.forceValue;
+        ForceValue.text = "Force Value: " + character.character.stats.forceValue;
         GridSpeed.text = "Grid Speed: " + character.currentGridSpeed;
     }
 

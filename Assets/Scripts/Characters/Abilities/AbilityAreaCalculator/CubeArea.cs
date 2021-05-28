@@ -7,6 +7,7 @@ public class CubeArea : AreaCalculator {
     private TileMap map;
 
     public override List<GameObject> calculateArea(int initX, int initY, int range, bool isPlayerTeam, string cardinalPosition) {
+        resetTargets();
 
         map = GameObject.Find("Map").GetComponent<TileMap>();
         discoverTargetsInArea(range, initX, initY, isPlayerTeam);

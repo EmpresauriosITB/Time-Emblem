@@ -8,7 +8,11 @@ public abstract class AreaCalculator : ScriptableObject {
 
     public abstract List<GameObject> calculateArea(int initX, int initY, int range, bool isPlayerTeam, string cardinalPosition);
 
-    public GameObject getTarget(int x, int y, bool isPlayerTeam) {
+    protected void resetTargets() {
+        targets = new List<GameObject>();
+    }
+
+    protected GameObject getTarget(int x, int y, bool isPlayerTeam) {
         List<GameObject> team = getTeam(isPlayerTeam);
         GameObject target = null;
         for (int i = 0; i < team.Count && target == null; i++) {
@@ -16,9 +20,9 @@ public abstract class AreaCalculator : ScriptableObject {
             if (unit.tileX == x && unit.tileY == y) target = team[i];
         }
         return target;
-    } 
+    }
 
-    public bool isTargetInTile(int x, int y, bool isPlayerTeam) {
+    protected bool isTargetInTile(int x, int y, bool isPlayerTeam) {
         List<GameObject> targets = getTeam(isPlayerTeam);
         for (int i = 0; i < targets.Count; i++) {
             Unit unit = targets[i].GetComponent<Unit>();
@@ -27,11 +31,11 @@ public abstract class AreaCalculator : ScriptableObject {
         return false;
     }
 
-    public void addTarget(int initX, int initY, bool isPlayerTeam) {
+    protected void addTarget(int initX, int initY, bool isPlayerTeam) {
         if (isTargetInTile(initX, initY, isPlayerTeam)) { targets.Add(getTarget(initX, initY, isPlayerTeam)); }
     }
 
-    public List<GameObject> getTeam(bool isPlayerTeam) {
+    protected List<GameObject> getTeam(bool isPlayerTeam) {
         if (isPlayerTeam) return BattleData.playerTeam;
         else return BattleData.enemyTeam;
     }

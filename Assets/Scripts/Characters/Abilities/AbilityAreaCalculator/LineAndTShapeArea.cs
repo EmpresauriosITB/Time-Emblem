@@ -7,8 +7,9 @@ public class LineAndTShapeArea : AreaCalculator {
 
     public bool isTShape;
 
-    public override List<GameObject> calculateArea(int initX, int initY, int range, bool isPlayerTeam, string cardinalPosition) { 
-        
+    public override List<GameObject> calculateArea(int initX, int initY, int range, bool isPlayerTeam, string cardinalPosition) {
+        resetTargets();
+
         for (int i = 0; i < range; i++) {
             calculateAreaByCardinalPosition(initX, initY, isPlayerTeam, cardinalPosition, i, range);
         }

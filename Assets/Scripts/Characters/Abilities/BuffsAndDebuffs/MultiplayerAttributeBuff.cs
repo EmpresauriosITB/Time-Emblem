@@ -25,22 +25,22 @@ public class MultiplayerAttributeBuff : BuffAndDebuff {
     private void CheckStatToModify(bool isBuff) {
         switch (statToModify) {
             case StatToModify.pp:
-                target.character.currentPhysicalPower = ModifyStat(target.character.currentPhysicalPower, isBuff);
+                target.currentPhysicalPower = ModifyStat(target.currentPhysicalPower, isBuff);
                 break;
             case StatToModify.pd:
-                target.character.currentPhysicalDefense = ModifyStat(target.character.currentPhysicalDefense, isBuff);
+                target.currentPhysicalDefense = ModifyStat(target.currentPhysicalDefense, isBuff);
                 break;
             case StatToModify.mp:
-                target.character.currentMentalPower = ModifyStat(target.character.currentMentalPower, isBuff);
+                target.currentMentalPower = ModifyStat(target.currentMentalPower, isBuff);
                 break;
             case StatToModify.md:
-                target.character.currentMentalDefense = ModifyStat(target.character.currentMentalDefense, isBuff);
+                target.currentMentalDefense = ModifyStat(target.currentMentalDefense, isBuff);
                 break;
             case StatToModify.gs:
-                target.character.currentGridSpeed = ModifyStat(target.character.currentGridSpeed, isBuff);
+                target.currentGridSpeed = ModifyStat(target.currentGridSpeed, isBuff);
                 break;
             case StatToModify.vel:
-                target.character.currentVelocity = ModifyStat(target.character.currentVelocity, isBuff);
+                target.currentVelocity = ModifyStat(target.currentVelocity, isBuff);
                 break;
         }
     }

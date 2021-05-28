@@ -37,7 +37,7 @@ public class Unit : MonoBehaviour {
 
 
 	public void MoveNextTile() {
-        float moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().character.currentGridSpeed;
+        float moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().currentGridSpeed;
         float remainingMovement = moveSpeed;
 
 		map.DesocupyTile(tileX, tileY);

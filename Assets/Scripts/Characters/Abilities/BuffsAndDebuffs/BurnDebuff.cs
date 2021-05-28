@@ -8,7 +8,7 @@ public class BurnDebuff : BuffAndDebuff {
     public int burnDamage;
 
     public override void effect() {
-        target.character.currentHp -= burnDamage;
+        target.currentHp -= burnDamage;
     }
 
     protected override void ResetEffect() {}

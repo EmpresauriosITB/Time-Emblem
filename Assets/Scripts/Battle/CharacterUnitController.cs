@@ -10,24 +10,44 @@ public class CharacterUnitController : MonoBehaviour {
     [SerializeField]
     public float timeToNextActivePeriod;
     public bool isPlayer;
-    private bool isDead = false;
+    public bool isDead = false;
 
     public BattleManager bm;
 
+    public int currentHp;
+    public int currentPhysicalPower;
+    public int currentPhysicalDefense;
+    public int currentMentalPower;
+    public int currentMentalDefense;
+    public int currentVelocity;
+    public int currentGridSpeed;
+
+
+    public void InitCurrentStats()
+    {
+        currentHp = (int)character.stats.hp;
+        currentPhysicalPower = (int)character.stats.physicalPower;
+        currentPhysicalDefense = (int)character.stats.physicalDefense;
+        currentMentalPower = (int)character.stats.mentalPower;
+        currentMentalDefense = (int)character.stats.mentalDefense;
+        currentVelocity = (int)character.stats.velocity;
+        currentGridSpeed = (int)character.stats.gridSpeed;
+    }
+
 
     void Start() {
-        character.InitCurrentStats();
-        timeToNextActivePeriod = Time.time + character.currentVelocity;
+        InitCurrentStats();
+        timeToNextActivePeriod = Time.time + currentVelocity;
         resetActions();
     }
 
     void Update() {
         if (actionsLeft <= 0) {
             bm.isDefocused = true;
-            timeToNextActivePeriod = Time.time + character.currentVelocity;
+            timeToNextActivePeriod = Time.time + currentVelocity;
             resetActions();
         }
-        if (character.currentHp <= 0 && !isDead) {
+        if (currentHp <= 0 && !isDead) {
             isDead = true;
         }
     }
@@ -48,7 +68,7 @@ public class CharacterUnitController : MonoBehaviour {
     }
 
     public void ResetCooldown() {
-        timeToNextActivePeriod = Time.deltaTime + character.currentVelocity;
+        timeToNextActivePeriod = Time.deltaTime + currentVelocity;
     }
 
     public bool HasActionsLeft() {
