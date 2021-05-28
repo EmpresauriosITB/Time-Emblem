@@ -47,9 +47,12 @@ public class Unit : MonoBehaviour {
 		float remainingMovement = moveSpeed;
 
 		map.DesocupyTile(tileX, tileY);
-		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map, TileState.nothing, null);
+        if (this.gameObject.GetComponent<CharacterUnitController>().isPlayer)
+        {
+            PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map, TileState.nothing, null);
+        }
 
-		while(remainingMovement > 0 && currentPath != null) {
+        while (remainingMovement > 0 && currentPath != null) {
 
 			// Get cost from current tile to next tile
 			remainingMovement -= map.CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y );
@@ -72,7 +75,7 @@ public class Unit : MonoBehaviour {
 		}
 
 		map.OccupyTile(tileX, tileY);
-		if(!this.gameObject.GetComponent<CharacterUnitController>().isPlayer){
+		if(this.gameObject.GetComponent<CharacterUnitController>().isPlayer){
 			PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving, null);
 		}	
         this.gameObject.GetComponent<CharacterUnitController>().actionsLeft --;
