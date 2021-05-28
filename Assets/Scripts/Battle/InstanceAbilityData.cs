@@ -7,7 +7,7 @@ public static class InstanceAbilityData {
     public static Abilities ability = null;
     public static TileMap map;
     public static List<ClickableTile> tiles = new List<ClickableTile>();
-
+    private static bool actorIsPlayer;
 
     public static void instanceAbility(Abilities a, TileMap m, ClickableTile tile) {
         tiles.Add(tile);
@@ -16,6 +16,7 @@ public static class InstanceAbilityData {
     }
 
     public static void doAbility(int x, int y, bool targetIsPlayer, GameObject actor) {
+        actorIsPlayer = actor.GetComponent<CharacterUnitController>().isPlayer;
         if (ability != null) {
             if (actor == null) { actor = map.selectedUnit; }
             Unit u = actor.GetComponent<Unit>();
@@ -29,7 +30,7 @@ public static class InstanceAbilityData {
     }
 
     private static void deleteInstance() {
-        if (tiles != null && tiles.Count > 1)
+        if (actorIsPlayer)
         {
             for (int i = 0; i < tiles.Count; i++)
             {

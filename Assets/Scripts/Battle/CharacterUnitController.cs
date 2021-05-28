@@ -46,7 +46,7 @@ public class CharacterUnitController : MonoBehaviour {
 
     void OnMouseUp() {
         if (!isDead) {
-            if (isPlayer && timeToNextActivePeriod < Time.time) { bm.SetCurrentaActiveCharacter(this.gameObject); }
+            if (isPlayer && checkTime()) { bm.SetCurrentaActiveCharacter(this.gameObject); }
             else { InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null); }
         }
 	}
@@ -71,5 +71,10 @@ public class CharacterUnitController : MonoBehaviour {
 
     public void resetActions() {
         actionsLeft = (int)character.stats.numActions;
+    }
+
+    public bool checkTime()
+    {
+        return timeToNextActivePeriod < Time.time;
     }
 }

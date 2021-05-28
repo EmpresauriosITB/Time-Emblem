@@ -17,7 +17,6 @@ public class StatesMachine : MonoBehaviour
 
     IEnumerator ActiveState()
     {
-        Debug.Log("Active: Enter");
         while (state == State.Active)
         {
             //COMPROBAR POSICION ENEMIGOS ABILITIES
@@ -42,7 +41,11 @@ public class StatesMachine : MonoBehaviour
                     }
                     go = movementIA.locateTarget(flag);
                     Unit u = go.gameObject.GetComponent<Unit>();
-                    InstanceAbilityData.doAbility(u.tileX, u.tileY, flag, this.gameObject);
+                    if (calculateDifference(u, a.Range))
+                    {
+                        InstanceAbilityData.doAbility(u.tileX, u.tileY, flag, this.gameObject);
+                    }
+                    
                 }
                 
             }
@@ -53,27 +56,26 @@ public class StatesMachine : MonoBehaviour
 
             yield return 0;
         }
-        Debug.Log("Active: Exit");
         NextState();
     }
 
     IEnumerator NotActiveState()
     {
-        Debug.Log("NotActive: Enter");
         while (state == State.NotActive)
         {
-            yield return 0;
-            //COMPROBAR COOLDOWN
+            
+            if (this.gameObject.GetComponent<CharacterUnitController>().checkTime())
+            {
+                state = StatesMachine.State.Active;
+            }
+            yield return 0;           
         }
-        Debug.Log("NotActive: Exit");
         NextState();
     }
 
     IEnumerator DeadState()
     {
-        Debug.Log("Dead: Enter");
-        gameObject.GetComponent<CharacterUnitController>().isDead = true;
-        gameObject.SetActive(false);
+
         yield return 0;
         
     }
@@ -93,6 +95,18 @@ public class StatesMachine : MonoBehaviour
                                 System.Reflection.BindingFlags.NonPublic |
                                 System.Reflection.BindingFlags.Instance);
         StartCoroutine((IEnumerator)info.Invoke(this, null));
+    }
+
+    bool calculateDifference(Unit u, int range)
+    {
+        Unit ia = this.gameObject.GetComponent<Unit>();
+        
+        int difX = Mathf.Abs(u.tileX - ia.tileX);
+        int difY = Mathf.Abs(u.tileY - ia.tileY);
+
+        int suma = difX + difY;
+
+        return suma <= range;
     }
 
 }

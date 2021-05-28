@@ -30,7 +30,8 @@ public class movementIA : MonoBehaviour
         else{
             enemies = BattleData.enemyTeam;
         }
-         
+
+        
         position = transform.position;
 
         if (enemies.Count == 0)
@@ -43,13 +44,13 @@ public class movementIA : MonoBehaviour
         if (enemies.Count == 1)
         {
             closest = enemies[0];
+            
             return closest;
         }
 
-
         // Otherwise: Take the enemies
         closest = enemies.OrderBy(go => (position - go.transform.position).sqrMagnitude).First();
-                
+           
         return closest;
     }
 
