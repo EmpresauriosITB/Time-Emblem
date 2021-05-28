@@ -13,19 +13,26 @@ public class StatesMachine : MonoBehaviour
 
     public State state;
     movementIA movementIA;
+    List<Abilities> listAbilities = new List<Abilities>();
 
     IEnumerator ActiveState()
     {
         Debug.Log("Active: Enter");
         while (state == State.Active)
         {
+            //COMPROBAR POSICION ENEMIGOS ABILITIES
+            
+            //COMPROBAR SI PUEDE HACER ABILITY
+            Debug.Log(gameObject.GetComponent<CharacterUnitController>().character);
+            Debug.Log(gameObject.GetComponent<CharacterUnitController>().character.abilitieSet.abilities.Count);
+
+            foreach (Abilities a in gameObject.GetComponent<CharacterUnitController>().character.abilitieSet.abilities)
+            {
+                //InstanceAbilityData.instanceAbility(a, gameObject.GetComponent<CharacterUnitController>().map,);
+            }
             //COMPROBAR POSICION ENEMIGOS
             movementIA.locatePlayer();
-            //COMPROBAR ENEMIGO MÁS CERCANO
-            movementIA.setTarget();
-            //COMPROBAR ATAQUE A MELEE
-            //COMPROBAR ATAQUE A DISTANCIA
-            //ACERCARSE ENEMIGO
+            //ACERCARSE ENEMIGO          
             movementIA.moveIA(movementIA.setTarget());
             yield return 0;
         }
@@ -56,6 +63,7 @@ public class StatesMachine : MonoBehaviour
     void Start()
     {
         movementIA = gameObject.GetComponent<movementIA>();
+        
         NextState();
     }
 

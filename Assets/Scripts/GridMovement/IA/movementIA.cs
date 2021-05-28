@@ -60,9 +60,47 @@ public class movementIA : MonoBehaviour
     {
        
         int[] positionTarget = target;
-                   
-        map.GeneratePathTo(positionTarget[0] +1, positionTarget[1] +1, gameObject);
-
+        
+        // X enemy < X ia && Y enemy < Y ia
+        if(gameObject.GetComponent<Unit>().tileX > positionTarget[0] && gameObject.GetComponent<Unit>().tileY > positionTarget[1])
+        {
+            map.GeneratePathTo(positionTarget[0] +1, positionTarget[1] +1, gameObject);
+        }
+        // X enemy < X ia && Y enemy > Y ia
+        else if (gameObject.GetComponent<Unit>().tileX > positionTarget[0] && gameObject.GetComponent<Unit>().tileY < positionTarget[1])
+        {
+            map.GeneratePathTo(positionTarget[0] + 1, positionTarget[1] - 1, gameObject);
+        }
+        // X enemy > X ia && Y enemy > Y ia
+        else if (gameObject.GetComponent<Unit>().tileX < positionTarget[0] && gameObject.GetComponent<Unit>().tileY < positionTarget[1])
+        {
+            map.GeneratePathTo(positionTarget[0] - 1, positionTarget[1] - 1, gameObject);
+        }
+        // X enemy > X ia && Y enemy < Y ia
+        else if (gameObject.GetComponent<Unit>().tileX < positionTarget[0] && gameObject.GetComponent<Unit>().tileY > positionTarget[1])
+        {
+            map.GeneratePathTo(positionTarget[0] - 1, positionTarget[1] + 1, gameObject);
+        }
+        // X enemy = X ia && Y enemy > Y ia
+        else if (gameObject.GetComponent<Unit>().tileX == positionTarget[0] && gameObject.GetComponent<Unit>().tileY < positionTarget[1])
+        {
+            map.GeneratePathTo(positionTarget[0], positionTarget[1] - 1, gameObject);
+        }
+        // X enemy = X ia && Y enemy < Y ia
+        else if (gameObject.GetComponent<Unit>().tileX == positionTarget[0] && gameObject.GetComponent<Unit>().tileY < positionTarget[1])
+        {
+            map.GeneratePathTo(positionTarget[0], positionTarget[1] + 1, gameObject);
+        }
+        // X enemy < X ia && Y enemy = Y ia
+        else if (gameObject.GetComponent<Unit>().tileX > positionTarget[0] && gameObject.GetComponent<Unit>().tileY == positionTarget[1])
+        {
+            map.GeneratePathTo(positionTarget[0] +1, positionTarget[1], gameObject);
+        }
+        // X enemy > X ia && Y enemy = Y ia
+        else if (gameObject.GetComponent<Unit>().tileX > positionTarget[0] && gameObject.GetComponent<Unit>().tileY == positionTarget[1])
+        {
+            map.GeneratePathTo(positionTarget[0] - 1, positionTarget[1], gameObject);
+        }
         gameObject.GetComponent<Unit>().MoveNextTile();
 
         gameObject.GetComponent<StatesMachine>().state = StatesMachine.State.NotActive;
