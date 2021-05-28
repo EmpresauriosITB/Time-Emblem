@@ -24,7 +24,7 @@ public class SpawningBehabiour : AbilityBehaviour {
         Vector3 v = new Vector3(x, spawn.transform.position.y, y);
         Transform t = spawn.transform;
         t.position = v;
-        spawn.GetComponent<CharacterUnitController>().InitBattleManager(actor.AddComponent<CharacterUnitController>().bm);
+        spawn.GetComponent<CharacterUnitController>().InitBattleManager(actor.AddComponent<CharacterUnitController>().bm, null);
         GameObject goInit = GameObject.Instantiate(spawn, t);
         goInit.transform.parent = actor.transform.parent;
         return targets.Count > 0;

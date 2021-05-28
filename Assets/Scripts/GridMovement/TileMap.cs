@@ -23,7 +23,7 @@ public class TileMap : MonoBehaviour {
         GenerateMapData();
 		GenerateMapVisual(manager);
 		GeneratePathfindingGraph();
-        GenerateEnemies();
+        GenerateEnemies(manager);
 	}
 
     public void setSelectedUnit(GameObject selectedUnit) {
@@ -33,7 +33,7 @@ public class TileMap : MonoBehaviour {
         this.selectedUnit = selectedUnit;
     }
 
-    public void GenerateEnemies() {
+    public void GenerateEnemies(BattleManager manager) {
         enemies = new List<GameObject>();
         for (int i = 0; i < tileSet.enemyTeam.enemies.Count; i++) {
             EnemyData d = tileSet.enemyTeam.enemies[i];
@@ -42,6 +42,7 @@ public class TileMap : MonoBehaviour {
             t.position = v;
             OccupyTile(d.initX,d.initY);
             GameObject go = GameObject.Instantiate(d.enemy, t);
+            go.GetComponent<CharacterUnitController>().InitBattleManager(manager, this);
 
             go.transform.parent = this.gameObject.transform.parent.GetChild(0).GetChild(1);
             enemies.Add(d.enemy);
