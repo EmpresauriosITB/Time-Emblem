@@ -20,6 +20,7 @@ public static class InstanceAbilityData {
             if (actor == null) { actor = map.selectedUnit; }
             Unit u = actor.GetComponent<Unit>();
             string cardinalPosition = ability.areaCalculator.getCardinalPosition(x, y, u.tileX, u.tileY);
+            if (ability.TargetAllies) { targetIsPlayer = !targetIsPlayer; }
             bool abilityDone = ability.abilityBehaviour.doAbility(ability.Power, ability.isPhysical, ability.areaCalculator.calculateArea(x, y, ability.Area, targetIsPlayer, cardinalPosition), map.selectedUnit);
             deleteInstance();
             if (abilityDone) {
@@ -37,5 +38,4 @@ public static class InstanceAbilityData {
         map = null;
         tiles = new List<ClickableTile>();
     }
-
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AreaCalculator : MonoBehaviour {
+public abstract class AreaCalculator : ScriptableObject {
 
     public List<GameObject> targets = new List<GameObject>();
 

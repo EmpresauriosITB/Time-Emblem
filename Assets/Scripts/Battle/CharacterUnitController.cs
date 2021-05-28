@@ -8,14 +8,11 @@ public class CharacterUnitController : MonoBehaviour {
     public Unit unit;
     public int actionsLeft;
     [SerializeField]
-    private float timeToNextActivePeriod;
+    public float timeToNextActivePeriod;
     public bool isPlayer;
     private bool isDead = false;
 
     public BattleManager bm;
-
-    public delegate void SetCurrentActiveCharacter(GameObject activeChar);
-    public event SetCurrentActiveCharacter setCurrentActiveCharacter;
 
 
     void Start() {

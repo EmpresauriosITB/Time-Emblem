@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "CubeArea")]
 public class CubeArea : AreaCalculator {
     private TileMap map;
 

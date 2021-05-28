@@ -109,8 +109,6 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < pt.Count; i++) {
             CharacterUnitController controller = pt[i].GetComponent<CharacterUnitController>();
             Unit unit = pt[i].GetComponent<Unit>();
-
-            controller.setCurrentActiveCharacter += SetCurrentaActiveCharacter;
             tileMap.OccupyTile(unit.tileX, unit.tileY);
         }
         tileMap.activevate = true;
@@ -137,8 +135,6 @@ public class BattleManager : MonoBehaviour {
             Character charInfo = activeChar.GetComponent<CharacterUnitController>().character;
             Unit unit = activeChar.GetComponent<Unit>();
 
-            Debug.Log(unit.tileX);
-            Debug.Log(unit.tileY);
             PathFind.setAllowedToCLickTiles(charInfo.currentGridSpeed ,unit.tileX, unit.tileY, true, tileMap, TileState.moving, null);
 
             MenuManager.setCharacter(activeChar);

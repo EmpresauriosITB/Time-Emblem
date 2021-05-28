@@ -33,7 +33,6 @@ public class TextLogController : MonoBehaviour
     }
 
     public void DeleteTextItems() {
-        Debug.Log(destroyText != null);
         destroyText();
     }
 

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerData : MonoBehaviour
 {
     public int forceValue;
-    public TeamSet teamSet;
+    public List<GameObject> team;
 
 }

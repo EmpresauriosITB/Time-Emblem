@@ -8,10 +8,8 @@ public class Unit : MonoBehaviour {
 	public TileMap map;
 
 	public List<Node> currentPath = null;
-	float moveSpeed;
 
 	void Start() {
-		moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().character.stats.gridSpeed;
 		tileX = (int) this.transform.position.x;
 		tileY = (int) this.transform.position.z;
 	}
@@ -39,7 +37,8 @@ public class Unit : MonoBehaviour {
 
 
 	public void MoveNextTile() {
-		float remainingMovement = moveSpeed;
+        float moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().character.currentGridSpeed;
+        float remainingMovement = moveSpeed;
 
 		map.DesocupyTile(tileX, tileY);
 		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map, TileState.nothing, null);

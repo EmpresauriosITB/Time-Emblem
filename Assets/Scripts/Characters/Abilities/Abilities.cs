@@ -10,8 +10,8 @@ public class Abilities : ScriptableObject {
     public int Range;
     public bool HasAreaEffect;
     public int Area;
-    public bool HasBuffEfect;
     public bool isPhysical;
+    public bool TargetAllies;
     
     public AbilityBehaviour abilityBehaviour;
     public AreaCalculator areaCalculator;

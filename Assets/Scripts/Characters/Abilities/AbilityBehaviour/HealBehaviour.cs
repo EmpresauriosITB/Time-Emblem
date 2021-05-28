@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "HealBehaviour")]
 public class HealBehaviour : AbilityBehaviour {
 
     public override bool doAbility(int Power, bool isPhysical, List<GameObject> targets, GameObject actor) {
