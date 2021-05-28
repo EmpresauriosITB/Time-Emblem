@@ -7,6 +7,7 @@ public class DamageBehaviour : AbilityBehaviour {
     public override bool doAbility(int Power, bool isPhysical, List<GameObject> targets, GameObject actor) {
         
         int attack;
+        
         if (isPhysical) attack = actor.GetComponent<CharacterUnitController>().character.currentPhysicalPower;
         else attack = actor.GetComponent<CharacterUnitController>().character.currentMentalPower;
         int deffense;

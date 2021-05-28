@@ -10,7 +10,7 @@ public class movementIA : MonoBehaviour
 
     TileMap map;
 
-    GameObject[] enemies;
+    List<GameObject> enemies;
     GameObject closest;
     Vector3 position;
     
@@ -21,19 +21,26 @@ public class movementIA : MonoBehaviour
     }
 
     
-    public GameObject locatePlayer()
+    public GameObject locateTarget(bool targetIsPlayer)
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemies");
+        if (targetIsPlayer)
+        {
+            enemies = BattleData.playerTeam;
+        }
+        else{
+            enemies = BattleData.enemyTeam;
+        }
+         
         position = transform.position;
 
-        if (enemies.Length == 0)
+        if (enemies.Count == 0)
         {
             Debug.LogWarning("No enemies found!", this);
             return null;
         }
 
         
-        if (enemies.Length == 1)
+        if (enemies.Count == 1)
         {
             closest = enemies[0];
             return closest;
@@ -49,8 +56,8 @@ public class movementIA : MonoBehaviour
     public int[] setTarget()
     {
         
-        int targetx = locatePlayer().GetComponent<Unit>().tileX;
-        int targety = locatePlayer().GetComponent<Unit>().tileY;
+        int targetx = locateTarget(true).GetComponent<Unit>().tileX;
+        int targety = locateTarget(true).GetComponent<Unit>().tileY;
         
         int[] target = new int[] { targetx, targety };
         return target;
@@ -103,7 +110,7 @@ public class movementIA : MonoBehaviour
         }
         gameObject.GetComponent<Unit>().MoveNextTile();
 
-        gameObject.GetComponent<StatesMachine>().state = StatesMachine.State.NotActive;
+        
             
     }
 

@@ -14,6 +14,7 @@ public class CharacterUnitController : MonoBehaviour {
     public TileMap map;
 
     public BattleManager bm;
+    public StatesMachine sm;
 
     public delegate void SetCurrentActiveCharacter(GameObject activeChar);
     public event SetCurrentActiveCharacter setCurrentActiveCharacter;
@@ -28,9 +29,16 @@ public class CharacterUnitController : MonoBehaviour {
     void Update() {
         if (actionsLeft <= 0) {
             bm.isDefocused = true;
+            
             timeToNextActivePeriod = Time.time + character.currentVelocity;
             resetActions();
+            if (!isPlayer)
+            {
+                sm.state = StatesMachine.State.NotActive;
+            }
+            
         }
+        
         if (character.currentHp <= 0 && !isDead) {
             isDead = true;
         }
@@ -49,7 +57,7 @@ public class CharacterUnitController : MonoBehaviour {
 
     public void InitBattleManager(BattleManager bm, TileMap map) {
         this.bm = bm;
-        this.map = map;
+        this.map = map; 
     }
 
     public void ResetCooldown() {
@@ -57,6 +65,7 @@ public class CharacterUnitController : MonoBehaviour {
     }
 
     public bool HasActionsLeft() {
+
         return actionsLeft > 0;
     }
 

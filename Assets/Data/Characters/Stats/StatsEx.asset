@@ -17,7 +17,7 @@ MonoBehaviour:
   physicalDefense: 2
   mentalPower: 20
   mentalDefense: 20
-  velocity: 2
+  velocity: 10
   forceValue: 5
   gridSpeed: 5
   numActions: 2

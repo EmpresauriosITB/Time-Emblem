@@ -23,17 +23,34 @@ public class StatesMachine : MonoBehaviour
             //COMPROBAR POSICION ENEMIGOS ABILITIES
             
             //COMPROBAR SI PUEDE HACER ABILITY
-            Debug.Log(gameObject.GetComponent<CharacterUnitController>().character);
-            Debug.Log(gameObject.GetComponent<CharacterUnitController>().character.abilitieSet.abilities.Count);
+            
 
             foreach (Abilities a in gameObject.GetComponent<CharacterUnitController>().character.abilitieSet.abilities)
             {
-                //InstanceAbilityData.instanceAbility(a, gameObject.GetComponent<CharacterUnitController>().map,);
+                if (this.gameObject.GetComponent<CharacterUnitController>().HasActionsLeft())
+                {
+                    GameObject go;
+                    bool flag;
+                    InstanceAbilityData.instanceAbility(a, gameObject.GetComponent<CharacterUnitController>().map, null);
+                    if (a.TargetAllies)
+                    {
+                        flag = this.gameObject.GetComponent<CharacterUnitController>().isPlayer;
+                    }
+                    else
+                    {
+                        flag = !this.gameObject.GetComponent<CharacterUnitController>().isPlayer;
+                    }
+                    go = movementIA.locateTarget(flag);
+                    Unit u = go.gameObject.GetComponent<Unit>();
+                    InstanceAbilityData.doAbility(u.tileX, u.tileY, flag, this.gameObject);
+                }
+                
             }
-            //COMPROBAR POSICION ENEMIGOS
-            movementIA.locatePlayer();
-            //ACERCARSE ENEMIGO          
-            movementIA.moveIA(movementIA.setTarget());
+            if (this.gameObject.GetComponent<CharacterUnitController>().HasActionsLeft())
+            {
+                movementIA.moveIA(movementIA.setTarget());
+            }
+
             yield return 0;
         }
         Debug.Log("Active: Exit");
@@ -56,6 +73,7 @@ public class StatesMachine : MonoBehaviour
     {
         Debug.Log("Dead: Enter");
         gameObject.GetComponent<CharacterUnitController>().isDead = true;
+        gameObject.SetActive(false);
         yield return 0;
         
     }

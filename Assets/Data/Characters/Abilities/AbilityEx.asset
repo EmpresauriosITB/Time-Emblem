@@ -19,7 +19,8 @@ MonoBehaviour:
   HasAreaEffect: 0
   Area: 0
   HasBuffEfect: 0
-  isPhysical: 0
+  isPhysical: 1
+  TargetAllies: 0
   abilityBehaviour: {fileID: 657365777690678040, guid: 0418c2bc3c66b50419c7b32e31b472ab,
     type: 3}
   areaCalculator: {fileID: 2728104226620640054, guid: 41db8701982abc8428b640bc66f8dfc9,

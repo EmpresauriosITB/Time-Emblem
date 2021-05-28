@@ -177,3 +177,4 @@ MonoBehaviour:
   isDead: 0
   map: {fileID: 0}
   bm: {fileID: 0}
+  sm: {fileID: 0}

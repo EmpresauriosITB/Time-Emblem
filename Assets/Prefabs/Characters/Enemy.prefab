@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be96077d67a7afb4297d119684da546c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 11400000, guid: 3bee4cc77d62136419bee2d93c033056, type: 2}
+  character: {fileID: 11400000, guid: 3debf96a3b4fc594ba8f99b8be53b2e4, type: 2}
   unit: {fileID: 5041609162413508730}
   actionsLeft: 2
   timeToNextActivePeriod: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   isDead: 0
   map: {fileID: 0}
   bm: {fileID: 0}
+  sm: {fileID: -2006489810356759257}
 --- !u!114 &918222913058065489
 MonoBehaviour:
   m_ObjectHideFlags: 0

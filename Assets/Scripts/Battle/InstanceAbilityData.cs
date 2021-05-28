@@ -20,7 +20,7 @@ public static class InstanceAbilityData {
             if (actor == null) { actor = map.selectedUnit; }
             Unit u = actor.GetComponent<Unit>();
             string cardinalPosition = ability.areaCalculator.getCardinalPosition(x, y, u.tileX, u.tileY);
-            bool abilityDone = ability.abilityBehaviour.doAbility(ability.Power, ability.isPhysical, ability.areaCalculator.calculateArea(x, y, ability.Area, targetIsPlayer, cardinalPosition), map.selectedUnit);
+            bool abilityDone = ability.abilityBehaviour.doAbility(ability.Power, ability.isPhysical, ability.areaCalculator.calculateArea(x, y, ability.Area, targetIsPlayer, cardinalPosition), actor);
             deleteInstance();
             if (abilityDone) {
                 actor.GetComponent<CharacterUnitController>().actionsLeft--;
@@ -29,10 +29,15 @@ public static class InstanceAbilityData {
     }
 
     private static void deleteInstance() {
-        for (int i = 0; i < tiles.Count; i++) {
-            tiles[i].currentState = TileState.nothing;
-            tiles[i].gameObject.GetComponent<MeshRenderer>();
+        if (tiles != null && tiles.Count > 1)
+        {
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                tiles[i].currentState = TileState.nothing;
+                tiles[i].gameObject.GetComponent<MeshRenderer>();
+            }
         }
+        
         ability = null;
         map = null;
         tiles = new List<ClickableTile>();
