@@ -6,7 +6,7 @@ public class InteractableObjects : MonoBehaviour
 {
     public Texts texts;
     bool talking = false;
-    public GameObject Sensei, partner, partner_character, enemie1, enemie2, enemie3, sensei2;
+    public GameObject Sensei, partner, partner_character, enemie1, enemie2, enemie3;
 
     private void Start()
     {
@@ -17,7 +17,6 @@ public class InteractableObjects : MonoBehaviour
         enemie1 = enemie.transform.GetChild(0).GetChild(0).gameObject;
         enemie2 = enemie.transform.GetChild(1).GetChild(0).gameObject;
         enemie3 = enemie.transform.GetChild(2).GetChild(0).gameObject;
-        sensei2 = enemie.transform.GetChild(3).GetChild(0).gameObject;
     }
 
     private void OnTriggerStay(Collider collider)
@@ -28,10 +27,6 @@ public class InteractableObjects : MonoBehaviour
             obj.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (this.gameObject.Equals(enemie1) || this.gameObject.Equals(enemie2) || this.gameObject.Equals(enemie3) || this.gameObject.Equals(sensei2))
-                {
-                    EventBattle();
-                }
                 talking = true;
                 this.gameObject.GetComponent<StoryIAMovement>().Stop();
                 FindObjectOfType<ControlDialogs>().ActivatePoster(texts);
@@ -52,12 +47,11 @@ public class InteractableObjects : MonoBehaviour
             if (this.gameObject.Equals(partner_character)) {
                 EventPartnerFollow();
             }
-            if (this.gameObject.Equals(enemie1) || this.gameObject.Equals(enemie2) || this.gameObject.Equals(enemie3) || this.gameObject.Equals(sensei2)) {
+            if (this.gameObject.Equals(enemie1) || this.gameObject.Equals(enemie2) || this.gameObject.Equals(enemie3)) {
                 EventBattle();
                 GameObject enemieBattle = this.transform.parent.gameObject;
                 enemieBattle.gameObject.SetActive(false);
             }
-
             talking = false;
             this.gameObject.GetComponent<StoryIAMovement>().Reload();
             FindObjectOfType<ControlDialogs>().ClosePoster();
@@ -76,12 +70,6 @@ public class InteractableObjects : MonoBehaviour
     }
 
     public void EventBattle() {
-        StartCoroutine(waitBattle());
-    }
-
-    IEnumerator waitBattle()
-    {
-        yield return new WaitForSeconds(2);
         Debug.Log("EMPIEZA BATALLA");
     }
 }
