@@ -174,4 +174,12 @@ MonoBehaviour:
   actionsLeft: 2
   timeToNextActivePeriod: 0
   isPlayer: 0
+  isDead: 0
   bm: {fileID: 0}
+  currentHp: 0
+  currentPhysicalPower: 0
+  currentPhysicalDefense: 0
+  currentMentalPower: 0
+  currentMentalDefense: 0
+  currentVelocity: 0
+  currentGridSpeed: 0
