@@ -26,7 +26,8 @@ public abstract class AreaCalculator : ScriptableObject {
         List<GameObject> targets = getTeam(isPlayerTeam);
         for (int i = 0; i < targets.Count; i++) {
             Unit unit = targets[i].GetComponent<Unit>();
-            if (unit.tileX == x && unit.tileY == y) return true;
+            CharacterUnitController ch = targets[i].GetComponent<CharacterUnitController>();
+            if (unit.tileX == x && unit.tileY == y && !ch.isDead) return true;
         }
         return false;
     }
