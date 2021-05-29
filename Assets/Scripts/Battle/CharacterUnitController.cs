@@ -12,6 +12,7 @@ public class CharacterUnitController : MonoBehaviour {
     public bool isPlayer;
     public bool isDead = false;
     public TileMap map;
+    public List<BuffAndDebuff> buffAndDebuffs;
 
     public BattleManager bm;
     public StatesMachine sm;
@@ -44,6 +45,11 @@ public class CharacterUnitController : MonoBehaviour {
     }
 
     void Update() {
+        if (buffAndDebuffs.Count > 0) {
+            for (int i =0; i < buffAndDebuffs.Count; i++) {
+                if (buffAndDebuffs[i].checkEffectTime()) buffAndDebuffs.Remove(buffAndDebuffs[i]);
+            }
+        }
         if (actionsLeft <= 0) {
             bm.isDefocused = true;
             timeToNextActivePeriod = Time.time + currentVelocity;

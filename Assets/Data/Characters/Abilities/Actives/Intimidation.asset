@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ce4c77eeaaf02843911b063d9524ac4, type: 3}
-  m_Name: AbilityEx
+  m_Name: Intimidation
   m_EditorClassIdentifier: 
-  AbilityName: Example
-  Power: 80
-  Description: Example Ability for Testing
-  Range: 3
+  AbilityName: Intimidation
+  Power: 0
+  Description: 
+  Range: 4
   HasAreaEffect: 0
   Area: 0
   isPhysical: 0
   TargetAllies: 0
-  abilityBehaviour: {fileID: 11400000, guid: cb7d9b0a7899a234d8768fd126d5659c, type: 2}
-  areaCalculator: {fileID: 11400000, guid: a3e5f9ddd7f833c42b56ea312ba36d79, type: 2}
+  abilityBehaviour: {fileID: 11400000, guid: 5519756e27e57834fa311723e822faa5, type: 2}
+  areaCalculator: {fileID: 11400000, guid: 8b1c04b0087406446b86ed9d9b8dba31, type: 2}

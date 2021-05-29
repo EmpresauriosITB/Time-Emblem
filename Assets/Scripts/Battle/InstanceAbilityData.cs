@@ -16,9 +16,9 @@ public static class InstanceAbilityData {
     }
 
     public static void doAbility(int x, int y, bool targetIsPlayer, GameObject actor) {
-        actorIsPlayer = actor.GetComponent<CharacterUnitController>().isPlayer;
         if (ability != null) {
             if (actor == null) { actor = map.selectedUnit; }
+            actorIsPlayer = actor.GetComponent<CharacterUnitController>().isPlayer;
             Unit u = actor.GetComponent<Unit>();
             string cardinalPosition = ability.areaCalculator.getCardinalPosition(x, y, u.tileX, u.tileY);
             if (ability.TargetAllies) { targetIsPlayer = !targetIsPlayer; }

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ce4c77eeaaf02843911b063d9524ac4, type: 3}
-  m_Name: AbilityEx
+  m_Name: DoublePhisicalDefense
   m_EditorClassIdentifier: 
-  AbilityName: Example
-  Power: 80
-  Description: Example Ability for Testing
-  Range: 3
+  AbilityName: DoubleDefense
+  Power: 0
+  Description: 
+  Range: 0
   HasAreaEffect: 0
   Area: 0
   isPhysical: 0
-  TargetAllies: 0
-  abilityBehaviour: {fileID: 11400000, guid: cb7d9b0a7899a234d8768fd126d5659c, type: 2}
+  TargetAllies: 1
+  abilityBehaviour: {fileID: 11400000, guid: 67c939d6cc2c7b9438859a1064b5bf22, type: 2}
   areaCalculator: {fileID: 11400000, guid: a3e5f9ddd7f833c42b56ea312ba36d79, type: 2}

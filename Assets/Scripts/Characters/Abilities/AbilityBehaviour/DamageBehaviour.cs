@@ -16,7 +16,8 @@ public class DamageBehaviour : AbilityBehaviour {
         int deffense;
         for (int i = 0; i < targets.Count; i++) {
             if (Random.Range(0, 100) < buff.activationPorcentage) {
-
+                buff.Init(targets[i].GetComponent<CharacterUnitController>());
+                targets[i].GetComponent<CharacterUnitController>().buffAndDebuffs.Add(buff);
             }
             if (isPhysical) deffense = targets[i].GetComponent<CharacterUnitController>().currentPhysicalDefense;
             else deffense = targets[i].GetComponent<CharacterUnitController>().currentMentalDefense;

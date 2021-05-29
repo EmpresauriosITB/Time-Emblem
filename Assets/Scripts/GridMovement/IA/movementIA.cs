@@ -102,6 +102,7 @@ public class movementIA : MonoBehaviour
         // X enemy < X ia && Y enemy = Y ia
         else if (gameObject.GetComponent<Unit>().tileX > positionTarget[0] && gameObject.GetComponent<Unit>().tileY == positionTarget[1])
         {
+
             map.GeneratePathTo(positionTarget[0] +1, positionTarget[1], gameObject);
         }
         // X enemy > X ia && Y enemy = Y ia

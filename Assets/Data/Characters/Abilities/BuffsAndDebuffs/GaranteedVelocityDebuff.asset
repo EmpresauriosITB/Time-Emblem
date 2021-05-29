@@ -15,7 +15,7 @@ MonoBehaviour:
   lastsInTime: 1
   activeSeconds: 60
   actionPeriod: 0
-  activationPorcentage: 0
+  activationPorcentage: 100
   isPositive: 0
   isMultiplayerEffect: 0
   statToModify: 5

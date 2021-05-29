@@ -9,15 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cb3b628d2729f4da4367219b12e235, type: 3}
-  m_Name: StatsEx
+  m_Script: {fileID: 11500000, guid: 2534754d3acf8d04997ece0903a43535, type: 3}
+  m_Name: GaranteedVelocityDebuffBehaviour
   m_EditorClassIdentifier: 
-  hp: 20
-  physicalPower: 2
-  physicalDefense: 2
-  mentalPower: 20
-  mentalDefense: 20
-  velocity: 1
-  forceValue: 5
-  gridSpeed: 5
-  numActions: 2
+  buff: {fileID: 11400000, guid: 00c2f2c56aa6f7f4e86fa51ca62bdb88, type: 2}

@@ -15,6 +15,7 @@ public class BattleManager : MonoBehaviour {
     public PlayerData player;
 
     public DropZone board;
+    public GameObject hand;
 
     void Start() {}
 
@@ -58,9 +59,21 @@ public class BattleManager : MonoBehaviour {
         
         MenuManager.OpenMenu(Menu.Drag_Menu, null);
         MenuManager.SetBattleManager(this);
+       
+        //instantiateCards();
+        board.updateLimitNum(player.forceValue);
         currentState = GameStates.BattleManagerStates.SelectTeam;
-        
-        board.updateLimitNum(player.forceValue); 
+    }
+
+    private void instantiateCards() {
+        player.Init();
+        for (int i = 0; i < player.team.Count; i++) {
+            GameObject go = player.team[i];
+            go.transform.position = Vector3.zero;
+            go = GameObject.Instantiate(go);
+            go.transform.parent = hand.transform;
+        }
+
     }
 
     private void LocateUnits() {

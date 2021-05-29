@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ce4c77eeaaf02843911b063d9524ac4, type: 3}
-  m_Name: BlockDamage
+  m_Name: Shuriken
   m_EditorClassIdentifier: 
-  AbilityName: 
-  Power: 0
+  AbilityName: Shiriken
+  Power: 50
   Description: 
-  Range: 0
+  Range: 3
   HasAreaEffect: 0
   Area: 0
-  isPhysical: 0
+  isPhysical: 1
   TargetAllies: 0
-  abilityBehaviour: {fileID: 0}
-  areaCalculator: {fileID: 0}
+  abilityBehaviour: {fileID: 11400000, guid: ee324fb611cc2bf4b8899fd0b027194a, type: 2}
+  areaCalculator: {fileID: 11400000, guid: a3e5f9ddd7f833c42b56ea312ba36d79, type: 2}

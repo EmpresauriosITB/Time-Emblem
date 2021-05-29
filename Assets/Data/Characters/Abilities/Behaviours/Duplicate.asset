@@ -9,15 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cb3b628d2729f4da4367219b12e235, type: 3}
-  m_Name: StatsEx
+  m_Script: {fileID: 11500000, guid: 13b46e3128f00634e99c1659d9c037f1, type: 3}
+  m_Name: Duplicate
   m_EditorClassIdentifier: 
-  hp: 20
-  physicalPower: 2
-  physicalDefense: 2
-  mentalPower: 20
-  mentalDefense: 20
-  velocity: 1
-  forceValue: 5
-  gridSpeed: 5
-  numActions: 2
+  spawn: {fileID: 0}
