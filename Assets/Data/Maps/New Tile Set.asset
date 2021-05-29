@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a5e7e91d454424490437100cb82903, type: 3}
   m_Name: New Tile Set
   m_EditorClassIdentifier: 
-  x: 50
-  y: 50
-  playerInitX: 1
-  playerInitY: 5
+  x: 60
+  y: 70
+  playerInitX: 19
+  playerInitY: 6
   tileMapData:
   - posX: 0
     posY: 0
@@ -7523,6 +7523,8 @@ MonoBehaviour:
       type: 3}
     tileVisualPrefabActive: {fileID: 843045937017852223, guid: e7ee48712f3712f44b48ed75467a8db5,
       type: 3}
+    visualReference: {fileID: 2533832823933859700, guid: 29ac1e3c87477d34b9b548c90f4d371f,
+      type: 3}
     isWalkable: 1
     movementCost: 1
   - name: NoWalkeable
@@ -7530,6 +7532,7 @@ MonoBehaviour:
       type: 3}
     tileVisualPrefabActive: {fileID: 173604, guid: 0eefaabb347f4d145bb2d8979b23b327,
       type: 3}
+    visualReference: {fileID: 0}
     isWalkable: 0
     movementCost: 0
   - name: Difficult Terrain
@@ -7537,6 +7540,7 @@ MonoBehaviour:
       type: 3}
     tileVisualPrefabActive: {fileID: 173604, guid: 0eefaabb347f4d145bb2d8979b23b327,
       type: 3}
+    visualReference: {fileID: 0}
     isWalkable: 1
     movementCost: 2
-  enemyTeam: {fileID: 11400000, guid: 1a14420497d04c648aebb42b0239a746, type: 2}
+  enemyTeam: {fileID: 11400000, guid: 69e6bfccd87c2074bb8c195beb0eb19d, type: 2}

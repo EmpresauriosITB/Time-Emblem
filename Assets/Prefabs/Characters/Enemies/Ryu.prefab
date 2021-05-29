@@ -33085,7 +33085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8401929118015908266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 1.63, z: 5}
+  m_LocalPosition: {x: 20, y: 1.63, z: 37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3426061643443592446}
@@ -33141,6 +33141,8 @@ MonoBehaviour:
   isDead: 0
   map: {fileID: 0}
   buffAndDebuffs: []
+  animator: {fileID: 3850522344280809034}
+  isHumanoid: 0
   bm: {fileID: 0}
   sm: {fileID: 6145521179594913018}
   currentHp: 0

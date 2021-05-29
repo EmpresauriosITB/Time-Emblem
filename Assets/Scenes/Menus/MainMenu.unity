@@ -5117,6 +5117,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1665013588353830672}
+  - component: {fileID: 1665013588353830680}
+  - component: {fileID: 1665013588353830679}
   m_Layer: 0
   m_Name: BattleManagement
   m_TagString: Untagged
@@ -5124,6 +5126,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1665013588353830679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665013588353830678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a891e24aba3d7a47918d3c12502be6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceValue: 5
+  team:
+  - {fileID: 2606287209517409166, guid: b3fcfa1813174ff4fa7f6d5f4ed7424f, type: 3}
+  - {fileID: 2606287209517409166, guid: a7688a52701d1ca4a8e3c6e27d35080a, type: 3}
+--- !u!114 &1665013588353830680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665013588353830678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64014819fd65a554091c71c67a5bc45e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1665013588353830679}
+  cardSet: {fileID: 11400000, guid: 24d76a2d8c3a2b0488e898db8e4050c9, type: 2}
 --- !u!222 &2010427614550112240
 CanvasRenderer:
   m_ObjectHideFlags: 0

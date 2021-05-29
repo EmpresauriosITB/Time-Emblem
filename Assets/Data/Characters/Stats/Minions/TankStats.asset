@@ -20,3 +20,4 @@ MonoBehaviour:
   velocity: 45
   forceValue: 0
   gridSpeed: 3
+  numActions: 2

@@ -2291,6 +2291,8 @@ MonoBehaviour:
   isDead: 0
   map: {fileID: 0}
   buffAndDebuffs: []
+  animator: {fileID: 4327189724784898609}
+  isHumanoid: 1
   bm: {fileID: 0}
   sm: {fileID: 0}
   currentHp: 0

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b46e3128f00634e99c1659d9c037f1, type: 3}
   m_Name: Duplicate
   m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
+  spawn: {fileID: 4396060421307179977, guid: b4b1829af4a2aff48838cf8b46312b24, type: 3}

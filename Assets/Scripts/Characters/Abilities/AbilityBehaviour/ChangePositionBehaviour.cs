@@ -8,6 +8,7 @@ public class ChangePositionBehaviour : AbilityBehaviour
 
     public override bool doAbility(int Power, bool isPhysical, List<GameObject> targets, GameObject actor) {
         if (targets.Count > 0) {
+            actor.gameObject.GetComponent<CharacterUnitController>().animator.SetTrigger("SpecialAttack1Trigger");
             GameObject go = targets[0].gameObject;
             Unit ut = go.GetComponent<Unit>();
             Unit ua = actor.GetComponent<Unit>();

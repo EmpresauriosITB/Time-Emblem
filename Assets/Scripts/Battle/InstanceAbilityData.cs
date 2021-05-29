@@ -33,8 +33,11 @@ public static class InstanceAbilityData {
         {
             for (int i = 0; i < tiles.Count; i++)
             {
-                tiles[i].currentState = TileState.nothing;
-                tiles[i].gameObject.GetComponent<MeshRenderer>();
+                if (tiles[i] != null)
+                {
+                    tiles[i].currentState = TileState.nothing;
+                    tiles[i].gameObject.GetComponent<MeshRenderer>();
+                }
             }
         }
         

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour {
     public GameStates.BattleManagerStates currentState = GameStates.BattleManagerStates.StartEncounter;
@@ -13,16 +14,42 @@ public class BattleManager : MonoBehaviour {
     private GameObject activeChar;
     public List<GameObject> pt;
     public CardSet player;
+    public GameObject cardForWinning;
+    public Animator transition;
 
     public DropZone board;
     public GameObject hand;
+    private bool winnerWins = false;
+
+    public int lossIndex;
+    public int winIndex;
 
     void Start() {}
 
     void Update() {
-        if (BattleData.CheckIfPlayerWins()) { Debug.Log("PlayerWins"); }
-        if (BattleData.CheckIfEnemyWins()) { Debug.Log("EnemyWins"); }
+        if (BattleData.CheckIfPlayerWins() && GameStates.BattleManagerStates.Battle == currentState && !winnerWins) {
+            winnerWins = true;
+            player.cards.Add(cardForWinning);
+            player.forceValue += 2;
+            StartCoroutine(sceneLoader(winIndex));
+            Debug.Log("PlayerWins"); }
+        if (BattleData.CheckIfEnemyWins() && GameStates.BattleManagerStates.Battle == currentState && !winnerWins) {
+            winnerWins = true;
+            StartCoroutine(sceneLoader(lossIndex));
+            Debug.Log("EnemyWins");
+        }
         CheckState();
+    }
+
+
+
+
+    IEnumerator sceneLoader(int i){
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(1);
+        BattleData.enemyTeam = new List<GameObject>();
+        BattleData.playerTeam = new List<GameObject>();
+        SceneManager.LoadScene(i);
     }
 
     private void CheckState() {
@@ -56,8 +83,8 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void StartEncounter() {
-        
-        
+
+        MenuManager.Init();
         MenuManager.OpenMenu(Menu.Drag_Menu, null);
         MenuManager.SetBattleManager(this);
        

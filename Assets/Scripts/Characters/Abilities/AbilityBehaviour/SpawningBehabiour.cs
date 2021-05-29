@@ -9,6 +9,7 @@ public class SpawningBehabiour : AbilityBehaviour {
 
     public override bool doAbility(int Power, bool isPhysical, List<GameObject> targets, GameObject actor) {
         GameObject target = targets[0];
+        actor.gameObject.GetComponent<CharacterUnitController>().animator.SetTrigger("SpecialAttack1Trigger");
         int x = 0, y = 0;
         bool flag = true;
         Unit u = target.GetComponent<Unit>();

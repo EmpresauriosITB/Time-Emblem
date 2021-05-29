@@ -13,6 +13,8 @@ public class CharacterUnitController : MonoBehaviour {
     public bool isDead = false;
     public TileMap map;
     public List<BuffAndDebuff> buffAndDebuffs;
+    public Animator animator;
+    public bool isHumanoid;
 
     public BattleManager bm;
     public StatesMachine sm;
@@ -62,6 +64,8 @@ public class CharacterUnitController : MonoBehaviour {
             
         }
         if (currentHp <= 0 && !isDead) {
+            if (isHumanoid) { animator.SetTrigger("DeathTrigger"); }
+            else { animator.SetTrigger("death"); }
             isDead = true;
         }
     }
