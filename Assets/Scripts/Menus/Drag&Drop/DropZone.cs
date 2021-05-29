@@ -15,7 +15,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
 
         Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-        Character character = eventData.pointerDrag.GetComponent<DataCarta>().character.GetComponent<CharacterUnitController>().character;
+        Character character = d.gameObject.GetComponent<DataCarta>().character.GetComponent<CharacterUnitController>().character;
+        
         if (hasLimit) {
             if (limitNum + 1 >= totalTeamNum + character.stats.forceValue) {
                 if (d != null) {
