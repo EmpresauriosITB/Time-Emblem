@@ -15,8 +15,9 @@ MonoBehaviour:
   hp: 85
   physicalPower: 65
   physicalDefense: 60
-  mentalPower: 0
-  mentalDefense: 0
+  mentalPower: 80
+  mentalDefense: 80
   velocity: 12
   forceValue: 0
   gridSpeed: 6
+  numActions: 0

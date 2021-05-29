@@ -30,9 +30,19 @@ public class InteractableObjects : MonoBehaviour
             obj.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (this.gameObject.Equals(enemie1) || this.gameObject.Equals(enemie2) || this.gameObject.Equals(enemie3) || this.gameObject.Equals(sensei2))
+                if (this.gameObject.Equals(enemie1) || this.gameObject.Equals(enemie2))
                 {
-                    EventBattle();
+                    StartCoroutine(waitBattle1());
+                }
+
+                if (this.gameObject.Equals(enemie3))
+                {
+                    StartCoroutine(waitBattle2());
+                }
+
+                if (this.gameObject.Equals(sensei2))
+                {
+                    StartCoroutine(waitBattle3());
                 }
                 talking = true;
                 this.gameObject.GetComponent<StoryIAMovement>().Stop();
@@ -55,11 +65,20 @@ public class InteractableObjects : MonoBehaviour
             {
                 EventPartnerFollow();
             }
-            if (this.gameObject.Equals(enemie1) || this.gameObject.Equals(enemie2) || this.gameObject.Equals(enemie3) || this.gameObject.Equals(sensei2))
+
+            if (this.gameObject.Equals(enemie1) || this.gameObject.Equals(enemie2))
             {
-                EventBattle();
-                GameObject enemieBattle = this.transform.parent.gameObject;
-                enemieBattle.gameObject.SetActive(false);
+                StartCoroutine(waitBattle1());
+            }
+
+            if (this.gameObject.Equals(enemie3))
+            {
+                StartCoroutine(waitBattle2());
+            }
+
+            if (this.gameObject.Equals(sensei2))
+            {
+                StartCoroutine(waitBattle3());
             }
 
             talking = false;
@@ -81,15 +100,21 @@ public class InteractableObjects : MonoBehaviour
         partner.GetComponent<ActivateObject>().activatePartnerFollow();
     }
 
-    public void EventBattle()
-    {
-        StartCoroutine(waitBattle());
-    }
-
-    IEnumerator waitBattle()
+    IEnumerator waitBattle1()
     {
         yield return new WaitForSeconds(2);
-        battleLoader.LoadNextLevel();
-        Debug.Log("EMPIEZA BATALLA");
+        battleLoader.LoadBattle1();
+    }
+
+    IEnumerator waitBattle2()
+    {
+        yield return new WaitForSeconds(2);
+        battleLoader.LoadBattle2();
+    }
+
+    IEnumerator waitBattle3()
+    {
+        yield return new WaitForSeconds(2);
+        battleLoader.LoadBattle3();
     }
 }

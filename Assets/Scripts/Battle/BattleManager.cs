@@ -12,7 +12,7 @@ public class BattleManager : MonoBehaviour {
     public TileMap tileMap;
     private GameObject activeChar;
     public List<GameObject> pt;
-    public PlayerData player;
+    public CardSet player;
 
     public DropZone board;
     public GameObject hand;
@@ -61,15 +61,14 @@ public class BattleManager : MonoBehaviour {
         MenuManager.OpenMenu(Menu.Drag_Menu, null);
         MenuManager.SetBattleManager(this);
        
-        //instantiateCards();
+        instantiateCards();
         board.updateLimitNum(player.forceValue);
         currentState = GameStates.BattleManagerStates.SelectTeam;
     }
 
     private void instantiateCards() {
-        player.Init();
-        for (int i = 0; i < player.team.Count; i++) {
-            GameObject go = player.team[i];
+        for (int i = 0; i < player.cards.Count; i++) {
+            GameObject go = player.cards[i];
             go.transform.position = Vector3.zero;
             go = GameObject.Instantiate(go);
             go.transform.parent = hand.transform;

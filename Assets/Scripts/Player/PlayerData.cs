@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class PlayerData : MonoBehaviour
-{
+public class PlayerData : MonoBehaviour {
     public int forceValue;
-    public List<GameObject> team;
+    public List<GameObject> team; 
 
     public void Init() {
         PlayerData pd = BinariSave.LoadPlayerData();
