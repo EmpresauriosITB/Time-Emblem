@@ -609,7 +609,9 @@ MonoBehaviour:
   isPlayer: 1
   isDead: 0
   map: {fileID: 0}
+  buffAndDebuffs: []
   bm: {fileID: 0}
+  sm: {fileID: 0}
   currentHp: 0
   currentPhysicalPower: 0
   currentPhysicalDefense: 0

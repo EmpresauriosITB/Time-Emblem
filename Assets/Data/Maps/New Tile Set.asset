@@ -7521,7 +7521,7 @@ MonoBehaviour:
   - name: Default
     tileVisualPrefabNotActive: {fileID: 130280, guid: fe846d821f03406459b00accdd18d267,
       type: 3}
-    tileVisualPrefabActive: {fileID: 173604, guid: 0eefaabb347f4d145bb2d8979b23b327,
+    tileVisualPrefabActive: {fileID: 843045937017852223, guid: e7ee48712f3712f44b48ed75467a8db5,
       type: 3}
     isWalkable: 1
     movementCost: 1

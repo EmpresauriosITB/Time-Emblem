@@ -7,6 +7,7 @@ public abstract class BuffAndDebuff : ScriptableObject {
     public bool lastsInTime;
     public int activeSeconds;
     public int actionPeriod;
+    public bool singleEffect;
 
     private int actionPeriodCount;
     private int activeSecondsCount;
@@ -20,7 +21,8 @@ public abstract class BuffAndDebuff : ScriptableObject {
         if (lastsInTime && activeSeconds > Time.time) {
             if (actionPeriodCount > Time.time) {
                 effect();
-                actionPeriodCount = (int) (Time.time + actionPeriod);
+                if (singleEffect) actionPeriodCount = (int)(Time.time + activeSeconds);
+                else actionPeriodCount = (int) (Time.time + actionPeriod);
             }
             return true;
         }
