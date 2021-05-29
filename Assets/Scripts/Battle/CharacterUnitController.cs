@@ -40,7 +40,8 @@ public class CharacterUnitController : MonoBehaviour {
 
     void Start() {
         InitCurrentStats();
-        timeToNextActivePeriod = Time.time + currentVelocity;
+        timeToNextActivePeriod = Time.time + currentVelocity;      
+            
         resetActions();
     }
 
