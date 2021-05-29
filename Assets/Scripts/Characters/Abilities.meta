@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Scripts/Characters/Abilities.meta
 guid: b7a2506eced768340a6a3fd3553e5490
-=======
-guid: 714f92f0c61257e43be2e890b693e061
->>>>>>> GridMovement:Assets/Prefabs.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

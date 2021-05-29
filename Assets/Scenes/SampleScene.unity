@@ -286,7 +286,8 @@ Camera:
 --- !u!4 &519420032
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7255116143222910880, guid: 42608c0ff3829604b90017d74b0ee012,
+    type: 3}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
@@ -295,7 +296,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!224 &674838645 stripped
 RectTransform:
@@ -1052,7 +1053,7 @@ PrefabInstance:
     - target: {fileID: 5224458308421036483, guid: 35e4ecef894b6dd4c8bda685b29c9bb7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5224458308421036483, guid: 35e4ecef894b6dd4c8bda685b29c9bb7,
         type: 3}
