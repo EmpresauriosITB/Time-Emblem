@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cb3b628d2729f4da4367219b12e235, type: 3}
-  m_Name: StatsNinja
+  m_Script: {fileID: 11500000, guid: c632a9cb6c2092746b2bf860207f9c41, type: 3}
+  m_Name: MainCharacterSet
   m_EditorClassIdentifier: 
-  hp: 50
-  physicalPower: 50
-  physicalDefense: 30
-  mentalPower: 50
-  mentalDefense: 30
-  velocity: 7
-  forceValue: 2
-  gridSpeed: 9
-  numActions: 0
+  abilities:
+  - {fileID: 11400000, guid: 133ee5f1733b73641a2441871e54c251, type: 2}
+  - {fileID: 11400000, guid: de4ccf3ab36224e4d88e8e21b762c344, type: 2}

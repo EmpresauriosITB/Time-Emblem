@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7cb3b628d2729f4da4367219b12e235, type: 3}
-  m_Name: StatsNinja
+  m_Name: MainCharacterStats
   m_EditorClassIdentifier: 
-  hp: 50
-  physicalPower: 50
-  physicalDefense: 30
-  mentalPower: 50
-  mentalDefense: 30
-  velocity: 7
-  forceValue: 2
-  gridSpeed: 9
-  numActions: 0
+  hp: 100
+  physicalPower: 95
+  physicalDefense: 80
+  mentalPower: 95
+  mentalDefense: 80
+  velocity: 15
+  forceValue: 0
+  gridSpeed: 5
+  numActions: 3

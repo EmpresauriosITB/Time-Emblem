@@ -9,15 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cb3b628d2729f4da4367219b12e235, type: 3}
-  m_Name: StatsNinja
+  m_Script: {fileID: 11500000, guid: 9945c2b87004d8341bbba7aea1ec64e6, type: 3}
+  m_Name: PlauerCardSet
   m_EditorClassIdentifier: 
-  hp: 50
-  physicalPower: 50
-  physicalDefense: 30
-  mentalPower: 50
-  mentalDefense: 30
-  velocity: 7
-  forceValue: 2
-  gridSpeed: 9
-  numActions: 0
+  cards: []
