@@ -9,7 +9,6 @@ public class PickupObject : MonoBehaviour
 
     public void Start()
     {
-        pixelCamera = GameObject.FindObjectOfType<Camera>();
         onBoard = false;
     }
 
@@ -27,9 +26,9 @@ public class PickupObject : MonoBehaviour
             {
                 GameObject child = this.gameObject.transform.GetChild(1).gameObject;
                 child.SetActive(true);
-                this.gameObject.GetComponent<PlayerController>().camara = collider.gameObject.GetComponent<PlayerController>().camara;
-                gameObject.GetComponent<PlayerController>().camara.transform.GetChild(0).GetComponent<PlayerFollow>().PlayerTransform = gameObject.transform;
-                gameObject.GetComponent<PlayerController>().setCanMove(true);
+                this.gameObject.GetComponent<PlayerController1>().camara = collider.gameObject.GetComponent<PlayerController1>().camara;
+                gameObject.GetComponent<PlayerController1>().camara.transform.GetChild(0).GetComponent<PlayerFollow>().PlayerTransform = gameObject.transform;
+                gameObject.GetComponent<PlayerController1>().setCanMove(true);
                 collider.gameObject.SetActive(false);
                 collider.gameObject.transform.SetParent(this.gameObject.transform.GetChild(0).gameObject.transform, true);
                 pixelCamera.fieldOfView = 60f;
@@ -47,8 +46,8 @@ public class PickupObject : MonoBehaviour
                 playerPirate.SetActive(true);
                 playerPirate.transform.parent = null;
                 this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
-                gameObject.GetComponent<PlayerController>().camara.transform.GetChild(0).GetComponent<PlayerFollow>().PlayerTransform = GameObject.Find("Player").transform;
-                gameObject.GetComponent<PlayerController>().setCanMove(false);
+                gameObject.GetComponent<PlayerController1>().camara.transform.GetChild(0).GetComponent<PlayerFollow>().PlayerTransform = GameObject.Find("Player").transform;
+                gameObject.GetComponent<PlayerController1>().setCanMove(false);
             }
         }
     }

@@ -56,18 +56,24 @@ public class PlayerController : MonoBehaviour
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 controller.Move(moveDir.normalized * speed * Time.deltaTime);
-                if(anim != null)
+                if (anim != null)
                 {
                     anim.SetBool("Run", true);
-                    partnerCharacter.GetComponent<Partner_follow>().Run();
+                    if (partnerCharacter != null)
+                    {
+                        partnerCharacter.GetComponent<Partner_follow>().Run();
+                    }
                 }
             }
             else
             {
-                if(anim != null)
+                if (anim != null)
                 {
                     anim.SetBool("Run", false);
-                    partnerCharacter.GetComponent<Partner_follow>().StopRun();
+                    if (partnerCharacter != null)
+                    {
+                        partnerCharacter.GetComponent<Partner_follow>().StopRun();
+                    }
                 }
             }
 
