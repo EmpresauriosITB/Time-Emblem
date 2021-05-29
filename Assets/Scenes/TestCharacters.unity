@@ -397,6 +397,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: (Player) AbilityCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 8913076838071518506, guid: 45483ba3315f682498d94c1f1fe41acc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8913076838071556362, guid: 45483ba3315f682498d94c1f1fe41acc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -454,3 +459,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45483ba3315f682498d94c1f1fe41acc, type: 3}
+--- !u!1001 &7781486950961363332
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0946157
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6727388
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9914453
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.13052304
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 194.99998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945417045, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845103318945726247, guid: 1fd7a14a1490cd549bba43a47414f5eb,
+        type: 3}
+      propertyPath: m_Name
+      value: DragonCharacter
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1fd7a14a1490cd549bba43a47414f5eb, type: 3}
