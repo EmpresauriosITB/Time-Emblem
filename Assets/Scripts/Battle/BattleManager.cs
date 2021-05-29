@@ -8,7 +8,6 @@ public class BattleManager : MonoBehaviour {
 
     private bool conGoNextState = false;
     public bool isDefocused = false;
-    public Scene
 
     public TileMap tileMap;
     private GameObject activeChar;
