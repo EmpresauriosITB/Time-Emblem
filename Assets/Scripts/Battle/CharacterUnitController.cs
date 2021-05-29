@@ -73,7 +73,7 @@ public class CharacterUnitController : MonoBehaviour {
     void OnMouseUp() {
 
         if (!isDead) {
-            if (isPlayer && checkTime()) { bm.SetCurrentaActiveCharacter(this.gameObject); }
+            if (isPlayer && checkTime() && bm.activeChar == null) { bm.SetCurrentaActiveCharacter(this.gameObject); }
             else { InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null); }
         }
 	}

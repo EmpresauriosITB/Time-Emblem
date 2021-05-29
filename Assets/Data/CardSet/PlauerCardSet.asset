@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9945c2b87004d8341bbba7aea1ec64e6, type: 3}
   m_Name: PlauerCardSet
   m_EditorClassIdentifier: 
-  cards:
-  - {fileID: 2606287209517409166, guid: 85e05c43e2856694ab7f46f085e0e280, type: 3}
+  cards: []
   forceValue: 7

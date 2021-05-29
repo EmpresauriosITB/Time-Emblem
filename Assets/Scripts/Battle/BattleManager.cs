@@ -11,7 +11,7 @@ public class BattleManager : MonoBehaviour {
     public bool isDefocused = false;
 
     public TileMap tileMap;
-    private GameObject activeChar;
+    public GameObject activeChar;
     public List<GameObject> pt;
     public CardSet player;
     public GameObject cardForWinning;
