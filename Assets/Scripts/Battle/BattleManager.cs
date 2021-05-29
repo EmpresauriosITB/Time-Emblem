@@ -8,6 +8,7 @@ public class BattleManager : MonoBehaviour {
 
     private bool conGoNextState = false;
     public bool isDefocused = false;
+    public Scene
 
     public TileMap tileMap;
     private GameObject activeChar;
@@ -56,6 +57,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void StartEncounter() {
+        
         
         MenuManager.OpenMenu(Menu.Drag_Menu, null);
         MenuManager.SetBattleManager(this);
