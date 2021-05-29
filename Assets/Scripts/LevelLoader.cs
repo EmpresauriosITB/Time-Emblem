@@ -14,6 +14,41 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
+    public void LoadPirateScene()
+    {
+        StartCoroutine(LoadLevel(1));
+    }
+    public void LoadSpainScene()
+    {
+        StartCoroutine(LoadLevel(2));
+    }
+
+    public void LoadBattle1()
+    {
+        StartCoroutine(LoadLevel(3));
+    }
+
+    public void LoadBattle2()
+    {
+        StartCoroutine(LoadLevel(4));
+    }
+
+    public void LoadBattle3()
+    {
+        StartCoroutine(LoadLevel(5));
+    }
+
+    public void LoadBattle4()
+    {
+        StartCoroutine(LoadLevel(6));
+    }
+
+    public void LoadBattle5()
+    {
+        StartCoroutine(LoadLevel(7));
+    }
+
+
     IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");

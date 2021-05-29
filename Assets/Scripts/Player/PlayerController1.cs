@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController1 : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerController1 : MonoBehaviour
     public Camera PixelCamera;
     Vector3 velocity;
     GameObject playerCharacter;
+    LevelLoader battleLoader;
 
 
     void Start()
@@ -27,6 +29,7 @@ public class PlayerController1 : MonoBehaviour
         camara = GameObject.Find("Camera");
         PixelCamera = FindObjectOfType<Camera>();
         playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        battleLoader = FindObjectOfType<LevelLoader>();
     }
 
     void Update()
@@ -46,6 +49,19 @@ public class PlayerController1 : MonoBehaviour
             Vector3 direction = new Vector3(-horizontal, 0f, -vertical).normalized;
 
             velocity.y += gravity * Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (SceneManager.GetActiveScene().name.Equals("Pirate"))
+                {
+                    battleLoader.LoadSpainScene();
+                }
+
+                if (SceneManager.GetActiveScene().name.Equals("Spain"))
+                {
+                    battleLoader.LoadPirateScene();
+                }
+            }
 
             if (direction.magnitude >= 0.1f)
             {
