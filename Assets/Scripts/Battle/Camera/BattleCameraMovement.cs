@@ -13,6 +13,9 @@ public class BattleCameraMovement : MonoBehaviour
 
     Camera myCam;
 
+    [SerializeField] private Vector2 screenXLimits = Vector2.zero;
+    [SerializeField] private Vector2 screenYLimits = Vector2.zero;
+
     private void Start()
     {
         myCam = GetComponent<Camera>();
@@ -22,6 +25,7 @@ public class BattleCameraMovement : MonoBehaviour
     {
         // Zoom code 
         var zoom = Input.GetAxis("Mouse ScrollWheel");
+        Vector3 pos = myCam.transform.position;
         myCam.orthographicSize -= zoom * zoomSpeed;
 
         myCam.orthographicSize = Mathf.Clamp(myCam.orthographicSize,
@@ -39,6 +43,10 @@ public class BattleCameraMovement : MonoBehaviour
             Speed.y -= borderMoveSpeed;
         else if (Input.mousePosition.y > Screen.height - (Screen.height * screenOffset))
             Speed.y += borderMoveSpeed;
+
+        pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
+        pos.y = Mathf.Clamp(pos.y, screenYLimits.x, screenYLimits.y);
+        myCam.transform.position = pos;
 
         transform.position += Speed * Time.deltaTime;
     }
