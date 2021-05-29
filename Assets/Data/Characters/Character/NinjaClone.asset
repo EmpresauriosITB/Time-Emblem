@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9946fccffafcc944a98048304defbc7d, type: 3}
   m_Name: NinjaClone
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: fb4558a1ec0ad4e4a9544df3b4333dcb, type: 2}
+  stats: {fileID: 11400000, guid: d08d66d96e662344f9c63f0a9b6fbc60, type: 2}
   abilitieSet: {fileID: 11400000, guid: 4f95ec6f49cf58143bf398b9a6dfbf5b, type: 2}
   specialPassive: {fileID: 11400000, guid: 092ed38e8a18ce54a8105a93bf6eb026, type: 2}
   characterName: NinjaClone

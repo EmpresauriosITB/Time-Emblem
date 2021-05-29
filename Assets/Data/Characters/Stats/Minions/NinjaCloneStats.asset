@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cb3b628d2729f4da4367219b12e235, type: 3}
   m_Name: NinjaCloneStats
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 10
   physicalPower: 50
-  physicalDefense: 30
+  physicalDefense: 5
   mentalPower: 50
   mentalDefense: 30
   velocity: 7

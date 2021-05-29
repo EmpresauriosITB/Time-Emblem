@@ -6,8 +6,8 @@ public class DamageCalculator {
 
     public static int CalculateDamage(int Power, int Atack, int Defense, bool Burn) {
 
-        double Damage = (((Power * ((Atack * 1.5) / Defense)) / 5 + 2)  * CalculateModifier(Burn)) + 1;
-
+        double Damage = (((Power * ((Atack * 1.5) / Defense)) / 5 + 2)) + 1;
+        Debug.Log(Damage);
         return (int) Damage;
     }
 
@@ -15,12 +15,7 @@ public class DamageCalculator {
 
         double Critical = 1;
         if (Random.Range(0, 50) > 45) { Critical = 1.5; }
-
-        double random = Random.Range(85, 100) / 100;
-        double burn = 1;
-        if (Burn) burn = 0.5;
-
-        return Critical * random * burn;
+        return Critical;
     }
 
     public static int CalculateHeal(int Power, int MentalPower) {

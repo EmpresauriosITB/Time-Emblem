@@ -22,7 +22,7 @@ public static class InstanceAbilityData {
             Unit u = actor.GetComponent<Unit>();
             string cardinalPosition = ability.areaCalculator.getCardinalPosition(x, y, u.tileX, u.tileY);
             if (ability.TargetAllies) { targetIsPlayer = !targetIsPlayer; }
-            bool abilityDone = ability.abilityBehaviour.doAbility(ability.Power, ability.isPhysical, ability.areaCalculator.calculateArea(x, y, ability.Area, targetIsPlayer, cardinalPosition), map.selectedUnit);
+            bool abilityDone = ability.abilityBehaviour.doAbility(ability.Power, ability.isPhysical, ability.areaCalculator.calculateArea(x, y, ability.Area, targetIsPlayer, cardinalPosition), actor);
             deleteInstance();
             if (abilityDone) { actor.GetComponent<CharacterUnitController>().actionsLeft--; }
         }

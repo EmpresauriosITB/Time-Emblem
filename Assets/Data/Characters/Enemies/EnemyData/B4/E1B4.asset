@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bc1cdcf958e1c4086f7b8211c81e3a, type: 3}
   m_Name: E1B4
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6114110073380534277, guid: c2b094ebabd2ead4eb6ca39124fe5d3c, type: 3}
+  enemy: {fileID: 1115066306548371447, guid: 21102e75aefb038428146e4e9a1c6141, type: 3}
   initX: 26
   initY: 58
