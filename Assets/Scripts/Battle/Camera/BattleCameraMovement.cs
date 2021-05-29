@@ -14,7 +14,7 @@ public class BattleCameraMovement : MonoBehaviour
     Camera myCam;
 
     [SerializeField] private Vector2 screenXLimits = Vector2.zero;
-    [SerializeField] private Vector2 screenYLimits = Vector2.zero;
+    [SerializeField] private Vector2 screenZLimits = Vector2.zero;
 
     private void Start()
     {
@@ -40,12 +40,12 @@ public class BattleCameraMovement : MonoBehaviour
             Speed.x += borderMoveSpeed;
 
         if (Input.mousePosition.y < Screen.height * screenOffset)
-            Speed.y -= borderMoveSpeed;
+            Speed.z -= borderMoveSpeed;
         else if (Input.mousePosition.y > Screen.height - (Screen.height * screenOffset))
-            Speed.y += borderMoveSpeed;
+            Speed.z += borderMoveSpeed;
 
         pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
-        pos.y = Mathf.Clamp(pos.y, screenYLimits.x, screenYLimits.y);
+        pos.z = Mathf.Clamp(pos.z, screenZLimits.x, screenZLimits.y);
         myCam.transform.position = pos;
 
         transform.position += Speed * Time.deltaTime;
