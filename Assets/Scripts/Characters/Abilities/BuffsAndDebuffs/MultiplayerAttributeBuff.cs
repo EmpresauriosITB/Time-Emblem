@@ -9,13 +9,9 @@ public class MultiplayerAttributeBuff : BuffAndDebuff {
     public enum StatToModify {pp, pd, mp, md, gs, vel}
     public StatToModify statToModify;
     public int multiplayer;
-    private bool alreadyEffected = false;
 
     public override void effect() {
-        if (!alreadyEffected) {
-            CheckStatToModify(isPositive);
-            alreadyEffected = true;
-        }
+        CheckStatToModify(isPositive);
     }
 
     protected override void ResetEffect() {
