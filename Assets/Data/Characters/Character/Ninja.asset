@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9946fccffafcc944a98048304defbc7d, type: 3}
+  m_Name: Ninja
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: fb4558a1ec0ad4e4a9544df3b4333dcb, type: 2}
+  abilitieSet: {fileID: 11400000, guid: 55460d7e219f3d94d98db0320aca40c0, type: 2}
+  specialPassive: {fileID: 11400000, guid: 092ed38e8a18ce54a8105a93bf6eb026, type: 2}
+  characterName: Ninja

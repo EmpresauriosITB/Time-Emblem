@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Ability")]
+public class Abilities : ScriptableObject {
+    public string AbilityName;
+    public int Power;
+    public string Description;
+    public int Range;
+    public bool HasAreaEffect;
+    public int Area;
+    public bool isPhysical;
+    public bool needsArea;
+    public bool TargetAllies;
+    public bool isRangeAttack;
 
-public abstract class Abilities : ScriptableObject {
-    public string abilityName;
-    private int Power;
-    private string description;
-    private int range;
 
-
-    public abstract void init();
-
-    public abstract void doAbility();
-
-    public void SetPower(int power) { Power = power; }
-    public int GetPower() { return Power; }
-
-    public void SetName(string name) { abilityName = name; }
-    public string GetName() { return abilityName; }
-
-    public void SetDescription(string description) { this.description = description; }
-    public string GetDescription() { return description; }
+    public AbilityBehaviour abilityBehaviour;
+    public AreaCalculator areaCalculator;
 }

@@ -8,10 +8,15 @@ public class Unit : MonoBehaviour {
 	public TileMap map;
 
 	public List<Node> currentPath = null;
-	float moveSpeed;
 
 	void Start() {
-		moveSpeed = this.gameObject.GetComponent<CharacterController>().character.GetGridSpeed();
+		tileX = (int) this.transform.position.x;
+		tileY = (int) this.transform.position.z;
+		if (!this.gameObject.GetComponent<CharacterUnitController>().isPlayer)
+		{
+			map = this.gameObject.GetComponent<CharacterUnitController>().map;
+		}	
+		
 	}
 
 	void Update() {
@@ -22,9 +27,9 @@ public class Unit : MonoBehaviour {
 			while( currNode < currentPath.Count-1 ) {
 
 				Vector3 start = map.TileCoordToWorldCoord( currentPath[currNode].x, currentPath[currNode].y ) + 
-					new Vector3(0, 0, -1f) ;
+					new Vector3(0, -1f, 0) ;
 				Vector3 end   = map.TileCoordToWorldCoord( currentPath[currNode+1].x, currentPath[currNode+1].y )  + 
-					new Vector3(0, 0, -1f) ;
+					new Vector3(0, -1f, 0) ;
 
 				Debug.DrawLine(start, end, Color.red);
 
@@ -37,12 +42,16 @@ public class Unit : MonoBehaviour {
 
 
 	public void MoveNextTile() {
-		float remainingMovement = moveSpeed;
+        float moveSpeed = this.gameObject.GetComponent<CharacterUnitController>().currentGridSpeed;
+        float remainingMovement = moveSpeed;
 
 		map.DesocupyTile(tileX, tileY);
-		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map);
+        if (this.gameObject.GetComponent<CharacterUnitController>().isPlayer)
+        {
+            PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, false, map, TileState.nothing, null);
+        }
 
-		while(remainingMovement > 0 && currentPath != null) {
+        while (remainingMovement > 0 && currentPath != null) {
 
 			// Get cost from current tile to next tile
 			remainingMovement -= map.CostToEnterTile(currentPath[0].x, currentPath[0].y, currentPath[1].x, currentPath[1].y );
@@ -65,7 +74,9 @@ public class Unit : MonoBehaviour {
 		}
 
 		map.OccupyTile(tileX, tileY);
-			
-		PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map);
-	}
+		if(this.gameObject.GetComponent<CharacterUnitController>().isPlayer){
+			PathFind.setAllowedToCLickTiles(moveSpeed, tileX, tileY, true, map, TileState.moving, null);
+		}	
+        this.gameObject.GetComponent<CharacterUnitController>().actionsLeft --;
+    }
 }

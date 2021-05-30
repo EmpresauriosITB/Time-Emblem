@@ -14,4 +14,5 @@ public class Stats : ScriptableObject
     public float velocity;
     public float forceValue;
     public float gridSpeed;
+    public float numActions;
 }

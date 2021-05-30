@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerFollow : MonoBehaviour
 {
-    [SerializeField]
     public Transform PlayerTransform;
 
     private Vector3 _cameraOffset;
@@ -23,5 +22,4 @@ public class PlayerFollow : MonoBehaviour
 
         transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
     }
-
 }
