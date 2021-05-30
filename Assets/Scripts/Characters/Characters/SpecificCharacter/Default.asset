@@ -9,10 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d6c259e24be13d4798f9ac746d07236, type: 3}
+  m_Script: {fileID: 11500000, guid: 9946fccffafcc944a98048304defbc7d, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: ff0754640e242484ea05271b4bdf878a, type: 2}
+  abilitieSet: {fileID: 11400000, guid: 3875e457964599b4eb55af47db910457, type: 2}
+  specialPassive: {fileID: 11400000, guid: 092ed38e8a18ce54a8105a93bf6eb026, type: 2}
   characterName: 
-  abilitieSet: {fileID: 0}
-  specialPassiveSettings: {fileID: 0}
+  currentHp: 0
+  currentPhysicalPower: 0
+  currentPhysicalDefense: 0
+  currentMentalPower: 0
+  currentMentalDefense: 0
+  currentVelocity: 0
+  currentGridSpeed: 0

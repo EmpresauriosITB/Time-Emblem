@@ -4,5 +4,44 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menus/MainMenu.unity
+    guid: 63f9a6e5755915b49af619a30a4e8323
+  - enabled: 1
+    path: Assets/Scenes/Pirate.unity
+    guid: bfa5d56a0eb50f04ba05cb6891c91214
+  - enabled: 1
+    path: Assets/Scenes/Spain.unity
+    guid: cf7c677bbb7aac345a7c35e4f1b92a36
+  - enabled: 1
+    path: Assets/Scenes/Battles/Battle1.unity
+    guid: a6b1ef60de0de034ba3b1a20b93d8dfd
+  - enabled: 1
+    path: Assets/Scenes/Battles/Battle2.unity
+    guid: fe1f1988ead01364b9804451e2980d20
+  - enabled: 1
+    path: Assets/Scenes/Battles/Battle3.unity
+    guid: 67e9de8a5f0b1a34c95f77d0f1358826
+  - enabled: 1
+    path: Assets/Scenes/Battles/Battle4.unity
+    guid: 41d7d267cd954ec44897dd0ce64b3508
+  - enabled: 1
+    path: Assets/Scenes/Battles/Battle5.unity
+    guid: 8886c74c1265c324b89d7156164af2b7
+  - enabled: 1
+    path: Assets/Scenes/Japan 1.unity
+    guid: a47c7cbd1df89b34f88bceeecd8ff0b0
+  - enabled: 1
+    path: Assets/Scenes/Japan 2.unity
+    guid: bbd14ac74fb087b4596c8d3a89232563
+  - enabled: 1
+    path: Assets/Scenes/Destroyed Japan.unity
+    guid: 368dca176dc6256428aecd68dc4848c3
+  - enabled: 1
+    path: Assets/Scenes/Destroyed Japan 1.unity
+    guid: c2d83b86a2bc6bf4db0acd96014a37a3
+  - enabled: 1
+    path: Assets/Scenes/Japan.unity
+    guid: c3a883a2e6c928f45b0ceef05714cf78
   m_configObjects: {}

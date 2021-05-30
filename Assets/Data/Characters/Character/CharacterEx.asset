@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9946fccffafcc944a98048304defbc7d, type: 3}
+  m_Name: CharacterEx
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: a033f054ffc89f84395a1e586a65b088, type: 2}
+  abilitieSet: {fileID: 11400000, guid: 3875e457964599b4eb55af47db910457, type: 2}
+  specialPassive: {fileID: 11400000, guid: 72f58f85222fe9342ae382f2a8802eb8, type: 2}
+  characterName: Ejemplo
+  currentHp: 20
+  currentPhysicalPower: 2
+  currentPhysicalDefense: 2
+  currentMentalPower: 20
+  currentMentalDefense: 20
+  currentVelocity: 10
+  currentGridSpeed: 5

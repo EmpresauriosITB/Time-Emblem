@@ -9,23 +9,48 @@ public class TileMap : MonoBehaviour {
 	public TileSet tileSet;
 
 	public int[,] currentTiles;
-	public Node[,] graph;
+	public Node[,] moveGraph;
+	public Node[,] abilityGraph;
 
-	public delegate void ChangeTileMaterial(GameObject go, int x, int y);
-	public event ChangeTileMaterial changeTileMaterial;
+    public bool activevate = false;
+    private List<GameObject> enemies;
+	
+
+	public delegate void UpdateTileData(GameObject go, int x, int y, TileState state, Abilities abilities);
+	public event UpdateTileData updateTileData;
 
 	public void Init(BattleManager manager) {
         GenerateMapData();
 		GenerateMapVisual(manager);
 		GeneratePathfindingGraph();
+        GenerateEnemies(manager);
 	}
 
     public void setSelectedUnit(GameObject selectedUnit) {
         selectedUnit.GetComponent<Unit>().tileX = (int)selectedUnit.transform.position.x;
-        selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
+        selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.z;
         selectedUnit.GetComponent<Unit>().map = this;
         this.selectedUnit = selectedUnit;
-        
+    }
+
+    public void GenerateEnemies(BattleManager manager) {
+        enemies = new List<GameObject>();
+        for (int i = 0; i < tileSet.enemyTeam.enemies.Count; i++) {
+            EnemyData d = tileSet.enemyTeam.enemies[i];
+            Vector3 v = new Vector3(d.initX, d.enemy.transform.position.y, d.initY);
+            Transform t = d.enemy.transform;
+            t.position = v;
+            OccupyTile(d.initX,d.initY);
+            GameObject go = GameObject.Instantiate(d.enemy, t);
+            go.GetComponent<CharacterUnitController>().InitBattleManager(manager, this);
+
+            go.transform.parent = this.gameObject.transform.parent.GetChild(0).GetChild(1);
+            enemies.Add(d.enemy);
+        }
+    }
+
+    public List<GameObject> getEnemies() {
+        return enemies;
     }
 
 	public void OccupyTile(int x, int y) {
@@ -42,10 +67,21 @@ public class TileMap : MonoBehaviour {
 		}
 	} 
 
-	public void ActivateTile(int x, int y, bool isActive) {
-		graph[x,y].isActive = isActive;
-		if (isActive) { changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabActive, x, y); }
-		else { changeTileMaterial(tileSet.tileTypes[0].tileVisualPrefabNotActive, x, y); }
+	public void ActivateTile(int x, int y, bool isActive, TileState state, Abilities abilities) {
+		moveGraph[x,y].isActive = isActive;
+		GameObject visualPrefab = null;
+		switch (state) {
+			case TileState.doingAbility:
+				visualPrefab = tileSet.tileTypes[0].tileVisualPrefabActive;
+				break;
+			case TileState.moving:
+				visualPrefab = tileSet.tileTypes[0].tileVisualPrefabActive;
+				break;
+			case TileState.nothing:
+				visualPrefab = tileSet.tileTypes[0].tileVisualPrefabNotActive;
+				break;
+		}
+		updateTileData(visualPrefab, x, y, state, abilities);
 	}
 
 
@@ -84,65 +120,8 @@ public class TileMap : MonoBehaviour {
 	}
 
 	void GeneratePathfindingGraph() {
-		
-		// Initialize the array
-		graph = new Node[tileSet.GetX(),tileSet.GetY()];
-
-		// Initialize a Node for each spot in the array
-		for(int x=0; x < tileSet.GetX(); x++) {
-			for(int y=0; y < tileSet.GetY(); y++) {
-				graph[x,y] = new Node();
-				graph[x,y].x = x;
-				graph[x,y].y = y;
-			}
-		}
-
-		// Now that all the nodes exist, calculate their neighbours
-		for(int x=0; x < tileSet.GetX(); x++) {
-			for(int y=0; y < tileSet.GetY(); y++) {
-
-				// This is the 4-way connection version:
-				if(x > 0)
-					graph[x,y].neighbours.Add( graph[x-1, y] );
-				if(x < tileSet.GetX()-1)
-					graph[x,y].neighbours.Add( graph[x+1, y] );
-				if(y > 0)
-					graph[x,y].neighbours.Add( graph[x, y-1] );
-				if(y < tileSet.GetY()-1)
-					graph[x,y].neighbours.Add( graph[x, y+1] );
-
-
-				/*
-				// This is the 8-way connection version (allows diagonal movement)
-				// Try left
-				if(x > 0) {
-					graph[x,y].neighbours.Add( graph[x-1, y] );
-					if(y > 0)
-						graph[x,y].neighbours.Add( graph[x-1, y-1] );
-					if(y < tileSet.GetY()-1)
-						graph[x,y].neighbours.Add( graph[x-1, y+1] );
-				}
-
-				// Try Right
-				if(x < tileSet.GetX()-1) {
-					graph[x,y].neighbours.Add( graph[x+1, y] );
-					if(y > 0)
-						graph[x,y].neighbours.Add( graph[x+1, y-1] );
-					if(y < tileSet.GetY()-1)
-						graph[x,y].neighbours.Add( graph[x+1, y+1] );
-				}
-
-				// Try straight up and down
-				if(y > 0)
-					graph[x,y].neighbours.Add( graph[x, y-1] );
-				if(y < tileSet.GetY()-1)
-					graph[x,y].neighbours.Add( graph[x, y+1] );
-					*/
-
-				// This also works with 6-way hexes and n-way variable areas (like EU4)
-				
-			}
-		}
+		moveGraph = PathFindingGraphGenerator.generateNoCardinals(tileSet.GetX(),tileSet.GetY());
+		abilityGraph = PathFindingGraphGenerator.generateCardinals(tileSet.GetX(),tileSet.GetY());
 	}
 
 	void GenerateMapVisual(BattleManager manager) {
@@ -152,7 +131,7 @@ public class TileMap : MonoBehaviour {
 				num ++;
 				TileType tt = tileSet.tileTypes[ currentTiles[x,y] ];
 				
-				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefabNotActive, new Vector3(x, y, 0), Quaternion.identity );
+				GameObject go = (GameObject)Instantiate( tt.tileVisualPrefabNotActive, new Vector3(x, 0, y), Quaternion.identity );
 				go.name = "Tile " + num;
 				go.transform.parent = this.gameObject.transform.GetChild(0).transform;
 
@@ -166,53 +145,67 @@ public class TileMap : MonoBehaviour {
 	}
 
 	public Vector3 TileCoordToWorldCoord(int x, int y) {
-		return new Vector3(x, y, 0);
+		return new Vector3(x, 1.5f, y);
 	}
 
 	public bool UnitCanEnterTile(int x, int y) {
 
 		// We could test the unit's walk/hover/fly type against various
 		// terrain flags here to see if they are allowed to enter the tile.
+		
+		//Debug.Log("ISWALKABLE: " + tileSet.tileTypes[currentTiles[x, y]].isWalkable);
 
-		return tileSet.tileTypes[ currentTiles[x,y] ].isWalkable;
+		return tileSet.tileTypes[currentTiles[x,y] ].isWalkable;
 	}
 
-	public void GeneratePathTo(int x, int y) {
-        if (selectedUnit != null)
+	public void GeneratePathTo(int x, int y, GameObject gameObject) {
+		GameObject gameObjectToMove;
+		if (gameObject != null)
+		{
+			gameObjectToMove = gameObject;
+		}
+		else if (selectedUnit != null)
+		{
+			gameObjectToMove = selectedUnit;
+		}
+		else gameObjectToMove = null;
+		if (gameObjectToMove != null)
         {
-            // Clear out our unit's old path.
-            selectedUnit.GetComponent<Unit>().currentPath = null;
-
-            if (UnitCanEnterTile(x, y) == false)
+			// Clear out our unit's old path.
+			gameObjectToMove.GetComponent<Unit>().currentPath = null;
+			//Debug.Log("GENERATEPATH - X & Y: " + x + " - " + y);
+			if (UnitCanEnterTile(x, y) == false)
             {
                 // We probably clicked on a mountain or something, so just quit out.
                 return;
             }
 
-            Dictionary<Node, float> dist = new Dictionary<Node, float>();
+			//Debug.Log("EJECUTADO");
+
+			Dictionary<Node, float> dist = new Dictionary<Node, float>();
             Dictionary<Node, Node> prev = new Dictionary<Node, Node>();
 
             // Setup the "Q" -- the list of nodes we haven't checked yet.
             List<Node> unvisited = new List<Node>();
 
-            Node source = graph[
-                                selectedUnit.GetComponent<Unit>().tileX,
-                                selectedUnit.GetComponent<Unit>().tileY
+            Node source = moveGraph[
+                                gameObjectToMove.GetComponent<Unit>().tileX,
+								gameObjectToMove.GetComponent<Unit>().tileY
                                 ];
 
-            Node target = graph[
+            Node target = moveGraph[
                                 x,
                                 y
                                 ];
 
-            dist[source] = 0;
+			dist[source] = 0;
             prev[source] = null;
 
             // Initialize everything to have INFINITY distance, since
             // we don't know any better right now. Also, it's possible
             // that some nodes CAN'T be reached from the source,
             // which would make INFINITY a reasonable value
-            foreach (Node v in graph)
+            foreach (Node v in moveGraph)
             {
                 if (v != source)
                 {
@@ -279,8 +272,10 @@ public class TileMap : MonoBehaviour {
             // So we need to invert it!
 
             currentPath.Reverse();
+			
 
-            selectedUnit.GetComponent<Unit>().currentPath = currentPath;
+			gameObjectToMove.GetComponent<Unit>().currentPath = currentPath;
+			//Debug.Log("X: " + currentPath[currentPath.Count -1].x + "Y: " + currentPath[currentPath.Count - 1].y);
         }
 	}
 
