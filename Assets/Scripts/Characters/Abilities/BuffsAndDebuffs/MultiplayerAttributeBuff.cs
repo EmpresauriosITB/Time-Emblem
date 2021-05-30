@@ -15,6 +15,7 @@ public class MultiplayerAttributeBuff : BuffAndDebuff {
     }
 
     protected override void ResetEffect() {
+        Debug.Log("a");
         CheckStatToModify(!isPositive);
     }
 

@@ -17,6 +17,8 @@ public class StatesMachine : MonoBehaviour
 
     IEnumerator ActiveState()
     {
+        CharacterUnitController c = gameObject.GetComponent<CharacterUnitController>();
+        Unit thisUnit = gameObject.GetComponent<Unit>();
         while (state == State.Active)
         {
             //COMPROBAR POSICION ENEMIGOS ABILITIES
@@ -24,32 +26,36 @@ public class StatesMachine : MonoBehaviour
             //COMPROBAR SI PUEDE HACER ABILITY
             
 
-            foreach (Abilities a in gameObject.GetComponent<CharacterUnitController>().character.abilitieSet.abilities)
+            foreach (Abilities a in c.character.abilitieSet.abilities)
             {
-                if (this.gameObject.GetComponent<CharacterUnitController>().HasActionsLeft())
+                if (c.HasActionsLeft())
                 {
                     GameObject go;
                     bool flag;
-                    InstanceAbilityData.instanceAbility(a, gameObject.GetComponent<CharacterUnitController>().map, null);
+                    InstanceAbilityData.instanceAbility(a, c.map, null);
                     if (a.TargetAllies)
                     {
-                        flag = this.gameObject.GetComponent<CharacterUnitController>().isPlayer;
+                        flag = c.isPlayer;
                     }
                     else
                     {
-                        flag = !this.gameObject.GetComponent<CharacterUnitController>().isPlayer;
+                        flag = c.isPlayer;
                     }
                     go = movementIA.locateTarget(flag);
                     Unit u = go.gameObject.GetComponent<Unit>();
+                    
                     if (calculateDifference(u, a.Range))
                     {
-                        InstanceAbilityData.doAbility(u.tileX, u.tileY, flag, this.gameObject);
+                        if (a.TargetAllies)
+                        {
+                            InstanceAbilityData.doAbility(thisUnit.tileX, thisUnit.tileY, flag, this.gameObject);
+                        } else InstanceAbilityData.doAbility(u.tileX, u.tileY, flag, this.gameObject);
                     }
                     
                 }
                 
             }
-            if (this.gameObject.GetComponent<CharacterUnitController>().HasActionsLeft())
+            if (c.HasActionsLeft())
             {
                 movementIA.moveIA(movementIA.setTarget());
             }

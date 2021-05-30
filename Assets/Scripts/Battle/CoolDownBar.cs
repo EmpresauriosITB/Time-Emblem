@@ -16,7 +16,7 @@ public class CoolDownBar : MonoBehaviour
 	private void Start()
 	{
 		slider.maxValue = c.currentVelocity + Time.time;
-		slider.value = 0;
+		slider.value = Time.time;
 		cooldownPeriod = (int) c.timeToNextActivePeriod;
 		
 	}

@@ -15,4 +15,5 @@ MonoBehaviour:
   lastsInTime: 0
   activeSeconds: 0
   actionPeriod: 0
+  singleEffect: 1
   activationPorcentage: 35

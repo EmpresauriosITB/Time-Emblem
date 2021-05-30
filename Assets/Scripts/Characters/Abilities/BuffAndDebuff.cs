@@ -12,22 +12,29 @@ public abstract class BuffAndDebuff : ScriptableObject {
     private int actionPeriodCount;
     private int activeSecondsCount;
     protected CharacterUnitController target;
+    private bool alreadyReseted = false;
+    private bool flag;
 
     public int activationPorcentage;
 
     public abstract void effect();
 
     public bool checkEffectTime() {
+        flag = false;
         if (lastsInTime && activeSeconds > Time.time) {
             if (actionPeriodCount > Time.time) {
                 effect();
                 if (singleEffect) actionPeriodCount = (int)(Time.time + activeSeconds);
                 else actionPeriodCount = (int) (Time.time + actionPeriod);
             }
-            return true;
+            flag = true;
         }
-        ResetEffect();
-        return false;
+        if (!flag && !alreadyReseted) {
+            ResetEffect();
+            alreadyReseted = true;
+        }
+        
+        return flag;
     }
 
     public void Init(CharacterUnitController controller) {
