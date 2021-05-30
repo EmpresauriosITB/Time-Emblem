@@ -7,15 +7,14 @@ public class DamageBehaviour : AbilityBehaviour {
 
     public bool hasDebuff;
     public BuffAndDebuff buff;
-    public bool isRangeAttack;
+    
 
-    public override bool doAbility(int Power, bool isPhysical, List<GameObject> targets, GameObject actor) {
+    public override bool doAbility(int Power, bool isPhysical, List<GameObject> targets, GameObject actor, bool isRangeAttack) {
         CharacterUnitController actorCh = actor.GetComponent<CharacterUnitController>();
         int attack;
         if (isPhysical) attack = actorCh.currentPhysicalPower;
         else attack = actorCh.currentMentalPower;
         int deffense;
-        Debug.Log(actor.name);
         if (actorCh.isHumanoid) {
             if (isRangeAttack) { actorCh.animator.SetTrigger("RangeAttack1Trigger"); }
             else { actorCh.animator.SetTrigger("PunchTrigger"); }
@@ -23,7 +22,6 @@ public class DamageBehaviour : AbilityBehaviour {
             if (isRangeAttack) { actorCh.animator.SetTrigger("breatheFire"); }
             else { actorCh.animator.SetTrigger("flyAttack"); }
         }
-        Debug.Log(targets.Count);
         for (int i = 0; i < targets.Count; i++) {
             CharacterUnitController targetCh = targets[i].GetComponent<CharacterUnitController>();
             if (hasDebuff) {

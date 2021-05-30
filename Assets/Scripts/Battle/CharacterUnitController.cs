@@ -12,7 +12,7 @@ public class CharacterUnitController : MonoBehaviour {
     public bool isPlayer;
     public bool isDead = false;
     public TileMap map;
-    public List<BuffAndDebuff> buffAndDebuffs;
+    public List<BuffAndDebuff> buffAndDebuffs = new List<BuffAndDebuff>();
     public Animator animator;
     public bool isHumanoid;
 
@@ -67,14 +67,17 @@ public class CharacterUnitController : MonoBehaviour {
             if (isHumanoid) { animator.SetTrigger("DeathTrigger"); }
             else { animator.SetTrigger("death"); }
             isDead = true;
+            if (!isPlayer) {
+                this.gameObject.GetComponent<StatesMachine>().state = StatesMachine.State.Dead;
+            }
         }
     }
 
     void OnMouseUp() {
 
         if (!isDead) {
-            if (isPlayer && checkTime() && bm.activeChar == null) { bm.SetCurrentaActiveCharacter(this.gameObject); }
-            else { InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null); }
+            if (isPlayer && checkTime()) { bm.SetCurrentaActiveCharacter(this.gameObject); }
+            if (InstanceAbilityData.ability != null && InstanceAbilityData.map != null) { InstanceAbilityData.doAbility(unit.tileX, unit.tileY, false, null); }
         }
 	}
 

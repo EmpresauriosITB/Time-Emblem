@@ -19,6 +19,8 @@ MonoBehaviour:
   HasAreaEffect: 1
   Area: 5
   isPhysical: 0
+  needsArea: 1
   TargetAllies: 0
+  isRangeAttack: 1
   abilityBehaviour: {fileID: 11400000, guid: de427675dcd87c743945266c7e4cbcd3, type: 2}
   areaCalculator: {fileID: 11400000, guid: 8a50c10c98de9b9419b3e0c9b8c3553d, type: 2}

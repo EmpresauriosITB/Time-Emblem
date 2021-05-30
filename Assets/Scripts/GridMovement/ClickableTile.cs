@@ -11,7 +11,6 @@ public class ClickableTile : MonoBehaviour {
 	public TileMap map;
 
 	void OnMouseUp() {
-		Debug.Log("ha clicao");
 		if (map.activevate) {
             switch (currentState) {
                 case TileState.moving:

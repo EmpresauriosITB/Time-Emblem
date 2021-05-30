@@ -49,7 +49,13 @@ public class movementIA : MonoBehaviour
         }
 
         // Otherwise: Take the enemies
-        closest = enemies.OrderBy(go => (position - go.transform.position).sqrMagnitude).First();
+        enemies = enemies.OrderBy(go => (position - go.transform.position).sqrMagnitude).ToList();
+
+        for (int i = 0; i < enemies.Count; i++) {
+            if (!enemies[i].GetComponent<CharacterUnitController>().isDead) {
+                closest = enemies[i];
+            }
+        }
            
         return closest;
     }

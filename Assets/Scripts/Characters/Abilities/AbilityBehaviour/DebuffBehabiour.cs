@@ -8,7 +8,7 @@ public class DebuffBehabiour : AbilityBehaviour {
 
     public BuffAndDebuff buff;
 
-    public override bool doAbility(int Power, bool isPhysical, List<GameObject> targets, GameObject actor) {
+    public override bool doAbility(int Power, bool isPhysical, List<GameObject> targets, GameObject actor, bool isRangeAttack) {
         CharacterUnitController unitCh = actor.gameObject.GetComponent<CharacterUnitController>();
         for (int i = 0; i < targets.Count; i++) {
             CharacterUnitController target = targets[i].GetComponent<CharacterUnitController>();

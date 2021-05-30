@@ -7,7 +7,6 @@ public class DamageCalculator {
     public static int CalculateDamage(int Power, int Atack, int Defense, bool Burn) {
 
         double Damage = (((Power * ((Atack * 1.5) / Defense)) / 5 + 2)) + 1;
-        Debug.Log(Damage);
         return (int) Damage;
     }
 
